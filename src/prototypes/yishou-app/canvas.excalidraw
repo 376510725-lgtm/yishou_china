@@ -1,0 +1,61 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "axhub-make",
+  "elements": [
+    {
+      "id": "SPgv0jK-BZTtRdQEp-LHp",
+      "type": "line",
+      "x": 528,
+      "y": 295,
+      "width": 332,
+      "height": 177,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#121212",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a0",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1090609863,
+      "version": 102,
+      "versionNonce": 1143060974,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1782369654620,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          332,
+          101
+        ],
+        [
+          6,
+          177
+        ]
+      ],
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": false
+    }
+  ],
+  "appState": {
+    "gridSize": 20,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
