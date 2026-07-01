@@ -69,7 +69,7 @@ export const SettleIntroPage: React.FC<SettleIntroPageProps> = ({
         >
           ←
         </button>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, textAlign: 'center' }}>
           <span style={{ fontSize: 18, fontWeight: 600, color: THEME.textPrimary }}>
             入驻申请
           </span>
@@ -127,7 +127,7 @@ export const SettleIntroPage: React.FC<SettleIntroPageProps> = ({
         </div>
 
         {/* 入驻优势列表 */}
-        <Card style={{ flex: 1 }}>
+        <Card>
           {advantages.map((item, index) => (
             <div
               key={index}
@@ -154,10 +154,12 @@ export const SettleIntroPage: React.FC<SettleIntroPageProps> = ({
           ))}
         </Card>
 
-        {/* 立即入驻按钮 */}
-        <Button onClick={onNext} themeColor={themeColor}>
-          立即入驻
-        </Button>
+        {/* 立即入驻按钮 - 固定在底部 */}
+        <div style={{ marginTop: 'auto', paddingTop: 24 }}>
+          <Button onClick={onNext} themeColor={themeColor}>
+            立即入驻
+          </Button>
+        </div>
       </div>
     </div>
   );

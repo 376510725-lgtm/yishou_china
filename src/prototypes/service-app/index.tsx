@@ -42,6 +42,9 @@ import { StaffRegisterPage } from './staff/RegisterPage';
 // 角色类型
 type Role = 'provider' | 'staff';
 
+// 入驻状态
+type SettleStatus = 'none' | 'pending' | 'rejected' | 'approved';
+
 // 页面类型
 type Page =
   | 'login'
@@ -160,30 +163,6 @@ const TASK_LIST = [
   },
 ];
 
-// 入驻申请数据
-type SettleStatus = 'pending' | 'rejected' | 'approved';
-
-interface SettleApplication {
-  companyName: string;
-  contact: string;
-  phone: string;
-  address: string;
-  serviceTypes: string[];
-  applyTime: string;
-  status: SettleStatus;
-  rejectReason?: string;
-}
-
-const SETTLE_APPLICATION: SettleApplication = {
-  companyName: '重庆福寿养老服务有限公司',
-  contact: '张明',
-  phone: '138****5678',
-  address: '重庆市渝中区解放碑街道XX号',
-  serviceTypes: ['助餐', '助洁', '助医'],
-  applyTime: '2026-06-04 14:30',
-  status: 'pending', // 可选值: 'pending' | 'rejected' | 'approved'
-};
-
 // Tab 配置
 const PROVIDER_TABS = [
   { id: 'home' as Tab, label: '工作台', icon: '🏠' },
@@ -208,7 +187,7 @@ export default function ServiceApp() {
   const [selectedOrder, setSelectedOrder] = useState<typeof ORDER_LIST[0] | null>(null);
   const [selectedStaff, setSelectedStaff] = useState<typeof STAFF_LIST[0] | null>(null);
   const [selectedTask, setSelectedTask] = useState<typeof TASK_LIST[0] | null>(null);
-  const [settleApplication, setSettleApplication] = useState<SettleApplication>(SETTLE_APPLICATION);
+  const [settleStatus, setSettleStatus] = useState<SettleStatus>('pending');
 
   // 主题色
   const themeColor = currentRole === 'provider' ? THEME.providerPrimary : THEME.staffPrimary;
@@ -234,10 +213,12 @@ export default function ServiceApp() {
           navigate('login');
         }
       }
-    } else if (['settle-form', 'settle-upload'].includes(currentPage)) {
+    } else if (currentPage === 'settle-form') {
       navigate('settle-intro');
+    } else if (currentPage === 'settle-upload') {
+      navigate('settle-form');
     } else if (currentPage === 'settle-intro') {
-      navigate('home');
+      navigate(settleStatus === 'none' ? 'home' : 'provider-register');
     } else if (currentPage === 'settle-status') {
       navigate('home');
     } else if (currentPage === 'task-checkin') {
@@ -318,8 +299,10 @@ export default function ServiceApp() {
         return (
           <HomePage
             themeColor={themeColor}
+            settleStatus={settleStatus}
             onNavigate={navigate}
             onOrderClick={handleOrderClick}
+            onTabChange={(tab) => setProviderTab(tab as Tab)}
           />
         );
       case 'orders':
@@ -400,15 +383,27 @@ export default function ServiceApp() {
           <SettleSuccessPage
             themeColor={themeColor}
             onBack={goBack}
-            onComplete={() => navigate('home')}
+            onComplete={() => {
+              setSettleStatus('pending');
+              navigate('home');
+            }}
+            onViewStatus={() => navigate('settle-status')}
           />
         );
       case 'settle-status':
         return (
           <SettleStatusPage
             themeColor={themeColor}
+            status={settleStatus}
             onBack={goBack}
-            application={settleApplication}
+            onCancel={() => {
+              setSettleStatus('none');
+              navigate('home');
+            }}
+            onModify={() => {
+              setSettleStatus('pending');
+              navigate('settle-form');
+            }}
           />
         );
       default:

@@ -27,20 +27,34 @@ export const SettleFormPage: React.FC<SettleFormPageProps> = ({
   onBack,
   onNext,
 }) => {
-  const [formData, setFormData] = useState({
-    companyName: '',
-    contactName: '',
-    contactPhone: '',
-    address: '',
-  });
+  const [companyName, setCompanyName] = useState('');
+  const [contactName, setContactName] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [address, setAddress] = useState('');
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [verifyCode, setVerifyCode] = useState('');
+  const [codeSent, setCodeSent] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+
+  const handleSendCode = () => {
+    if (!contactPhone || countdown > 0) return;
+    setCodeSent(true);
+    setCountdown(60);
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
 
   const toggleService = (label: string) => {
-    if (selectedServices.includes(label)) {
-      setSelectedServices(selectedServices.filter((s) => s !== label));
-    } else {
-      setSelectedServices([...selectedServices, label]);
-    }
+    setSelectedServices((prev) =>
+      prev.includes(label) ? prev.filter((s) => s !== label) : [...prev, label]
+    );
   };
 
   return (
@@ -84,7 +98,7 @@ export const SettleFormPage: React.FC<SettleFormPageProps> = ({
         >
           ←
         </button>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, textAlign: 'center' }}>
           <span style={{ fontSize: 18, fontWeight: 600, color: THEME.textPrimary }}>
             填写信息
           </span>
@@ -114,10 +128,8 @@ export const SettleFormPage: React.FC<SettleFormPageProps> = ({
             </label>
             <Input
               placeholder="请输入服务商名称"
-              value={formData.companyName}
-              onChange={(v) =>
-                setFormData({ ...formData, companyName: v })
-              }
+              value={companyName}
+              onChange={setCompanyName}
               themeColor={themeColor}
             />
           </div>
@@ -136,10 +148,8 @@ export const SettleFormPage: React.FC<SettleFormPageProps> = ({
             </label>
             <Input
               placeholder="请输入联系人姓名"
-              value={formData.contactName}
-              onChange={(v) =>
-                setFormData({ ...formData, contactName: v })
-              }
+              value={contactName}
+              onChange={setContactName}
               themeColor={themeColor}
             />
           </div>
@@ -158,13 +168,58 @@ export const SettleFormPage: React.FC<SettleFormPageProps> = ({
             </label>
             <Input
               placeholder="请输入手机号"
-              value={formData.contactPhone}
-              onChange={(v) =>
-                setFormData({ ...formData, contactPhone: v })
-              }
+              value={contactPhone}
+              onChange={setContactPhone}
               prefix="+86"
               themeColor={themeColor}
             />
+          </div>
+
+          {/* 验证码 */}
+          <div style={{ marginBottom: 20 }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: 14,
+                color: THEME.textSecondary,
+                marginBottom: 8,
+              }}
+            >
+              验证码
+            </label>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <div style={{ flex: 1 }}>
+                <Input
+                  placeholder="请输入验证码"
+                  value={verifyCode}
+                  onChange={(v) => setVerifyCode(v)}
+                  themeColor={themeColor}
+                />
+              </div>
+              <button
+                onClick={handleSendCode}
+                disabled={!contactPhone || countdown > 0}
+                style={{
+                  width: 110,
+                  height: 52,
+                  borderRadius: 12,
+                  border: countdown > 0 ? `1px solid ${THEME.borderLight}` : `1px solid ${themeColor}50`,
+                  background: countdown > 0
+                    ? THEME.bgInput
+                    : `${themeColor}15`,
+                  color: countdown > 0
+                    ? THEME.textMuted
+                    : themeColor,
+                  fontSize: 14,
+                  fontWeight: 500,
+                  cursor: !contactPhone || countdown > 0 ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {countdown > 0 ? `${countdown}s` : codeSent ? '重新发送' : '发送验证码'}
+              </button>
+            </div>
           </div>
 
           {/* 详细地址 */}
@@ -181,10 +236,8 @@ export const SettleFormPage: React.FC<SettleFormPageProps> = ({
             </label>
             <Input
               placeholder="请输入详细地址"
-              value={formData.address}
-              onChange={(v) =>
-                setFormData({ ...formData, address: v })
-              }
+              value={address}
+              onChange={setAddress}
               themeColor={themeColor}
             />
           </div>

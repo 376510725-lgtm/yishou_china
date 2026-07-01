@@ -9,10 +9,8 @@ import {
   FileTextOutlined,
   TeamOutlined,
   BellOutlined,
-  RightOutlined,
-  EnvironmentOutlined,
 } from '@ant-design/icons';
-import { Card, Tag, Avatar, THEME } from '../shared/components';
+import { Card, THEME } from '../shared/components';
 
 // 模拟数据
 const ORDER_LIST = [
@@ -65,14 +63,18 @@ const SERVICE_TYPES = [
 
 interface HomePageProps {
   themeColor?: string;
+  settleStatus?: 'none' | 'pending' | 'rejected' | 'approved';
   onNavigate: (screen: string) => void;
   onOrderClick: (order: typeof ORDER_LIST[0]) => void;
+  onTabChange?: (tab: string) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   themeColor = THEME.providerPrimary,
+  settleStatus = 'none',
   onNavigate,
   onOrderClick,
+  onTabChange,
 }) => {
   // 统计数据
   const stats = [
@@ -132,7 +134,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <div
         style={{
           flex: 1,
-          padding: '64px 16px 80px',
+          padding: '52px 16px 80px',
           overflowY: 'auto',
           overflowX: 'hidden',
         }}
@@ -142,15 +144,17 @@ export const HomePage: React.FC<HomePageProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '12px 0',
+            padding: '4px 0',
           }}
         >
-          <Tag
-            color={THEME.warning}
-            bg={`${THEME.warning}20`}
+          <span
+            style={{
+              fontSize: 13,
+              color: THEME.textSecondary,
+            }}
           >
-            审核中
-          </Tag>
+            今日订单概览
+          </span>
         </div>
 
         {/* 统计卡片 */}
@@ -214,19 +218,51 @@ export const HomePage: React.FC<HomePageProps> = ({
             {quickActions.map((action, index) => (
               <div
                 key={index}
-                onClick={() =>
-                  index === 0
-                    ? onNavigate('settle-status')
-                    : index === 1
-                    ? onNavigate('orders')
-                    : onNavigate('staff')
-                }
+                onClick={() => {
+                  if (index === 0) {
+                    onNavigate(settleStatus === 'none' ? 'settle-intro' : 'settle-status');
+                  } else if (index === 1) {
+                    onTabChange?.('orders');
+                    onNavigate('orders');
+                  } else {
+                    onTabChange?.('staff');
+                    onNavigate('staff');
+                  }
+                }}
                 style={{
                   flex: 1,
                   textAlign: 'center',
                   cursor: 'pointer',
+                  position: 'relative',
                 }}
               >
+                {/* 入驻办理右上方审核状态角标 */}
+                {index === 0 && settleStatus !== 'none' && (() => {
+                  const statusConfig: Record<string, { label: string; color: string }> = {
+                    pending: { label: '审核中', color: THEME.warning },
+                    rejected: { label: '审核失败', color: THEME.danger },
+                    approved: { label: '已通过', color: THEME.success },
+                  };
+                  const cfg = statusConfig[settleStatus];
+                  return (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: -6,
+                        right: -4,
+                        fontSize: 10,
+                        color: cfg.color,
+                        background: `${cfg.color}20`,
+                        borderRadius: 4,
+                        padding: '2px 5px',
+                        lineHeight: '16px',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {cfg.label}
+                    </span>
+                  );
+                })()}
                 <div
                   style={{
                     width: 48,
@@ -278,7 +314,10 @@ export const HomePage: React.FC<HomePageProps> = ({
             {SERVICE_TYPES.map((service) => (
               <div
                 key={service.label}
-                onClick={() => onNavigate('orders')}
+                onClick={() => {
+                  onTabChange?.('orders');
+                  onNavigate('orders');
+                }}
                 style={{
                   textAlign: 'center',
                   cursor: 'pointer',
@@ -312,126 +351,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
         </Card>
 
-        {/* 新订单提醒 */}
-        <Card>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: 12,
-            }}
-          >
-            <div
-              style={{
-                fontSize: 15,
-                fontWeight: 600,
-                color: THEME.textPrimary,
-              }}
-            >
-              新订单提醒
-            </div>
-            <div
-              onClick={() => onNavigate('orders')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 4,
-                cursor: 'pointer',
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 12,
-                  color: THEME.textMuted,
-                }}
-              >
-                查看全部
-              </span>
-              <RightOutlined
-                style={{ fontSize: 10, color: THEME.textMuted }}
-              />
-            </div>
-          </div>
-
-          {ORDER_LIST.filter((o) => o.status === 'pending')
-            .slice(0, 2)
-            .map((order) => (
-              <div
-                key={order.id}
-                onClick={() => onOrderClick(order)}
-                style={{
-                  padding: '12px 0',
-                  borderTop:
-                    order.id !== ORDER_LIST[0].id
-                      ? `1px solid ${THEME.borderLight}`
-                      : 'none',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: 8,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 10,
-                    }}
-                  >
-                    <Avatar
-                      letter={order.avatar}
-                      color={order.color}
-                      size={40}
-                    />
-                    <div>
-                      <div
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 500,
-                          color: THEME.textPrimary,
-                        }}
-                      >
-                        {order.user}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 12,
-                          color: THEME.textMuted,
-                        }}
-                      >
-                        {order.phone}
-                      </div>
-                    </div>
-                  </div>
-                  <Tag color={THEME.danger} bg={`${THEME.danger}20`}>
-                    待接单
-                  </Tag>
-                </div>
-                <div
-                  style={{
-                    fontSize: 13,
-                    color: THEME.textSecondary,
-                  }}
-                >
-                  <div style={{ marginBottom: 4 }}>
-                    <Tag>{order.service}</Tag>{' '}
-                    {order.time}
-                  </div>
-                  <div>
-                    <EnvironmentOutlined
-                      style={{ marginRight: 4, fontSize: 12 }}
-                    />
-                    {order.address}
-                  </div>
-                </div>
-              </div>
-            ))}
-        </Card>
       </div>
     </div>
   );

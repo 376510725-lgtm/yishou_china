@@ -61,7 +61,7 @@ export const SettleSuccessPage: React.FC<SettleSuccessPageProps> = ({
         >
           ←
         </button>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, textAlign: 'center' }}>
           <span style={{ fontSize: 18, fontWeight: 600, color: THEME.textPrimary }}>
             提交成功
           </span>

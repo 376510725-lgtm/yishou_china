@@ -3,11 +3,12 @@
  * 深空暗夜科技风格
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   UploadOutlined,
   ExclamationCircleOutlined,
   PlusOutlined,
+  CheckCircleOutlined,
 } from '@ant-design/icons';
 import { Button, Card, NavBar, THEME } from '../shared/components';
 
@@ -22,6 +23,24 @@ export const SettleUploadPage: React.FC<SettleUploadPageProps> = ({
   onBack,
   onNext,
 }) => {
+  const [businessLicense, setBusinessLicense] = useState('');
+  const [idCardFront, setIdCardFront] = useState('');
+  const [idCardBack, setIdCardBack] = useState('');
+
+  // 模拟上传：点击后切换已上传/未上传
+  const toggleUpload = (field: string) => {
+    switch (field) {
+      case 'businessLicense':
+        setBusinessLicense((prev) => (prev ? '' : '已上传'));
+        break;
+      case 'idCardFront':
+        setIdCardFront((prev) => (prev ? '' : '已上传'));
+        break;
+      case 'idCardBack':
+        setIdCardBack((prev) => (prev ? '' : '已上传'));
+        break;
+    }
+  };
   return (
     <div
       style={{
@@ -63,7 +82,7 @@ export const SettleUploadPage: React.FC<SettleUploadPageProps> = ({
         >
           ←
         </button>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, textAlign: 'center' }}>
           <span style={{ fontSize: 18, fontWeight: 600, color: THEME.textPrimary }}>
             上传资质
           </span>
@@ -100,10 +119,13 @@ export const SettleUploadPage: React.FC<SettleUploadPageProps> = ({
             <span style={{ color: THEME.danger, fontSize: 14 }}>*</span>
           </div>
           <div
+            onClick={() => toggleUpload('businessLicense')}
             style={{
               height: 100,
-              background: THEME.bgInput,
-              border: `2px dashed ${THEME.borderMedium}`,
+              background: businessLicense ? `${THEME.success}10` : THEME.bgInput,
+              border: businessLicense
+                ? `2px solid ${THEME.success}40`
+                : `2px dashed ${THEME.borderMedium}`,
               borderRadius: 12,
               display: 'flex',
               flexDirection: 'column',
@@ -113,18 +135,25 @@ export const SettleUploadPage: React.FC<SettleUploadPageProps> = ({
               transition: 'all 0.2s ease',
             }}
           >
-            <PlusOutlined
-              style={{ fontSize: 28, color: THEME.textMuted, marginBottom: 8 }}
-            />
-            <span
-              style={{ fontSize: 13, color: THEME.textMuted }}
-            >
-              点击上传
-            </span>
+            {businessLicense ? (
+              <>
+                <CheckCircleOutlined
+                  style={{ fontSize: 28, color: THEME.success, marginBottom: 8 }}
+                />
+                <span style={{ fontSize: 13, color: THEME.success }}>已上传</span>
+              </>
+            ) : (
+              <>
+                <PlusOutlined
+                  style={{ fontSize: 28, color: THEME.textMuted, marginBottom: 8 }}
+                />
+                <span style={{ fontSize: 13, color: THEME.textMuted }}>点击上传</span>
+              </>
+            )}
           </div>
         </Card>
 
-        {/* 身份证 */}
+        {/* 身份证正面 */}
         <Card style={{ marginBottom: 20 }}>
           <div
             style={{
@@ -141,15 +170,18 @@ export const SettleUploadPage: React.FC<SettleUploadPageProps> = ({
                 color: THEME.textPrimary,
               }}
             >
-              身份证
+              身份证正面
             </span>
             <span style={{ color: THEME.danger, fontSize: 14 }}>*</span>
           </div>
           <div
+            onClick={() => toggleUpload('idCardFront')}
             style={{
               height: 100,
-              background: THEME.bgInput,
-              border: `2px dashed ${THEME.borderMedium}`,
+              background: idCardFront ? `${THEME.success}10` : THEME.bgInput,
+              border: idCardFront
+                ? `2px solid ${THEME.success}40`
+                : `2px dashed ${THEME.borderMedium}`,
               borderRadius: 12,
               display: 'flex',
               flexDirection: 'column',
@@ -159,14 +191,77 @@ export const SettleUploadPage: React.FC<SettleUploadPageProps> = ({
               transition: 'all 0.2s ease',
             }}
           >
-            <PlusOutlined
-              style={{ fontSize: 28, color: THEME.textMuted, marginBottom: 8 }}
-            />
+            {idCardFront ? (
+              <>
+                <CheckCircleOutlined
+                  style={{ fontSize: 28, color: THEME.success, marginBottom: 8 }}
+                />
+                <span style={{ fontSize: 13, color: THEME.success }}>已上传</span>
+              </>
+            ) : (
+              <>
+                <PlusOutlined
+                  style={{ fontSize: 28, color: THEME.textMuted, marginBottom: 8 }}
+                />
+                <span style={{ fontSize: 13, color: THEME.textMuted }}>点击上传</span>
+              </>
+            )}
+          </div>
+        </Card>
+
+        {/* 身份证反面 */}
+        <Card style={{ marginBottom: 20 }}>
+          <div
+            style={{
+              marginBottom: 16,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
             <span
-              style={{ fontSize: 13, color: THEME.textMuted }}
+              style={{
+                fontSize: 15,
+                fontWeight: 500,
+                color: THEME.textPrimary,
+              }}
             >
-              点击上传
+              身份证反面
             </span>
+            <span style={{ color: THEME.danger, fontSize: 14 }}>*</span>
+          </div>
+          <div
+            onClick={() => toggleUpload('idCardBack')}
+            style={{
+              height: 100,
+              background: idCardBack ? `${THEME.success}10` : THEME.bgInput,
+              border: idCardBack
+                ? `2px solid ${THEME.success}40`
+                : `2px dashed ${THEME.borderMedium}`,
+              borderRadius: 12,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            {idCardBack ? (
+              <>
+                <CheckCircleOutlined
+                  style={{ fontSize: 28, color: THEME.success, marginBottom: 8 }}
+                />
+                <span style={{ fontSize: 13, color: THEME.success }}>已上传</span>
+              </>
+            ) : (
+              <>
+                <PlusOutlined
+                  style={{ fontSize: 28, color: THEME.textMuted, marginBottom: 8 }}
+                />
+                <span style={{ fontSize: 13, color: THEME.textMuted }}>点击上传</span>
+              </>
+            )}
           </div>
         </Card>
 
