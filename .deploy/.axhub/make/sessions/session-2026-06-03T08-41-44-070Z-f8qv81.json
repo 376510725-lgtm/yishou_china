@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "session-2026-06-03T08-41-44-070Z-f8qv81",
+  "projectId": "yishou_china",
+  "resourceId": "annotation-demo",
+  "resourceType": "prototype",
+  "status": "ready",
+  "errorMessage": "",
+  "createdAt": "2026-06-03T08:41:44.070Z",
+  "clientUrlOrigin": "http://localhost:51723",
+  "runtimeVersion": "0.2.0"
+}

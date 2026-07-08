@@ -4,45 +4,21 @@
  */
 
 import React, { useState } from 'react';
-import { UserAddOutlined, RightOutlined } from '@ant-design/icons';
+import { UserAddOutlined, RightOutlined, SearchOutlined, DeleteOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
 import { Card, Tag, Avatar, Button, THEME } from '../shared/components';
 
-// 模拟数据
-const STAFF_LIST = [
-  {
-    id: 1,
-    name: '王小明',
-    avatar: '王',
-    color: '#00D4FF',
-    phone: '138****1234',
-    status: 'online',
-    skills: ['助餐', '助洁'],
-    todayTasks: 3,
-    totalTasks: 156,
-  },
-  {
-    id: 2,
-    name: '李小红',
-    avatar: '李',
-    color: '#10B981',
-    phone: '139****5678',
-    status: 'busy',
-    skills: ['助医', '助浴'],
-    todayTasks: 5,
-    totalTasks: 289,
-  },
-  {
-    id: 3,
-    name: '张大力',
-    avatar: '张',
-    color: '#F59E0B',
-    phone: '137****9012',
-    status: 'offline',
-    skills: ['助行', '助急'],
-    todayTasks: 0,
-    totalTasks: 98,
-  },
-];
+interface StaffData {
+  id: number;
+  name: string;
+  avatar: string;
+  color: string;
+  phone: string;
+  status: 'online' | 'busy' | 'offline';
+  skills: string[];
+  todayTasks: number;
+  totalTasks: number;
+  reviewStatus?: 'pending' | 'approved' | 'rejected';
+}
 
 const FILTER_TABS = [
   { id: 'all', label: '全部' },
@@ -59,23 +35,33 @@ const STATUS_MAP: Record<string, { label: string; color: string; bg: string }> =
 
 interface StaffListPageProps {
   themeColor?: string;
+  staffs?: StaffData[];
   onBack: () => void;
-  onStaffClick: (staff: typeof STAFF_LIST[0]) => void;
+  onStaffClick: (staff: StaffData) => void;
   onAddStaff: () => void;
+  onRemoveStaff?: (staff: StaffData) => void;
+  onReview?: () => void;
 }
 
 export const StaffListPage: React.FC<StaffListPageProps> = ({
   themeColor = '#00D4FF',
+  staffs: propStaffs,
   onBack,
   onStaffClick,
   onAddStaff,
+  onRemoveStaff,
+  onReview,
 }) => {
+  const staffList = (propStaffs ?? []).filter(s => s.reviewStatus !== 'pending');
   const [activeFilter, setActiveFilter] = useState('all');
+  const [searchText, setSearchText] = useState('');
 
-  const filteredStaff =
-    activeFilter === 'all'
-      ? STAFF_LIST
-      : STAFF_LIST.filter((s) => s.status === activeFilter);
+  const filteredStaff = (activeFilter === 'all'
+    ? staffList
+    : staffList.filter((s) => s.status === activeFilter))
+    .filter(s => !searchText || s.name.includes(searchText) || s.skills.some(sk => sk.includes(searchText)));
+
+  const pendingCount = (propStaffs ?? []).filter(s => s.reviewStatus === 'pending').length;
 
   return (
     <div
@@ -138,7 +124,7 @@ export const StaffListPage: React.FC<StaffListPageProps> = ({
                 cursor: 'pointer',
                 background: isActive
                   ? `${themeColor}20`
-                  : `${THEME.bgLight}60`,
+                  : THEME.bgCard,
                 color: isActive ? themeColor : THEME.textSecondary,
                 border: `1px solid ${isActive ? `${themeColor}50` : `${THEME.borderLight}`}`,
                 transition: 'all 0.2s ease',
@@ -150,11 +136,29 @@ export const StaffListPage: React.FC<StaffListPageProps> = ({
         })}
       </div>
 
+      {/* 搜索框 */}
+      <div style={{ padding: '0 16px 10px', flexShrink: 0 }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', background: THEME.bgInput,
+          borderRadius: 10, padding: '10px 14px', border: `1px solid ${THEME.borderLight}`,
+          gap: 8,
+        }}>
+          <SearchOutlined style={{ color: THEME.textMuted, fontSize: 16 }} />
+          <input
+            placeholder="搜索人员姓名/技能..."
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
+            style={{ flex: 1, border: 'none', background: 'transparent', color: THEME.textPrimary, fontSize: 14, outline: 'none' }}
+          />
+          {searchText && <span onClick={() => setSearchText('')} style={{ color: THEME.textMuted, cursor: 'pointer', fontSize: 16 }}>✕</span>}
+        </div>
+      </div>
+
       {/* 人员列表 */}
       <div
         style={{
           flex: 1,
-          padding: '0 16px 16px',
+          padding: '0 16px 80px',
           overflow: 'auto',
         }}
       >
@@ -165,6 +169,7 @@ export const StaffListPage: React.FC<StaffListPageProps> = ({
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
+              marginBottom: 12,
             }}
           >
             <div
@@ -185,7 +190,80 @@ export const StaffListPage: React.FC<StaffListPageProps> = ({
               <UserAddOutlined style={{ marginRight: 4 }} /> 添加
             </Button>
           </div>
+          <div style={{ display: 'flex', gap: 16, fontSize: 12, color: THEME.textMuted }}>
+            <span>在线 {staffList.filter(s => s.status === 'online').length}</span>
+            <span>忙碌 {staffList.filter(s => s.status === 'busy').length}</span>
+            <span>离线 {staffList.filter(s => s.status === 'offline').length}</span>
+          </div>
         </Card>
+
+        {/* 人员审核入口 */}
+        {onReview && (
+          <Card
+            style={{ marginBottom: 16, cursor: 'pointer' }}
+            onClick={onReview}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+              }}
+            >
+              <div
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 12,
+                  background: `${themeColor}15`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <SafetyCertificateOutlined style={{ fontSize: 22, color: themeColor }} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 600,
+                    color: THEME.textPrimary,
+                    marginBottom: 2,
+                  }}
+                >
+                  人员审核
+                </div>
+                <div style={{ fontSize: 12, color: THEME.textMuted }}>
+                  {pendingCount > 0
+                    ? `${pendingCount} 名人员待审核`
+                    : '暂无待审核人员'}
+                </div>
+              </div>
+              {pendingCount > 0 && (
+                <div
+                  style={{
+                    minWidth: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    background: THEME.danger,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: '#fff',
+                    padding: '0 6px',
+                  }}
+                >
+                  {pendingCount}
+                </div>
+              )}
+              <RightOutlined style={{ color: THEME.textMuted, fontSize: 14 }} />
+            </div>
+          </Card>
+        )}
 
         {/* 人员卡片 */}
         {filteredStaff.map((staff) => {
@@ -193,7 +271,6 @@ export const StaffListPage: React.FC<StaffListPageProps> = ({
           return (
             <Card
               key={staff.id}
-              onClick={() => onStaffClick(staff)}
               style={{ marginBottom: 12 }}
             >
               <div
@@ -203,57 +280,66 @@ export const StaffListPage: React.FC<StaffListPageProps> = ({
                   gap: 12,
                 }}
               >
-                <Avatar
-                  letter={staff.avatar}
-                  color={staff.color}
-                  size={52}
-                />
-                <div style={{ flex: 1 }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      marginBottom: 6,
-                    }}
-                  >
-                    <span
+                <div onClick={() => onStaffClick(staff)} style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1, cursor: 'pointer' }}>
+                  <Avatar
+                    letter={staff.avatar}
+                    color={staff.color}
+                    size={52}
+                  />
+                  <div style={{ flex: 1 }}>
+                    <div
                       style={{
-                        fontSize: 16,
-                        fontWeight: 500,
-                        color: THEME.textPrimary,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        marginBottom: 6,
                       }}
                     >
-                      {staff.name}
-                    </span>
-                    <Tag
-                      color={statusInfo.color}
-                      bg={statusInfo.bg}
+                      <span
+                        style={{
+                          fontSize: 16,
+                          fontWeight: 500,
+                          color: THEME.textPrimary,
+                        }}
+                      >
+                        {staff.name}
+                      </span>
+                      <Tag
+                        color={statusInfo.color}
+                        bg={statusInfo.bg}
+                      >
+                        {statusInfo.label}
+                      </Tag>
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13,
+                        color: THEME.textSecondary,
+                        marginBottom: 4,
+                      }}
                     >
-                      {statusInfo.label}
-                    </Tag>
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 13,
-                      color: THEME.textSecondary,
-                      marginBottom: 4,
-                    }}
-                  >
-                    擅长：{staff.skills.join('、')}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: THEME.textMuted,
-                    }}
-                  >
-                    今日 {staff.todayTasks} 单 | 共 {staff.totalTasks} 单
+                      擅长：{staff.skills.join('、')}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: THEME.textMuted,
+                      }}
+                    >
+                      今日 {staff.todayTasks} 单 | 共 {staff.totalTasks} 单
+                    </div>
                   </div>
                 </div>
-                <RightOutlined
-                  style={{ color: THEME.textMuted, fontSize: 14 }}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  <RightOutlined
+                    style={{ color: THEME.textMuted, fontSize: 14, cursor: 'pointer' }}
+                    onClick={() => onStaffClick(staff)}
+                  />
+                  <DeleteOutlined
+                    style={{ color: THEME.danger, fontSize: 14, cursor: 'pointer', opacity: 0.6 }}
+                    onClick={(e) => { e.stopPropagation(); onRemoveStaff?.(staff); }}
+                  />
+                </div>
               </div>
             </Card>
           );

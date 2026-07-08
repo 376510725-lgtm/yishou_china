@@ -4,15 +4,17 @@
  */
 
 import React from 'react';
-import { Card, Avatar, THEME } from '../shared/components';
+import { Card, Avatar, Button, THEME } from '../shared/components';
 import { RightOutlined } from '@ant-design/icons';
 
 interface IncomePageProps {
   themeColor?: string;
+  onWithdraw?: () => void;
 }
 
 export const IncomePage: React.FC<IncomePageProps> = ({
   themeColor = '#A855F7',
+  onWithdraw,
 }) => {
   const incomeRecords = [
     {
@@ -180,6 +182,39 @@ export const IncomePage: React.FC<IncomePageProps> = ({
               </div>
             </div>
           </div>
+        </div>
+
+        {/* 提现按钮 */}
+        <div style={{ padding: '12px 16px' }}>
+          <Button onClick={onWithdraw} themeColor={themeColor} size="large">
+            立即提现
+          </Button>
+        </div>
+
+        {/* 收入趋势图（简易柱状图） */}
+        <div style={{ padding: '0 16px 16px' }}>
+          <Card>
+            <div style={{ fontSize: 15, fontWeight: 600, color: THEME.textPrimary, marginBottom: 16 }}>本月收入趋势</div>
+            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', height: 100, gap: 6 }}>
+              {[
+                { day: '1日', value: 68 }, { day: '3日', value: 128 }, { day: '5日', value: 198 },
+                { day: '7日', value: 88 }, { day: '9日', value: 156 }, { day: '11日', value: 0 },
+                { day: '13日', value: 198 },
+              ].map((item, i) => (
+                <div key={i} style={{ flex: 1, textAlign: 'center' }}>
+                  <div style={{ fontSize: 10, color: themeColor, marginBottom: 4, fontWeight: 500 }}>
+                    ¥{item.value || ''}
+                  </div>
+                  <div style={{
+                    width: '100%', height: Math.max(item.value / 200 * 70, 4),
+                    background: item.value > 0 ? `linear-gradient(180deg, ${themeColor} 0%, ${themeColor}40 100%)` : THEME.bgInput,
+                    borderRadius: '4px 4px 0 0', margin: '0 auto', minWidth: 20
+                  }} />
+                  <div style={{ fontSize: 10, color: THEME.textMuted, marginTop: 4 }}>{item.day}</div>
+                </div>
+              ))}
+            </div>
+          </Card>
         </div>
 
         {/* 收入记录列表 */}

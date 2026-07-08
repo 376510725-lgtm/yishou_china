@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "session-2026-06-09T08-05-44-095Z-c7b2hl",
+  "projectId": "yishou_china",
+  "resourceId": "yishou-app",
+  "resourceType": "prototype",
+  "status": "ready",
+  "errorMessage": "",
+  "createdAt": "2026-06-09T08:05:44.095Z",
+  "clientUrlOrigin": "http://localhost:51721",
+  "runtimeVersion": "0.2.0"
+}

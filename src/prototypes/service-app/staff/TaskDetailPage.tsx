@@ -135,6 +135,7 @@ export const TaskDetailPage: React.FC<TaskDetailPageProps> = ({
               size="small"
               themeColor={themeColor}
               style={{ width: 44, padding: 0 }}
+              onClick={() => window.open(`tel:${task.phone.replace(/\*/g, '0')}`)}
             >
               <PhoneOutlined />
             </Button>
@@ -184,11 +185,15 @@ export const TaskDetailPage: React.FC<TaskDetailPageProps> = ({
                 alignItems: 'center',
                 gap: 8,
                 fontSize: 14,
-                color: THEME.textSecondary,
+                color: themeColor,
+                cursor: 'pointer',
+                textDecoration: 'underline',
               }}
+              onClick={() => window.open(`https://uri.amap.com/search?keyword=${encodeURIComponent(task.address)}`)}
             >
               <EnvironmentOutlined style={{ marginRight: 4 }} />
               {task.address}
+              <span style={{ fontSize: 12, color: THEME.success, background: `${THEME.success}15`, padding: '2px 6px', borderRadius: 4, textDecoration: 'none' }}>导航</span>
             </div>
             <div
               style={{

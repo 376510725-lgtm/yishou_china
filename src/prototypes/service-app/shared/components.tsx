@@ -38,6 +38,7 @@ export const THEME = {
   // 背景色
   bgDark: '#0a0f1a',
   bgDarkAlt: '#0d1219',
+  bgLight: 'rgba(255,255,255,0.06)',
   bgCard: 'rgba(255,255,255,0.08)',
   bgCardHover: 'rgba(255,255,255,0.14)',
   bgInput: 'rgba(255,255,255,0.06)',
@@ -616,8 +617,245 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   </div>
 );
 
+// ========== Modal 弹窗组件 ==========
+interface ModalProps {
+  visible: boolean;
+  title?: string;
+  children: React.ReactNode;
+  onClose: () => void;
+  footer?: React.ReactNode;
+  themeColor?: string;
+}
+
+export const Modal: React.FC<ModalProps> = ({
+  visible,
+  title,
+  children,
+  onClose,
+  footer,
+  themeColor = THEME.neonGreen,
+}) => {
+  if (!visible) return null;
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'rgba(0,0,0,0.6)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+        backdropFilter: 'blur(4px)',
+      }}
+      onClick={onClose}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: '#101826',
+          borderRadius: 16,
+          padding: '24px 20px 20px',
+          width: '85%',
+          maxWidth: 340,
+          border: `1px solid ${THEME.borderMedium}`,
+          boxShadow: `0 20px 60px rgba(0,0,0,0.5), 0 0 30px ${themeColor}15`,
+        }}
+      >
+        {title && (
+          <div
+            style={{
+              fontSize: 17,
+              fontWeight: 600,
+              color: THEME.textPrimary,
+              textAlign: 'center',
+              marginBottom: 16,
+            }}
+          >
+            {title}
+          </div>
+        )}
+        <div style={{ color: THEME.textSecondary, fontSize: 14, lineHeight: 1.6 }}>
+          {children}
+        </div>
+        {footer && (
+          <div style={{ marginTop: 20, display: 'flex', gap: 10 }}>
+            {footer}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// ========== Toast 提示组件 ==========
+interface ToastProps {
+  visible: boolean;
+  message: string;
+  type?: 'success' | 'error' | 'warning' | 'info';
+  themeColor?: string;
+}
+
+export const Toast: React.FC<ToastProps> = ({
+  visible,
+  message,
+  type = 'success',
+  themeColor = THEME.neonGreen,
+}) => {
+  if (!visible) return null;
+  const typeConfig: Record<string, { color: string; icon: string }> = {
+    success: { color: THEME.success, icon: '✓' },
+    error: { color: THEME.danger, icon: '✕' },
+    warning: { color: THEME.warning, icon: '!' },
+    info: { color: themeColor, icon: 'i' },
+  };
+  const cfg = typeConfig[type];
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 2000,
+        background: 'rgba(16, 24, 38, 0.95)',
+        borderRadius: 12,
+        padding: '16px 24px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        border: `1px solid ${cfg.color}30`,
+        boxShadow: `0 8px 32px rgba(0,0,0,0.4), 0 0 20px ${cfg.color}20`,
+        animation: 'toastFadeIn 0.3s ease',
+      }}
+    >
+      <div
+        style={{
+          width: 24,
+          height: 24,
+          borderRadius: '50%',
+          background: cfg.color,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#fff',
+          fontSize: 12,
+          fontWeight: 700,
+          flexShrink: 0,
+        }}
+      >
+        {cfg.icon}
+      </div>
+      <span style={{ color: THEME.textPrimary, fontSize: 14, fontWeight: 500 }}>
+        {message}
+      </span>
+    </div>
+  );
+};
+
+// ========== Upload 上传组件 ==========
+interface UploadProps {
+  label: string;
+  preview?: string;
+  onUpload: () => void;
+  onDelete?: () => void;
+  required?: boolean;
+  themeColor?: string;
+}
+
+export const Upload: React.FC<UploadProps> = ({
+  label,
+  preview,
+  onUpload,
+  onDelete,
+  required = false,
+  themeColor = THEME.neonGreen,
+}) => (
+  <div style={{ marginBottom: 16 }}>
+    <div
+      style={{
+        fontSize: 13,
+        color: THEME.textSecondary,
+        marginBottom: 8,
+      }}
+    >
+      {label}
+      {required && <span style={{ color: THEME.danger }}> *</span>}
+    </div>
+    {preview ? (
+      <div
+        style={{
+          position: 'relative',
+          borderRadius: 10,
+          overflow: 'hidden',
+          border: `1px solid ${THEME.borderLight}`,
+        }}
+      >
+        <img
+          src={preview}
+          alt={label}
+          style={{ width: '100%', height: 140, objectFit: 'cover', display: 'block' }}
+        />
+        {onDelete && (
+          <div
+            onClick={onDelete}
+            style={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              width: 24,
+              height: 24,
+              borderRadius: '50%',
+              background: 'rgba(0,0,0,0.6)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontSize: 12,
+              cursor: 'pointer',
+            }}
+          >
+            ✕
+          </div>
+        )}
+      </div>
+    ) : (
+      <div
+        onClick={onUpload}
+        style={{
+          height: 100,
+          borderRadius: 10,
+          border: `2px dashed ${THEME.borderMedium}`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 6,
+          cursor: 'pointer',
+          background: THEME.bgInput,
+          transition: 'all 0.2s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = themeColor;
+          e.currentTarget.style.background = `${themeColor}10`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = THEME.borderMedium;
+          e.currentTarget.style.background = THEME.bgInput;
+        }}
+      >
+        <CameraOutlined style={{ fontSize: 24, color: THEME.textMuted }} />
+        <span style={{ fontSize: 12, color: THEME.textMuted }}>点击上传</span>
+      </div>
+    )}
+  </div>
+);
+
 // ========== 辅助函数 ==========
-function adjustColor(hex: string, percent: number): string {
+export function adjustColor(hex: string, percent: number): string {
   const num = parseInt(hex.replace('#', ''), 16);
   const amt = Math.round(2.55 * percent);
   const R = Math.max(Math.min((num >> 16) + amt, 255), 0);

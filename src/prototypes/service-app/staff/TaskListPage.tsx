@@ -3,99 +3,118 @@
  * 深空暗夜科技风格
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import {
   EnvironmentOutlined,
-  PhoneOutlined,
+  SearchOutlined,
+  CloseCircleOutlined,
+  MoreOutlined,
+  PlayCircleOutlined,
 } from '@ant-design/icons';
 import { Card, Tag, Avatar, Button, THEME } from '../shared/components';
 
-// 模拟数据
-const TASK_LIST = [
-  {
-    id: 'DD202406010001',
-    user: '张阿姨',
-    avatar: '张',
-    color: '#A855F7',
-    phone: '138****5678',
-    service: '助餐',
-    address: '渝中区解放碑街道XX号',
-    time: '今天 12:00',
-    amount: '¥68.00',
-    status: 'pending',
-  },
-  {
-    id: 'DD202406010003',
-    user: '王奶奶',
-    avatar: '王',
-    color: '#F59E0B',
-    phone: '137****2345',
-    service: '助医',
-    address: '南岸区南坪街道XX号',
-    time: '今天 15:30',
-    amount: '¥198.00',
-    status: 'serving',
-  },
-  {
-    id: 'DD202406010005',
-    user: '刘奶奶',
-    avatar: '刘',
-    color: '#7C3AED',
-    phone: '135****3456',
-    service: '助浴',
-    address: '渝北区新南路XX号',
-    time: '昨天 14:00',
-    amount: '¥78.00',
-    status: 'completed',
-  },
-];
+interface TaskData {
+  id: string;
+  user: string;
+  avatar: string;
+  color: string;
+  phone: string;
+  service: string;
+  address: string;
+  time: string;
+  amount: string;
+  status: 'pending' | 'accepted' | 'serving' | 'completed';
+}
 
 const FILTER_TABS = [
   { id: 'all', label: '全部' },
-  { id: 'pending', label: '待接单' },
+  { id: 'accepted', label: '待开始' },
   { id: 'serving', label: '进行中' },
   { id: 'completed', label: '已完成' },
 ];
 
 const STATUS_MAP: Record<string, string> = {
   pending: '待接单',
-  accepted: '已接单',
+  accepted: '待开始',
   serving: '服务中',
   completed: '已完成',
 };
 
 const STATUS_COLORS: Record<string, { color: string; bg: string }> = {
   pending: { color: '#EF4444', bg: '#EF444420' },
+  accepted: { color: '#00D4FF', bg: '#00D4FF20' },
   serving: { color: '#F59E0B', bg: '#F59E0B20' },
   completed: { color: '#10B981', bg: '#10B98120' },
 };
 
 interface TaskListPageProps {
   themeColor?: string;
-  onTaskClick: (task: typeof TASK_LIST[0]) => void;
-  onCheckin: (task: typeof TASK_LIST[0]) => void;
+  tasks?: TaskData[];
+  onTaskClick: (task: TaskData) => void;
+  onAcceptTask?: (task: TaskData) => void;
+  onRejectTask?: (task: TaskData) => void;
+  onCheckin: (task: TaskData) => void;
 }
 
 export const TaskListPage: React.FC<TaskListPageProps> = ({
   themeColor = '#A855F7',
+  tasks: propTasks,
   onTaskClick,
+  onAcceptTask,
+  onRejectTask,
   onCheckin,
 }) => {
+  const taskList = propTasks ?? [];
   const [activeFilter, setActiveFilter] = useState('all');
+  const [searchText, setSearchText] = useState('');
+  const [actionMenuTaskId, setActionMenuTaskId] = useState<string | null>(null);
+  const [menuPosition, setMenuPosition] = useState<{ bottom: number; right: number } | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
-  const filteredTasks =
-    activeFilter === 'all'
-      ? TASK_LIST
-      : TASK_LIST.filter((t) => t.status === activeFilter);
+  // 关闭菜单
+  const closeMenu = useCallback(() => {
+    setActionMenuTaskId(null);
+    setMenuPosition(null);
+  }, []);
 
-  // 统计数据
+  // 点击外部关闭菜单
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        closeMenu();
+      }
+    };
+    if (actionMenuTaskId) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [actionMenuTaskId, closeMenu]);
+
+  // 滚动时关闭菜单
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el || !actionMenuTaskId) return;
+    const handleScroll = () => closeMenu();
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    return () => el.removeEventListener('scroll', handleScroll);
+  }, [actionMenuTaskId, closeMenu]);
+
+  const filteredTasks = (activeFilter === 'all'
+    ? taskList
+    : taskList.filter((t) => t.status === activeFilter))
+    .filter(t => !searchText || t.user.includes(searchText) || t.service.includes(searchText) || t.address.includes(searchText));
+
+  // 统计数据（实时计算）
   const stats = [
-    { label: '今日任务', value: 2 },
-    { label: '进行中', value: 1 },
-    { label: '已完成', value: 12 },
+    { label: '全部任务', value: taskList.length },
+    { label: '进行中', value: taskList.filter(t => t.status === 'serving').length },
+    { label: '已完成', value: taskList.filter(t => t.status === 'completed').length },
   ];
 
   return (
+    <>
     <div
       style={{
         flex: 1,
@@ -174,6 +193,24 @@ export const TaskListPage: React.FC<TaskListPageProps> = ({
         </Card>
       </div>
 
+      {/* 搜索框 */}
+      <div style={{ padding: '0 16px 10px', flexShrink: 0 }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', background: THEME.bgInput,
+          borderRadius: 10, padding: '10px 14px', border: `1px solid ${THEME.borderLight}`,
+          gap: 8,
+        }}>
+          <SearchOutlined style={{ color: THEME.textMuted, fontSize: 16 }} />
+          <input
+            placeholder="搜索任务/用户/地址..."
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
+            style={{ flex: 1, border: 'none', background: 'transparent', color: THEME.textPrimary, fontSize: 14, outline: 'none' }}
+          />
+          {searchText && <span onClick={() => setSearchText('')} style={{ color: THEME.textMuted, cursor: 'pointer', fontSize: 16 }}>✕</span>}
+        </div>
+      </div>
+
       {/* 筛选 Tab */}
       <div
         style={{
@@ -199,7 +236,7 @@ export const TaskListPage: React.FC<TaskListPageProps> = ({
                 cursor: 'pointer',
                 background: isActive
                   ? `${themeColor}20`
-                  : `${THEME.bgLight}60`,
+                  : THEME.bgCard,
                 color: isActive ? themeColor : THEME.textSecondary,
                 border: `1px solid ${isActive ? `${themeColor}50` : `${THEME.borderLight}`}`,
                 transition: 'all 0.2s ease',
@@ -213,6 +250,7 @@ export const TaskListPage: React.FC<TaskListPageProps> = ({
 
       {/* 任务列表 */}
       <div
+        ref={listRef}
         style={{
           flex: 1,
           padding: '0 16px 16px',
@@ -309,10 +347,25 @@ export const TaskListPage: React.FC<TaskListPageProps> = ({
                 >
                   {task.amount}
                 </div>
-                <div style={{ display: 'flex', gap: 8 }}>
-                  {task.status === 'pending' && (
-                    <Button size="small" themeColor={themeColor}>
-                      接受任务
+                <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+                  {task.status === 'accepted' && (
+                    <Button
+                      size="small"
+                      themeColor={themeColor}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+                        if (actionMenuTaskId === task.id) {
+                          closeMenu();
+                        } else {
+                          setActionMenuTaskId(task.id);
+                          setMenuPosition({ bottom: window.innerHeight - rect.top + 6, right: window.innerWidth - rect.right });
+                        }
+                      }}
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      操作
+                      <MoreOutlined style={{ marginLeft: 4, fontSize: 12 }} />
                     </Button>
                   )}
                   {task.status === 'serving' && (
@@ -323,6 +376,7 @@ export const TaskListPage: React.FC<TaskListPageProps> = ({
                         e.stopPropagation();
                         onCheckin(task);
                       }}
+                      style={{ whiteSpace: 'nowrap' }}
                     >
                       完成打卡
                     </Button>
@@ -331,6 +385,10 @@ export const TaskListPage: React.FC<TaskListPageProps> = ({
                     size="small"
                     type="default"
                     themeColor={themeColor}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onTaskClick(task);
+                    }}
                   >
                     详情
                   </Button>
@@ -341,6 +399,74 @@ export const TaskListPage: React.FC<TaskListPageProps> = ({
         })}
       </div>
     </div>
+    {/* Portal 下拉菜单 - 渲染到 body 避免被 overflow 裁剪 */}
+    {actionMenuTaskId && menuPosition && ReactDOM.createPortal(
+      <div
+        ref={menuRef}
+        style={{
+          position: 'fixed',
+          bottom: menuPosition.bottom,
+          right: menuPosition.right,
+          background: THEME.bgDark,
+          borderRadius: 10,
+          border: `1px solid ${THEME.borderLight}`,
+          boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+          minWidth: 140,
+          zIndex: 9999,
+          overflow: 'hidden',
+          padding: 4,
+        }}
+      >
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            closeMenu();
+            onAcceptTask?.(taskList.find(t => t.id === actionMenuTaskId)!);
+          }}
+          style={{
+            padding: '10px 14px',
+            fontSize: 13,
+            color: THEME.textPrimary,
+            cursor: 'pointer',
+            borderRadius: 8,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            transition: 'background 0.15s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = THEME.bgLight)}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+        >
+          <PlayCircleOutlined style={{ color: themeColor, fontSize: 15 }} />
+          开始服务
+        </div>
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            closeMenu();
+            onRejectTask?.(taskList.find(t => t.id === actionMenuTaskId)!);
+          }}
+          style={{
+            padding: '10px 14px',
+            fontSize: 13,
+            color: THEME.danger,
+            cursor: 'pointer',
+            borderRadius: 8,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            transition: 'background 0.15s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = THEME.bgLight)}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+        >
+          <CloseCircleOutlined style={{ fontSize: 15 }} />
+          拒绝
+        </div>
+      </div>,
+      document.body
+    )}
+    </>
   );
 };
 

@@ -1,0 +1,693 @@
+{
+  "version": 1,
+  "conversations": [
+    {
+      "threadId": "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1",
+      "title": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。",
+      "createdAt": "2026-07-07T03:41:22.639Z",
+      "updatedAt": "2026-07-07T03:41:54.188Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": null,
+      "providerSessionId": "019f3aaa-8c58-76f2-836c-8b2df221db8e",
+      "sourcePath": "C:\\Users\\WXD\\.codex\\sessions\\2026\\07\\07\\rollout-2026-07-07T11-41-28-019f3aaa-8c58-76f2-836c-8b2df221db8e.jsonl",
+      "sourceKind": "codex-jsonl",
+      "lastSeenMtime": 1783395713807.253,
+      "lastActiveAt": "2026-07-07T03:41:53.806Z"
+    },
+    {
+      "threadId": "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb",
+      "title": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。",
+      "createdAt": "2026-07-07T03:39:32.791Z",
+      "updatedAt": "2026-07-07T03:40:08.128Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": null,
+      "providerSessionId": "019f3aa8-e716-7742-837e-67a3bd9ea30f",
+      "sourcePath": "C:\\Users\\WXD\\.codex\\sessions\\2026\\07\\07\\rollout-2026-07-07T11-39-40-019f3aa8-e716-7742-837e-67a3bd9ea30f.jsonl",
+      "sourceKind": "codex-jsonl",
+      "lastSeenMtime": 1783395607994.1218,
+      "lastActiveAt": "2026-07-07T03:40:07.994Z"
+    },
+    {
+      "threadId": "direct-80ee02a3-7ba1-495a-93cb-10b05840056f",
+      "title": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。",
+      "createdAt": "2026-07-07T03:34:58.681Z",
+      "updatedAt": "2026-07-07T03:35:35.039Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": null,
+      "providerSessionId": "019f3aa4-b030-7ee2-8c3f-fa08b9fb57ab",
+      "sourcePath": "C:\\Users\\WXD\\.codex\\sessions\\2026\\07\\07\\rollout-2026-07-07T11-35-04-019f3aa4-b030-7ee2-8c3f-fa08b9fb57ab.jsonl",
+      "sourceKind": "codex-jsonl",
+      "lastSeenMtime": 1783395334891.3484,
+      "lastActiveAt": "2026-07-07T03:35:34.891Z"
+    },
+    {
+      "threadId": "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096",
+      "title": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。",
+      "createdAt": "2026-07-07T03:33:59.731Z",
+      "updatedAt": "2026-07-07T03:34:33.803Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": null,
+      "providerSessionId": "019f3aa3-ca15-7d01-8fdd-30fafba851f7",
+      "sourcePath": "C:\\Users\\WXD\\.codex\\sessions\\2026\\07\\07\\rollout-2026-07-07T11-34-05-019f3aa3-ca15-7d01-8fdd-30fafba851f7.jsonl",
+      "sourceKind": "codex-jsonl",
+      "lastSeenMtime": 1783395273654.8381,
+      "lastActiveAt": "2026-07-07T03:34:33.655Z"
+    },
+    {
+      "threadId": "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20",
+      "title": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。",
+      "createdAt": "2026-07-07T03:33:24.530Z",
+      "updatedAt": "2026-07-07T03:34:00.164Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": null,
+      "providerSessionId": "019f3aa3-4a34-7df2-b07f-2a063b0e1c77",
+      "sourcePath": "C:\\Users\\WXD\\.codex\\sessions\\2026\\07\\07\\rollout-2026-07-07T11-33-32-019f3aa3-4a34-7df2-b07f-2a063b0e1c77.jsonl",
+      "sourceKind": "codex-jsonl",
+      "lastSeenMtime": 1783395240023.3086,
+      "lastActiveAt": "2026-07-07T03:34:00.023Z"
+    },
+    {
+      "threadId": "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9",
+      "title": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。",
+      "createdAt": "2026-07-07T03:32:42.340Z",
+      "updatedAt": "2026-07-07T03:33:15.307Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": null,
+      "providerSessionId": "019f3aa2-9ba0-7bd0-8063-7d765ba3f7b6",
+      "sourcePath": null,
+      "sourceKind": null,
+      "lastSeenMtime": null,
+      "lastActiveAt": "2026-07-07T03:32:48.182Z"
+    },
+    {
+      "threadId": "direct-d54abd38-4e09-4321-adb3-152ee82b27d0",
+      "title": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。",
+      "createdAt": "2026-07-07T03:31:30.474Z",
+      "updatedAt": "2026-07-07T03:32:33.066Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": null,
+      "providerSessionId": "019f3aa1-eb20-7ab3-9cc1-4a6beb796d5c",
+      "sourcePath": "C:\\Users\\WXD\\.codex\\sessions\\2026\\07\\07\\rollout-2026-07-07T11-32-02-019f3aa1-eb20-7ab3-9cc1-4a6beb796d5c.jsonl",
+      "sourceKind": "codex-jsonl",
+      "lastSeenMtime": 1783395152943.6387,
+      "lastActiveAt": "2026-07-07T03:32:32.943Z"
+    }
+  ],
+  "sessions": [
+    {
+      "threadId": "direct-d54abd38-4e09-4321-adb3-152ee82b27d0",
+      "acpSessionId": "019f3aa1-eb20-7ab3-9cc1-4a6beb796d5c",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:32:03.638Z",
+      "lastActivityAt": "2026-07-07T03:32:33.040Z",
+      "closedAt": null
+    },
+    {
+      "threadId": "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9",
+      "acpSessionId": "019f3aa2-9ba0-7bd0-8063-7d765ba3f7b6",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:32:48.182Z",
+      "lastActivityAt": "2026-07-07T03:32:48.182Z",
+      "closedAt": null
+    },
+    {
+      "threadId": "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20",
+      "acpSessionId": "019f3aa3-4a34-7df2-b07f-2a063b0e1c77",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:33:33.494Z",
+      "lastActivityAt": "2026-07-07T03:34:00.137Z",
+      "closedAt": null
+    },
+    {
+      "threadId": "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096",
+      "acpSessionId": "019f3aa3-ca15-7d01-8fdd-30fafba851f7",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:34:05.614Z",
+      "lastActivityAt": "2026-07-07T03:34:33.775Z",
+      "closedAt": null
+    },
+    {
+      "threadId": "direct-80ee02a3-7ba1-495a-93cb-10b05840056f",
+      "acpSessionId": "019f3aa4-b030-7ee2-8c3f-fa08b9fb57ab",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:35:04.517Z",
+      "lastActivityAt": "2026-07-07T03:35:35.012Z",
+      "closedAt": null
+    },
+    {
+      "threadId": "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb",
+      "acpSessionId": "019f3aa8-e716-7742-837e-67a3bd9ea30f",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:39:41.342Z",
+      "lastActivityAt": "2026-07-07T03:40:08.101Z",
+      "closedAt": null
+    },
+    {
+      "threadId": "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1",
+      "acpSessionId": "019f3aaa-8c58-76f2-836c-8b2df221db8e",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:41:28.543Z",
+      "lastActivityAt": "2026-07-07T03:41:54.125Z",
+      "closedAt": null
+    }
+  ],
+  "messages": {
+    "direct-d54abd38-4e09-4321-adb3-152ee82b27d0": {
+      "messages": [
+        {
+          "id": "direct-d54abd38-4e09-4321-adb3-152ee82b27d0-user",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "direct-d54abd38-4e09-4321-adb3-152ee82b27d0-user",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-d54abd38-4e09-4321-adb3-152ee82b27d0",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395090491
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-07T03:31:30.493Z",
+          "updatedAt": "2026-07-07T03:32:33.053Z"
+        },
+        {
+          "id": "assistant-mra3esb1-2vfokbsvidc",
+          "parent_id": "direct-d54abd38-4e09-4321-adb3-152ee82b27d0-user",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3esb1-2vfokbsvidc",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "completed",
+                  "threadId": "direct-d54abd38-4e09-4321-adb3-152ee82b27d0",
+                  "acpSessionId": "019f3aa1-eb20-7ab3-9cc1-4a6beb796d5c",
+                  "error": null,
+                  "updatedAt": 1783395153003
+                }
+              }
+            },
+            "role": "assistant",
+            "parts": [
+              {
+                "type": "step-start"
+              },
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\nunexpected status 403 Forbidden: 预扣费额度失败, 用户剩余额度: ＄0.000800, 需要预扣费额度: ＄0.219664 (request id: 20260707033232519374844052Z5x6p), url: https://nty-hk.zhouyang168.top/v1/responses\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:32:09.988Z",
+          "updatedAt": "2026-07-07T03:32:33.066Z"
+        }
+      ],
+      "headId": "assistant-mra3esb1-2vfokbsvidc"
+    },
+    "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9": {
+      "messages": [
+        {
+          "id": "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9-user",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9-user",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395162354
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-07T03:32:42.354Z",
+          "updatedAt": "2026-07-07T03:33:15.285Z"
+        },
+        {
+          "id": "assistant-mra3fqnu-mv9wnh7mlsm",
+          "parent_id": "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9-user",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3fqnu-mv9wnh7mlsm",
+            "role": "assistant",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-2be08cc7-273c-4b3c-8897-48b770bf54f9",
+                  "acpSessionId": "019f3aa2-9ba0-7bd0-8063-7d765ba3f7b6",
+                  "error": null,
+                  "streamId": "acp:codex:mra3fqnx:2cb6a53c-c665-4b05-9132-16f27e9cc239",
+                  "updatedAt": 1783395195285
+                }
+              }
+            },
+            "parts": [
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:32:53.913Z",
+          "updatedAt": "2026-07-07T03:33:15.307Z"
+        }
+      ],
+      "headId": "assistant-mra3fqnu-mv9wnh7mlsm"
+    },
+    "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20": {
+      "messages": [
+        {
+          "id": "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20-user",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20-user",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395204545
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-07T03:33:24.546Z",
+          "updatedAt": "2026-07-07T03:34:00.150Z"
+        },
+        {
+          "id": "assistant-mra3gpmy-ui7p5yc5td",
+          "parent_id": "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20-user",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3gpmy-ui7p5yc5td",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "completed",
+                  "threadId": "direct-3002aec8-ad39-4cad-b8c4-5540703ebd20",
+                  "acpSessionId": "019f3aa3-4a34-7df2-b07f-2a063b0e1c77",
+                  "error": null,
+                  "updatedAt": 1783395240080
+                }
+              }
+            },
+            "role": "assistant",
+            "parts": [
+              {
+                "type": "step-start"
+              },
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\nunexpected status 403 Forbidden: 预扣费额度失败, 用户剩余额度: ＄0.000800, 需要预扣费额度: ＄0.219664 (request id: 20260707033359423245977oE6hXANf), url: https://nty-hk.zhouyang168.top/v1/responses\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:33:39.325Z",
+          "updatedAt": "2026-07-07T03:34:00.164Z"
+        }
+      ],
+      "headId": "assistant-mra3gpmy-ui7p5yc5td"
+    },
+    "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096": {
+      "messages": [
+        {
+          "id": "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096-user",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096-user",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395239745
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-07T03:33:59.745Z",
+          "updatedAt": "2026-07-07T03:34:33.788Z"
+        },
+        {
+          "id": "assistant-mra3heeq-tbw230t6vtm",
+          "parent_id": "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096-user",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3heeq-tbw230t6vtm",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "completed",
+                  "threadId": "direct-4743e37a-cc6b-42f1-b0db-8d39108f9096",
+                  "acpSessionId": "019f3aa3-ca15-7d01-8fdd-30fafba851f7",
+                  "error": null,
+                  "updatedAt": 1783395273716
+                }
+              }
+            },
+            "role": "assistant",
+            "parts": [
+              {
+                "type": "step-start"
+              },
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\nunexpected status 403 Forbidden: 预扣费额度失败, 用户剩余额度: ＄0.000800, 需要预扣费额度: ＄0.219664 (request id: 2026070703343351250124ffgImR3I), url: https://nty-hk.zhouyang168.top/v1/responses\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:34:11.371Z",
+          "updatedAt": "2026-07-07T03:34:33.803Z"
+        }
+      ],
+      "headId": "assistant-mra3heeq-tbw230t6vtm"
+    },
+    "direct-80ee02a3-7ba1-495a-93cb-10b05840056f": {
+      "messages": [
+        {
+          "id": "direct-80ee02a3-7ba1-495a-93cb-10b05840056f-user",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "direct-80ee02a3-7ba1-495a-93cb-10b05840056f-user",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-80ee02a3-7ba1-495a-93cb-10b05840056f",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395298696
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-07T03:34:58.697Z",
+          "updatedAt": "2026-07-07T03:35:35.026Z"
+        },
+        {
+          "id": "assistant-mra3inv0-4wgug5rfaj8",
+          "parent_id": "direct-80ee02a3-7ba1-495a-93cb-10b05840056f-user",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3inv0-4wgug5rfaj8",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "completed",
+                  "threadId": "direct-80ee02a3-7ba1-495a-93cb-10b05840056f",
+                  "acpSessionId": "019f3aa4-b030-7ee2-8c3f-fa08b9fb57ab",
+                  "error": null,
+                  "updatedAt": 1783395334952
+                }
+              }
+            },
+            "role": "assistant",
+            "parts": [
+              {
+                "type": "step-start"
+              },
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\nunexpected status 403 Forbidden: 预扣费额度失败, 用户剩余额度: ＄0.000800, 需要预扣费额度: ＄0.219664 (request id: 202607070335343183657431JoQPTt4), url: https://nty-hk.zhouyang168.top/v1/responses\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:35:10.267Z",
+          "updatedAt": "2026-07-07T03:35:35.039Z"
+        }
+      ],
+      "headId": "assistant-mra3inv0-4wgug5rfaj8"
+    },
+    "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb": {
+      "messages": [
+        {
+          "id": "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb-user",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb-user",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395572807
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-07T03:39:32.808Z",
+          "updatedAt": "2026-07-07T03:40:08.114Z"
+        },
+        {
+          "id": "assistant-mra3olgx-mitfhyvmih",
+          "parent_id": "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb-user",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3olgx-mitfhyvmih",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "completed",
+                  "threadId": "direct-aead0f36-00a5-4dfd-8ac1-553e4f7462cb",
+                  "acpSessionId": "019f3aa8-e716-7742-837e-67a3bd9ea30f",
+                  "error": null,
+                  "updatedAt": 1783395608048
+                }
+              }
+            },
+            "role": "assistant",
+            "parts": [
+              {
+                "type": "step-start"
+              },
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\nunexpected status 403 Forbidden: 预扣费额度失败, 用户剩余额度: ＄0.000800, 需要预扣费额度: ＄0.219664 (request id: 20260707034007388617284jai4LyY1), url: https://nty-hk.zhouyang168.top/v1/responses\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:39:47.154Z",
+          "updatedAt": "2026-07-07T03:40:08.128Z"
+        }
+      ],
+      "headId": "assistant-mra3olgx-mitfhyvmih"
+    },
+    "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1": {
+      "messages": [
+        {
+          "id": "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1-user",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1-user",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "请只返回 AXHUB_AGENT_TEST_OK，不要返回其他文字。"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395682652
+                }
+              }
+            }
+          },
+          "createdAt": "2026-07-07T03:41:22.652Z",
+          "updatedAt": "2026-07-07T03:41:54.158Z"
+        },
+        {
+          "id": "assistant-mra3qw6g-exyxto2ag75",
+          "parent_id": "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1-user",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3qw6g-exyxto2ag75",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "completed",
+                  "threadId": "direct-3d6b1ef4-a840-4dac-b557-58f1fec0cca1",
+                  "acpSessionId": "019f3aaa-8c58-76f2-836c-8b2df221db8e",
+                  "error": null,
+                  "updatedAt": 1783395713878
+                }
+              }
+            },
+            "role": "assistant",
+            "parts": [
+              {
+                "type": "step-start"
+              },
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\nunexpected status 403 Forbidden: 预扣费额度失败, 用户剩余额度: ＄0.000800, 需要预扣费额度: ＄0.219664 (request id: 20260707034153211411942LVUay0QR), url: https://nty-hk.zhouyang168.top/v1/responses\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:41:34.320Z",
+          "updatedAt": "2026-07-07T03:41:54.188Z"
+        }
+      ],
+      "headId": "assistant-mra3qw6g-exyxto2ag75"
+    }
+  }
+}

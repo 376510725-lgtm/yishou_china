@@ -1,0 +1,938 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-03T01:27:51.397Z",
+  "items": {
+    "prototypes/management": {
+      "group": "prototypes",
+      "name": "management",
+      "js": "src/prototypes/management/index.tsx",
+      "html": "src/prototypes/management/index.html"
+    },
+    "prototypes/service-app": {
+      "group": "prototypes",
+      "name": "service-app",
+      "js": "src/prototypes/service-app/index.tsx",
+      "html": "src/prototypes/service-app/index.html"
+    },
+    "prototypes/yishou-app": {
+      "group": "prototypes",
+      "name": "yishou-app",
+      "js": "src/prototypes/yishou-app/index.tsx",
+      "html": "src/prototypes/yishou-app/index.html"
+    },
+    "themes/8returns": {
+      "group": "themes",
+      "name": "8returns",
+      "js": "src/themes/8returns/index.tsx",
+      "html": "src/themes/8returns/index.html"
+    },
+    "themes/aevi-wellness": {
+      "group": "themes",
+      "name": "aevi-wellness",
+      "js": "src/themes/aevi-wellness/index.tsx",
+      "html": "src/themes/aevi-wellness/index.html"
+    },
+    "themes/airbnb": {
+      "group": "themes",
+      "name": "airbnb",
+      "js": "src/themes/airbnb/index.tsx",
+      "html": "src/themes/airbnb/index.html"
+    },
+    "themes/airtable": {
+      "group": "themes",
+      "name": "airtable",
+      "js": "src/themes/airtable/index.tsx",
+      "html": "src/themes/airtable/index.html"
+    },
+    "themes/alison-roman": {
+      "group": "themes",
+      "name": "alison-roman",
+      "js": "src/themes/alison-roman/index.tsx",
+      "html": "src/themes/alison-roman/index.html"
+    },
+    "themes/alpine-hearing-protection": {
+      "group": "themes",
+      "name": "alpine-hearing-protection",
+      "js": "src/themes/alpine-hearing-protection/index.tsx",
+      "html": "src/themes/alpine-hearing-protection/index.html"
+    },
+    "themes/altitude": {
+      "group": "themes",
+      "name": "altitude",
+      "js": "src/themes/altitude/index.tsx",
+      "html": "src/themes/altitude/index.html"
+    },
+    "themes/amp": {
+      "group": "themes",
+      "name": "amp",
+      "js": "src/themes/amp/index.tsx",
+      "html": "src/themes/amp/index.html"
+    },
+    "themes/apple": {
+      "group": "themes",
+      "name": "apple",
+      "js": "src/themes/apple/index.tsx",
+      "html": "src/themes/apple/index.html"
+    },
+    "themes/artandcommerce": {
+      "group": "themes",
+      "name": "artandcommerce",
+      "js": "src/themes/artandcommerce/index.tsx",
+      "html": "src/themes/artandcommerce/index.html"
+    },
+    "themes/arte": {
+      "group": "themes",
+      "name": "arte",
+      "js": "src/themes/arte/index.tsx",
+      "html": "src/themes/arte/index.html"
+    },
+    "themes/artu": {
+      "group": "themes",
+      "name": "artu",
+      "js": "src/themes/artu/index.tsx",
+      "html": "src/themes/artu/index.html"
+    },
+    "themes/arva": {
+      "group": "themes",
+      "name": "arva",
+      "js": "src/themes/arva/index.tsx",
+      "html": "src/themes/arva/index.html"
+    },
+    "themes/ashton-bespoke": {
+      "group": "themes",
+      "name": "ashton-bespoke",
+      "js": "src/themes/ashton-bespoke/index.tsx",
+      "html": "src/themes/ashton-bespoke/index.html"
+    },
+    "themes/aspelin-reitan": {
+      "group": "themes",
+      "name": "aspelin-reitan",
+      "js": "src/themes/aspelin-reitan/index.tsx",
+      "html": "src/themes/aspelin-reitan/index.html"
+    },
+    "themes/assurestor": {
+      "group": "themes",
+      "name": "assurestor",
+      "js": "src/themes/assurestor/index.tsx",
+      "html": "src/themes/assurestor/index.html"
+    },
+    "themes/atelier-deux-ce": {
+      "group": "themes",
+      "name": "atelier-deux-ce",
+      "js": "src/themes/atelier-deux-ce/index.tsx",
+      "html": "src/themes/atelier-deux-ce/index.html"
+    },
+    "themes/athletics": {
+      "group": "themes",
+      "name": "athletics",
+      "js": "src/themes/athletics/index.tsx",
+      "html": "src/themes/athletics/index.html"
+    },
+    "themes/atlantic-vc": {
+      "group": "themes",
+      "name": "atlantic-vc",
+      "js": "src/themes/atlantic-vc/index.tsx",
+      "html": "src/themes/atlantic-vc/index.html"
+    },
+    "themes/atoms": {
+      "group": "themes",
+      "name": "atoms",
+      "js": "src/themes/atoms/index.tsx",
+      "html": "src/themes/atoms/index.html"
+    },
+    "themes/audyr": {
+      "group": "themes",
+      "name": "audyr",
+      "js": "src/themes/audyr/index.tsx",
+      "html": "src/themes/audyr/index.html"
+    },
+    "themes/august-health-ehr": {
+      "group": "themes",
+      "name": "august-health-ehr",
+      "js": "src/themes/august-health-ehr/index.tsx",
+      "html": "src/themes/august-health-ehr/index.html"
+    },
+    "themes/binance": {
+      "group": "themes",
+      "name": "binance",
+      "js": "src/themes/binance/index.tsx",
+      "html": "src/themes/binance/index.html"
+    },
+    "themes/bmw": {
+      "group": "themes",
+      "name": "bmw",
+      "js": "src/themes/bmw/index.tsx",
+      "html": "src/themes/bmw/index.html"
+    },
+    "themes/cal-com": {
+      "group": "themes",
+      "name": "cal-com",
+      "js": "src/themes/cal-com/index.tsx",
+      "html": "src/themes/cal-com/index.html"
+    },
+    "themes/cards-against-humanity": {
+      "group": "themes",
+      "name": "cards-against-humanity",
+      "js": "src/themes/cards-against-humanity/index.tsx",
+      "html": "src/themes/cards-against-humanity/index.html"
+    },
+    "themes/claude": {
+      "group": "themes",
+      "name": "claude",
+      "js": "src/themes/claude/index.tsx",
+      "html": "src/themes/claude/index.html"
+    },
+    "themes/clay": {
+      "group": "themes",
+      "name": "clay",
+      "js": "src/themes/clay/index.tsx",
+      "html": "src/themes/clay/index.html"
+    },
+    "themes/clickhouse": {
+      "group": "themes",
+      "name": "clickhouse",
+      "js": "src/themes/clickhouse/index.tsx",
+      "html": "src/themes/clickhouse/index.html"
+    },
+    "themes/clutch-security": {
+      "group": "themes",
+      "name": "clutch-security",
+      "js": "src/themes/clutch-security/index.tsx",
+      "html": "src/themes/clutch-security/index.html"
+    },
+    "themes/cohere": {
+      "group": "themes",
+      "name": "cohere",
+      "js": "src/themes/cohere/index.tsx",
+      "html": "src/themes/cohere/index.html"
+    },
+    "themes/coinbase": {
+      "group": "themes",
+      "name": "coinbase",
+      "js": "src/themes/coinbase/index.tsx",
+      "html": "src/themes/coinbase/index.html"
+    },
+    "themes/composio": {
+      "group": "themes",
+      "name": "composio",
+      "js": "src/themes/composio/index.tsx",
+      "html": "src/themes/composio/index.html"
+    },
+    "themes/cursor": {
+      "group": "themes",
+      "name": "cursor",
+      "js": "src/themes/cursor/index.tsx",
+      "html": "src/themes/cursor/index.html"
+    },
+    "themes/dope-security": {
+      "group": "themes",
+      "name": "dope-security",
+      "js": "src/themes/dope-security/index.tsx",
+      "html": "src/themes/dope-security/index.html"
+    },
+    "themes/duolingo": {
+      "group": "themes",
+      "name": "duolingo",
+      "js": "src/themes/duolingo/index.tsx",
+      "html": "src/themes/duolingo/index.html"
+    },
+    "themes/ease-health": {
+      "group": "themes",
+      "name": "ease-health",
+      "js": "src/themes/ease-health/index.tsx",
+      "html": "src/themes/ease-health/index.html"
+    },
+    "themes/elevenlabs": {
+      "group": "themes",
+      "name": "elevenlabs",
+      "js": "src/themes/elevenlabs/index.tsx",
+      "html": "src/themes/elevenlabs/index.html"
+    },
+    "themes/eventbrite": {
+      "group": "themes",
+      "name": "eventbrite",
+      "js": "src/themes/eventbrite/index.tsx",
+      "html": "src/themes/eventbrite/index.html"
+    },
+    "themes/expo": {
+      "group": "themes",
+      "name": "expo",
+      "js": "src/themes/expo/index.tsx",
+      "html": "src/themes/expo/index.html"
+    },
+    "themes/factory-ai": {
+      "group": "themes",
+      "name": "factory-ai",
+      "js": "src/themes/factory-ai/index.tsx",
+      "html": "src/themes/factory-ai/index.html"
+    },
+    "themes/ferrari": {
+      "group": "themes",
+      "name": "ferrari",
+      "js": "src/themes/ferrari/index.tsx",
+      "html": "src/themes/ferrari/index.html"
+    },
+    "themes/figma": {
+      "group": "themes",
+      "name": "figma",
+      "js": "src/themes/figma/index.tsx",
+      "html": "src/themes/figma/index.html"
+    },
+    "themes/framer": {
+      "group": "themes",
+      "name": "framer",
+      "js": "src/themes/framer/index.tsx",
+      "html": "src/themes/framer/index.html"
+    },
+    "themes/getburnt": {
+      "group": "themes",
+      "name": "getburnt",
+      "js": "src/themes/getburnt/index.tsx",
+      "html": "src/themes/getburnt/index.html"
+    },
+    "themes/google-for-education": {
+      "group": "themes",
+      "name": "google-for-education",
+      "js": "src/themes/google-for-education/index.tsx",
+      "html": "src/themes/google-for-education/index.html"
+    },
+    "themes/hashicorp": {
+      "group": "themes",
+      "name": "hashicorp",
+      "js": "src/themes/hashicorp/index.tsx",
+      "html": "src/themes/hashicorp/index.html"
+    },
+    "themes/headspace": {
+      "group": "themes",
+      "name": "headspace",
+      "js": "src/themes/headspace/index.tsx",
+      "html": "src/themes/headspace/index.html"
+    },
+    "themes/healthy-together": {
+      "group": "themes",
+      "name": "healthy-together",
+      "js": "src/themes/healthy-together/index.tsx",
+      "html": "src/themes/healthy-together/index.html"
+    },
+    "themes/ibm": {
+      "group": "themes",
+      "name": "ibm",
+      "js": "src/themes/ibm/index.tsx",
+      "html": "src/themes/ibm/index.html"
+    },
+    "themes/incident": {
+      "group": "themes",
+      "name": "incident",
+      "js": "src/themes/incident/index.tsx",
+      "html": "src/themes/incident/index.html"
+    },
+    "themes/intercom": {
+      "group": "themes",
+      "name": "intercom",
+      "js": "src/themes/intercom/index.tsx",
+      "html": "src/themes/intercom/index.html"
+    },
+    "themes/kami": {
+      "group": "themes",
+      "name": "kami",
+      "js": "src/themes/kami/index.tsx",
+      "html": "src/themes/kami/index.html"
+    },
+    "themes/kraken": {
+      "group": "themes",
+      "name": "kraken",
+      "js": "src/themes/kraken/index.tsx",
+      "html": "src/themes/kraken/index.html"
+    },
+    "themes/krepling": {
+      "group": "themes",
+      "name": "krepling",
+      "js": "src/themes/krepling/index.tsx",
+      "html": "src/themes/krepling/index.html"
+    },
+    "themes/lamborghini": {
+      "group": "themes",
+      "name": "lamborghini",
+      "js": "src/themes/lamborghini/index.tsx",
+      "html": "src/themes/lamborghini/index.html"
+    },
+    "themes/leandra-isler": {
+      "group": "themes",
+      "name": "leandra-isler",
+      "js": "src/themes/leandra-isler/index.tsx",
+      "html": "src/themes/leandra-isler/index.html"
+    },
+    "themes/linear": {
+      "group": "themes",
+      "name": "linear",
+      "js": "src/themes/linear/index.tsx",
+      "html": "src/themes/linear/index.html"
+    },
+    "themes/lithic": {
+      "group": "themes",
+      "name": "lithic",
+      "js": "src/themes/lithic/index.tsx",
+      "html": "src/themes/lithic/index.html"
+    },
+    "themes/lovable": {
+      "group": "themes",
+      "name": "lovable",
+      "js": "src/themes/lovable/index.tsx",
+      "html": "src/themes/lovable/index.html"
+    },
+    "themes/minimax": {
+      "group": "themes",
+      "name": "minimax",
+      "js": "src/themes/minimax/index.tsx",
+      "html": "src/themes/minimax/index.html"
+    },
+    "themes/mintlify": {
+      "group": "themes",
+      "name": "mintlify",
+      "js": "src/themes/mintlify/index.tsx",
+      "html": "src/themes/mintlify/index.html"
+    },
+    "themes/miro": {
+      "group": "themes",
+      "name": "miro",
+      "js": "src/themes/miro/index.tsx",
+      "html": "src/themes/miro/index.html"
+    },
+    "themes/mistral-ai": {
+      "group": "themes",
+      "name": "mistral-ai",
+      "js": "src/themes/mistral-ai/index.tsx",
+      "html": "src/themes/mistral-ai/index.html"
+    },
+    "themes/mongodb": {
+      "group": "themes",
+      "name": "mongodb",
+      "js": "src/themes/mongodb/index.tsx",
+      "html": "src/themes/mongodb/index.html"
+    },
+    "themes/neverhack": {
+      "group": "themes",
+      "name": "neverhack",
+      "js": "src/themes/neverhack/index.tsx",
+      "html": "src/themes/neverhack/index.html"
+    },
+    "themes/nike": {
+      "group": "themes",
+      "name": "nike",
+      "js": "src/themes/nike/index.tsx",
+      "html": "src/themes/nike/index.html"
+    },
+    "themes/nile-postgres": {
+      "group": "themes",
+      "name": "nile-postgres",
+      "js": "src/themes/nile-postgres/index.tsx",
+      "html": "src/themes/nile-postgres/index.html"
+    },
+    "themes/notion": {
+      "group": "themes",
+      "name": "notion",
+      "js": "src/themes/notion/index.tsx",
+      "html": "src/themes/notion/index.html"
+    },
+    "themes/nvidia": {
+      "group": "themes",
+      "name": "nvidia",
+      "js": "src/themes/nvidia/index.tsx",
+      "html": "src/themes/nvidia/index.html"
+    },
+    "themes/oak-me": {
+      "group": "themes",
+      "name": "oak-me",
+      "js": "src/themes/oak-me/index.tsx",
+      "html": "src/themes/oak-me/index.html"
+    },
+    "themes/ollama": {
+      "group": "themes",
+      "name": "ollama",
+      "js": "src/themes/ollama/index.tsx",
+      "html": "src/themes/ollama/index.html"
+    },
+    "themes/on-energy": {
+      "group": "themes",
+      "name": "on-energy",
+      "js": "src/themes/on-energy/index.tsx",
+      "html": "src/themes/on-energy/index.html"
+    },
+    "themes/opencode": {
+      "group": "themes",
+      "name": "opencode",
+      "js": "src/themes/opencode/index.tsx",
+      "html": "src/themes/opencode/index.html"
+    },
+    "themes/operate": {
+      "group": "themes",
+      "name": "operate",
+      "js": "src/themes/operate/index.tsx",
+      "html": "src/themes/operate/index.html"
+    },
+    "themes/pinterest": {
+      "group": "themes",
+      "name": "pinterest",
+      "js": "src/themes/pinterest/index.tsx",
+      "html": "src/themes/pinterest/index.html"
+    },
+    "themes/pirsch-analytics": {
+      "group": "themes",
+      "name": "pirsch-analytics",
+      "js": "src/themes/pirsch-analytics/index.tsx",
+      "html": "src/themes/pirsch-analytics/index.html"
+    },
+    "themes/planhat": {
+      "group": "themes",
+      "name": "planhat",
+      "js": "src/themes/planhat/index.tsx",
+      "html": "src/themes/planhat/index.html"
+    },
+    "themes/podscan-fm": {
+      "group": "themes",
+      "name": "podscan-fm",
+      "js": "src/themes/podscan-fm/index.tsx",
+      "html": "src/themes/podscan-fm/index.html"
+    },
+    "themes/posthog": {
+      "group": "themes",
+      "name": "posthog",
+      "js": "src/themes/posthog/index.tsx",
+      "html": "src/themes/posthog/index.html"
+    },
+    "themes/privy": {
+      "group": "themes",
+      "name": "privy",
+      "js": "src/themes/privy/index.tsx",
+      "html": "src/themes/privy/index.html"
+    },
+    "themes/raycast": {
+      "group": "themes",
+      "name": "raycast",
+      "js": "src/themes/raycast/index.tsx",
+      "html": "src/themes/raycast/index.html"
+    },
+    "themes/react-email": {
+      "group": "themes",
+      "name": "react-email",
+      "js": "src/themes/react-email/index.tsx",
+      "html": "src/themes/react-email/index.html"
+    },
+    "themes/renault": {
+      "group": "themes",
+      "name": "renault",
+      "js": "src/themes/renault/index.tsx",
+      "html": "src/themes/renault/index.html"
+    },
+    "themes/replicate": {
+      "group": "themes",
+      "name": "replicate",
+      "js": "src/themes/replicate/index.tsx",
+      "html": "src/themes/replicate/index.html"
+    },
+    "themes/resend": {
+      "group": "themes",
+      "name": "resend",
+      "js": "src/themes/resend/index.tsx",
+      "html": "src/themes/resend/index.html"
+    },
+    "themes/revolut": {
+      "group": "themes",
+      "name": "revolut",
+      "js": "src/themes/revolut/index.tsx",
+      "html": "src/themes/revolut/index.html"
+    },
+    "themes/runway": {
+      "group": "themes",
+      "name": "runway",
+      "js": "src/themes/runway/index.tsx",
+      "html": "src/themes/runway/index.html"
+    },
+    "themes/sanity": {
+      "group": "themes",
+      "name": "sanity",
+      "js": "src/themes/sanity/index.tsx",
+      "html": "src/themes/sanity/index.html"
+    },
+    "themes/sapgoodenergy": {
+      "group": "themes",
+      "name": "sapgoodenergy",
+      "js": "src/themes/sapgoodenergy/index.tsx",
+      "html": "src/themes/sapgoodenergy/index.html"
+    },
+    "themes/school": {
+      "group": "themes",
+      "name": "school",
+      "js": "src/themes/school/index.tsx",
+      "html": "src/themes/school/index.html"
+    },
+    "themes/seline-analytics": {
+      "group": "themes",
+      "name": "seline-analytics",
+      "js": "src/themes/seline-analytics/index.tsx",
+      "html": "src/themes/seline-analytics/index.html"
+    },
+    "themes/sentry": {
+      "group": "themes",
+      "name": "sentry",
+      "js": "src/themes/sentry/index.tsx",
+      "html": "src/themes/sentry/index.html"
+    },
+    "themes/shopify": {
+      "group": "themes",
+      "name": "shopify",
+      "js": "src/themes/shopify/index.tsx",
+      "html": "src/themes/shopify/index.html"
+    },
+    "themes/spacex": {
+      "group": "themes",
+      "name": "spacex",
+      "js": "src/themes/spacex/index.tsx",
+      "html": "src/themes/spacex/index.html"
+    },
+    "themes/spotify": {
+      "group": "themes",
+      "name": "spotify",
+      "js": "src/themes/spotify/index.tsx",
+      "html": "src/themes/spotify/index.html"
+    },
+    "themes/stripe": {
+      "group": "themes",
+      "name": "stripe",
+      "js": "src/themes/stripe/index.tsx",
+      "html": "src/themes/stripe/index.html"
+    },
+    "themes/supabase": {
+      "group": "themes",
+      "name": "supabase",
+      "js": "src/themes/supabase/index.tsx",
+      "html": "src/themes/supabase/index.html"
+    },
+    "themes/superhuman": {
+      "group": "themes",
+      "name": "superhuman",
+      "js": "src/themes/superhuman/index.tsx",
+      "html": "src/themes/superhuman/index.html"
+    },
+    "themes/surfshark": {
+      "group": "themes",
+      "name": "surfshark",
+      "js": "src/themes/surfshark/index.tsx",
+      "html": "src/themes/surfshark/index.html"
+    },
+    "themes/switch-lit": {
+      "group": "themes",
+      "name": "switch-lit",
+      "js": "src/themes/switch-lit/index.tsx",
+      "html": "src/themes/switch-lit/index.html"
+    },
+    "themes/t1-energy": {
+      "group": "themes",
+      "name": "t1-energy",
+      "js": "src/themes/t1-energy/index.tsx",
+      "html": "src/themes/t1-energy/index.html"
+    },
+    "themes/tesla": {
+      "group": "themes",
+      "name": "tesla",
+      "js": "src/themes/tesla/index.tsx",
+      "html": "src/themes/tesla/index.html"
+    },
+    "themes/together-ai": {
+      "group": "themes",
+      "name": "together-ai",
+      "js": "src/themes/together-ai/index.tsx",
+      "html": "src/themes/together-ai/index.html"
+    },
+    "themes/uber": {
+      "group": "themes",
+      "name": "uber",
+      "js": "src/themes/uber/index.tsx",
+      "html": "src/themes/uber/index.html"
+    },
+    "themes/vercel": {
+      "group": "themes",
+      "name": "vercel",
+      "js": "src/themes/vercel/index.tsx",
+      "html": "src/themes/vercel/index.html"
+    },
+    "themes/voltagent": {
+      "group": "themes",
+      "name": "voltagent",
+      "js": "src/themes/voltagent/index.tsx",
+      "html": "src/themes/voltagent/index.html"
+    },
+    "themes/warp": {
+      "group": "themes",
+      "name": "warp",
+      "js": "src/themes/warp/index.tsx",
+      "html": "src/themes/warp/index.html"
+    },
+    "themes/webflow": {
+      "group": "themes",
+      "name": "webflow",
+      "js": "src/themes/webflow/index.tsx",
+      "html": "src/themes/webflow/index.html"
+    },
+    "themes/wise": {
+      "group": "themes",
+      "name": "wise",
+      "js": "src/themes/wise/index.tsx",
+      "html": "src/themes/wise/index.html"
+    },
+    "themes/xai": {
+      "group": "themes",
+      "name": "xai",
+      "js": "src/themes/xai/index.tsx",
+      "html": "src/themes/xai/index.html"
+    },
+    "themes/xbox-com": {
+      "group": "themes",
+      "name": "xbox-com",
+      "js": "src/themes/xbox-com/index.tsx",
+      "html": "src/themes/xbox-com/index.html"
+    },
+    "themes/zapier": {
+      "group": "themes",
+      "name": "zapier",
+      "js": "src/themes/zapier/index.tsx",
+      "html": "src/themes/zapier/index.html"
+    }
+  },
+  "js": {
+    "prototypes/management": "src/prototypes/management/index.tsx",
+    "prototypes/service-app": "src/prototypes/service-app/index.tsx",
+    "prototypes/yishou-app": "src/prototypes/yishou-app/index.tsx",
+    "themes/8returns": "src/themes/8returns/index.tsx",
+    "themes/aevi-wellness": "src/themes/aevi-wellness/index.tsx",
+    "themes/airbnb": "src/themes/airbnb/index.tsx",
+    "themes/airtable": "src/themes/airtable/index.tsx",
+    "themes/alison-roman": "src/themes/alison-roman/index.tsx",
+    "themes/alpine-hearing-protection": "src/themes/alpine-hearing-protection/index.tsx",
+    "themes/altitude": "src/themes/altitude/index.tsx",
+    "themes/amp": "src/themes/amp/index.tsx",
+    "themes/apple": "src/themes/apple/index.tsx",
+    "themes/artandcommerce": "src/themes/artandcommerce/index.tsx",
+    "themes/arte": "src/themes/arte/index.tsx",
+    "themes/artu": "src/themes/artu/index.tsx",
+    "themes/arva": "src/themes/arva/index.tsx",
+    "themes/ashton-bespoke": "src/themes/ashton-bespoke/index.tsx",
+    "themes/aspelin-reitan": "src/themes/aspelin-reitan/index.tsx",
+    "themes/assurestor": "src/themes/assurestor/index.tsx",
+    "themes/atelier-deux-ce": "src/themes/atelier-deux-ce/index.tsx",
+    "themes/athletics": "src/themes/athletics/index.tsx",
+    "themes/atlantic-vc": "src/themes/atlantic-vc/index.tsx",
+    "themes/atoms": "src/themes/atoms/index.tsx",
+    "themes/audyr": "src/themes/audyr/index.tsx",
+    "themes/august-health-ehr": "src/themes/august-health-ehr/index.tsx",
+    "themes/binance": "src/themes/binance/index.tsx",
+    "themes/bmw": "src/themes/bmw/index.tsx",
+    "themes/cal-com": "src/themes/cal-com/index.tsx",
+    "themes/cards-against-humanity": "src/themes/cards-against-humanity/index.tsx",
+    "themes/claude": "src/themes/claude/index.tsx",
+    "themes/clay": "src/themes/clay/index.tsx",
+    "themes/clickhouse": "src/themes/clickhouse/index.tsx",
+    "themes/clutch-security": "src/themes/clutch-security/index.tsx",
+    "themes/cohere": "src/themes/cohere/index.tsx",
+    "themes/coinbase": "src/themes/coinbase/index.tsx",
+    "themes/composio": "src/themes/composio/index.tsx",
+    "themes/cursor": "src/themes/cursor/index.tsx",
+    "themes/dope-security": "src/themes/dope-security/index.tsx",
+    "themes/duolingo": "src/themes/duolingo/index.tsx",
+    "themes/ease-health": "src/themes/ease-health/index.tsx",
+    "themes/elevenlabs": "src/themes/elevenlabs/index.tsx",
+    "themes/eventbrite": "src/themes/eventbrite/index.tsx",
+    "themes/expo": "src/themes/expo/index.tsx",
+    "themes/factory-ai": "src/themes/factory-ai/index.tsx",
+    "themes/ferrari": "src/themes/ferrari/index.tsx",
+    "themes/figma": "src/themes/figma/index.tsx",
+    "themes/framer": "src/themes/framer/index.tsx",
+    "themes/getburnt": "src/themes/getburnt/index.tsx",
+    "themes/google-for-education": "src/themes/google-for-education/index.tsx",
+    "themes/hashicorp": "src/themes/hashicorp/index.tsx",
+    "themes/headspace": "src/themes/headspace/index.tsx",
+    "themes/healthy-together": "src/themes/healthy-together/index.tsx",
+    "themes/ibm": "src/themes/ibm/index.tsx",
+    "themes/incident": "src/themes/incident/index.tsx",
+    "themes/intercom": "src/themes/intercom/index.tsx",
+    "themes/kami": "src/themes/kami/index.tsx",
+    "themes/kraken": "src/themes/kraken/index.tsx",
+    "themes/krepling": "src/themes/krepling/index.tsx",
+    "themes/lamborghini": "src/themes/lamborghini/index.tsx",
+    "themes/leandra-isler": "src/themes/leandra-isler/index.tsx",
+    "themes/linear": "src/themes/linear/index.tsx",
+    "themes/lithic": "src/themes/lithic/index.tsx",
+    "themes/lovable": "src/themes/lovable/index.tsx",
+    "themes/minimax": "src/themes/minimax/index.tsx",
+    "themes/mintlify": "src/themes/mintlify/index.tsx",
+    "themes/miro": "src/themes/miro/index.tsx",
+    "themes/mistral-ai": "src/themes/mistral-ai/index.tsx",
+    "themes/mongodb": "src/themes/mongodb/index.tsx",
+    "themes/neverhack": "src/themes/neverhack/index.tsx",
+    "themes/nike": "src/themes/nike/index.tsx",
+    "themes/nile-postgres": "src/themes/nile-postgres/index.tsx",
+    "themes/notion": "src/themes/notion/index.tsx",
+    "themes/nvidia": "src/themes/nvidia/index.tsx",
+    "themes/oak-me": "src/themes/oak-me/index.tsx",
+    "themes/ollama": "src/themes/ollama/index.tsx",
+    "themes/on-energy": "src/themes/on-energy/index.tsx",
+    "themes/opencode": "src/themes/opencode/index.tsx",
+    "themes/operate": "src/themes/operate/index.tsx",
+    "themes/pinterest": "src/themes/pinterest/index.tsx",
+    "themes/pirsch-analytics": "src/themes/pirsch-analytics/index.tsx",
+    "themes/planhat": "src/themes/planhat/index.tsx",
+    "themes/podscan-fm": "src/themes/podscan-fm/index.tsx",
+    "themes/posthog": "src/themes/posthog/index.tsx",
+    "themes/privy": "src/themes/privy/index.tsx",
+    "themes/raycast": "src/themes/raycast/index.tsx",
+    "themes/react-email": "src/themes/react-email/index.tsx",
+    "themes/renault": "src/themes/renault/index.tsx",
+    "themes/replicate": "src/themes/replicate/index.tsx",
+    "themes/resend": "src/themes/resend/index.tsx",
+    "themes/revolut": "src/themes/revolut/index.tsx",
+    "themes/runway": "src/themes/runway/index.tsx",
+    "themes/sanity": "src/themes/sanity/index.tsx",
+    "themes/sapgoodenergy": "src/themes/sapgoodenergy/index.tsx",
+    "themes/school": "src/themes/school/index.tsx",
+    "themes/seline-analytics": "src/themes/seline-analytics/index.tsx",
+    "themes/sentry": "src/themes/sentry/index.tsx",
+    "themes/shopify": "src/themes/shopify/index.tsx",
+    "themes/spacex": "src/themes/spacex/index.tsx",
+    "themes/spotify": "src/themes/spotify/index.tsx",
+    "themes/stripe": "src/themes/stripe/index.tsx",
+    "themes/supabase": "src/themes/supabase/index.tsx",
+    "themes/superhuman": "src/themes/superhuman/index.tsx",
+    "themes/surfshark": "src/themes/surfshark/index.tsx",
+    "themes/switch-lit": "src/themes/switch-lit/index.tsx",
+    "themes/t1-energy": "src/themes/t1-energy/index.tsx",
+    "themes/tesla": "src/themes/tesla/index.tsx",
+    "themes/together-ai": "src/themes/together-ai/index.tsx",
+    "themes/uber": "src/themes/uber/index.tsx",
+    "themes/vercel": "src/themes/vercel/index.tsx",
+    "themes/voltagent": "src/themes/voltagent/index.tsx",
+    "themes/warp": "src/themes/warp/index.tsx",
+    "themes/webflow": "src/themes/webflow/index.tsx",
+    "themes/wise": "src/themes/wise/index.tsx",
+    "themes/xai": "src/themes/xai/index.tsx",
+    "themes/xbox-com": "src/themes/xbox-com/index.tsx",
+    "themes/zapier": "src/themes/zapier/index.tsx"
+  },
+  "html": {
+    "prototypes/management": "src/prototypes/management/index.html",
+    "prototypes/service-app": "src/prototypes/service-app/index.html",
+    "prototypes/yishou-app": "src/prototypes/yishou-app/index.html",
+    "themes/8returns": "src/themes/8returns/index.html",
+    "themes/aevi-wellness": "src/themes/aevi-wellness/index.html",
+    "themes/airbnb": "src/themes/airbnb/index.html",
+    "themes/airtable": "src/themes/airtable/index.html",
+    "themes/alison-roman": "src/themes/alison-roman/index.html",
+    "themes/alpine-hearing-protection": "src/themes/alpine-hearing-protection/index.html",
+    "themes/altitude": "src/themes/altitude/index.html",
+    "themes/amp": "src/themes/amp/index.html",
+    "themes/apple": "src/themes/apple/index.html",
+    "themes/artandcommerce": "src/themes/artandcommerce/index.html",
+    "themes/arte": "src/themes/arte/index.html",
+    "themes/artu": "src/themes/artu/index.html",
+    "themes/arva": "src/themes/arva/index.html",
+    "themes/ashton-bespoke": "src/themes/ashton-bespoke/index.html",
+    "themes/aspelin-reitan": "src/themes/aspelin-reitan/index.html",
+    "themes/assurestor": "src/themes/assurestor/index.html",
+    "themes/atelier-deux-ce": "src/themes/atelier-deux-ce/index.html",
+    "themes/athletics": "src/themes/athletics/index.html",
+    "themes/atlantic-vc": "src/themes/atlantic-vc/index.html",
+    "themes/atoms": "src/themes/atoms/index.html",
+    "themes/audyr": "src/themes/audyr/index.html",
+    "themes/august-health-ehr": "src/themes/august-health-ehr/index.html",
+    "themes/binance": "src/themes/binance/index.html",
+    "themes/bmw": "src/themes/bmw/index.html",
+    "themes/cal-com": "src/themes/cal-com/index.html",
+    "themes/cards-against-humanity": "src/themes/cards-against-humanity/index.html",
+    "themes/claude": "src/themes/claude/index.html",
+    "themes/clay": "src/themes/clay/index.html",
+    "themes/clickhouse": "src/themes/clickhouse/index.html",
+    "themes/clutch-security": "src/themes/clutch-security/index.html",
+    "themes/cohere": "src/themes/cohere/index.html",
+    "themes/coinbase": "src/themes/coinbase/index.html",
+    "themes/composio": "src/themes/composio/index.html",
+    "themes/cursor": "src/themes/cursor/index.html",
+    "themes/dope-security": "src/themes/dope-security/index.html",
+    "themes/duolingo": "src/themes/duolingo/index.html",
+    "themes/ease-health": "src/themes/ease-health/index.html",
+    "themes/elevenlabs": "src/themes/elevenlabs/index.html",
+    "themes/eventbrite": "src/themes/eventbrite/index.html",
+    "themes/expo": "src/themes/expo/index.html",
+    "themes/factory-ai": "src/themes/factory-ai/index.html",
+    "themes/ferrari": "src/themes/ferrari/index.html",
+    "themes/figma": "src/themes/figma/index.html",
+    "themes/framer": "src/themes/framer/index.html",
+    "themes/getburnt": "src/themes/getburnt/index.html",
+    "themes/google-for-education": "src/themes/google-for-education/index.html",
+    "themes/hashicorp": "src/themes/hashicorp/index.html",
+    "themes/headspace": "src/themes/headspace/index.html",
+    "themes/healthy-together": "src/themes/healthy-together/index.html",
+    "themes/ibm": "src/themes/ibm/index.html",
+    "themes/incident": "src/themes/incident/index.html",
+    "themes/intercom": "src/themes/intercom/index.html",
+    "themes/kami": "src/themes/kami/index.html",
+    "themes/kraken": "src/themes/kraken/index.html",
+    "themes/krepling": "src/themes/krepling/index.html",
+    "themes/lamborghini": "src/themes/lamborghini/index.html",
+    "themes/leandra-isler": "src/themes/leandra-isler/index.html",
+    "themes/linear": "src/themes/linear/index.html",
+    "themes/lithic": "src/themes/lithic/index.html",
+    "themes/lovable": "src/themes/lovable/index.html",
+    "themes/minimax": "src/themes/minimax/index.html",
+    "themes/mintlify": "src/themes/mintlify/index.html",
+    "themes/miro": "src/themes/miro/index.html",
+    "themes/mistral-ai": "src/themes/mistral-ai/index.html",
+    "themes/mongodb": "src/themes/mongodb/index.html",
+    "themes/neverhack": "src/themes/neverhack/index.html",
+    "themes/nike": "src/themes/nike/index.html",
+    "themes/nile-postgres": "src/themes/nile-postgres/index.html",
+    "themes/notion": "src/themes/notion/index.html",
+    "themes/nvidia": "src/themes/nvidia/index.html",
+    "themes/oak-me": "src/themes/oak-me/index.html",
+    "themes/ollama": "src/themes/ollama/index.html",
+    "themes/on-energy": "src/themes/on-energy/index.html",
+    "themes/opencode": "src/themes/opencode/index.html",
+    "themes/operate": "src/themes/operate/index.html",
+    "themes/pinterest": "src/themes/pinterest/index.html",
+    "themes/pirsch-analytics": "src/themes/pirsch-analytics/index.html",
+    "themes/planhat": "src/themes/planhat/index.html",
+    "themes/podscan-fm": "src/themes/podscan-fm/index.html",
+    "themes/posthog": "src/themes/posthog/index.html",
+    "themes/privy": "src/themes/privy/index.html",
+    "themes/raycast": "src/themes/raycast/index.html",
+    "themes/react-email": "src/themes/react-email/index.html",
+    "themes/renault": "src/themes/renault/index.html",
+    "themes/replicate": "src/themes/replicate/index.html",
+    "themes/resend": "src/themes/resend/index.html",
+    "themes/revolut": "src/themes/revolut/index.html",
+    "themes/runway": "src/themes/runway/index.html",
+    "themes/sanity": "src/themes/sanity/index.html",
+    "themes/sapgoodenergy": "src/themes/sapgoodenergy/index.html",
+    "themes/school": "src/themes/school/index.html",
+    "themes/seline-analytics": "src/themes/seline-analytics/index.html",
+    "themes/sentry": "src/themes/sentry/index.html",
+    "themes/shopify": "src/themes/shopify/index.html",
+    "themes/spacex": "src/themes/spacex/index.html",
+    "themes/spotify": "src/themes/spotify/index.html",
+    "themes/stripe": "src/themes/stripe/index.html",
+    "themes/supabase": "src/themes/supabase/index.html",
+    "themes/superhuman": "src/themes/superhuman/index.html",
+    "themes/surfshark": "src/themes/surfshark/index.html",
+    "themes/switch-lit": "src/themes/switch-lit/index.html",
+    "themes/t1-energy": "src/themes/t1-energy/index.html",
+    "themes/tesla": "src/themes/tesla/index.html",
+    "themes/together-ai": "src/themes/together-ai/index.html",
+    "themes/uber": "src/themes/uber/index.html",
+    "themes/vercel": "src/themes/vercel/index.html",
+    "themes/voltagent": "src/themes/voltagent/index.html",
+    "themes/warp": "src/themes/warp/index.html",
+    "themes/webflow": "src/themes/webflow/index.html",
+    "themes/wise": "src/themes/wise/index.html",
+    "themes/xai": "src/themes/xai/index.html",
+    "themes/xbox-com": "src/themes/xbox-com/index.html",
+    "themes/zapier": "src/themes/zapier/index.html"
+  }
+}

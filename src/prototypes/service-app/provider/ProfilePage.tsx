@@ -10,22 +10,28 @@ import {
   SettingOutlined,
   LogoutOutlined,
   RightOutlined,
+  WalletOutlined,
+  SafetyCertificateOutlined,
 } from '@ant-design/icons';
 import { Card, Tag, Avatar, THEME } from '../shared/components';
 
 interface ProfilePageProps {
   themeColor?: string;
   onLogout: () => void;
+  onNavigate?: (page: string) => void;
 }
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({
   themeColor = '#00D4FF',
   onLogout,
+  onNavigate,
 }) => {
   const menuItems = [
-    { icon: <UserOutlined />, label: '个人资料', badge: null },
-    { icon: <MessageOutlined />, label: '消息通知', badge: 3 },
-    { icon: <SettingOutlined />, label: '设置', badge: null },
+    { icon: <UserOutlined />, label: '个人资料', badge: null, action: 'profile-edit' },
+    { icon: <WalletOutlined />, label: '财务结算', badge: null, action: 'settlement' },
+    { icon: <SafetyCertificateOutlined />, label: '人员审核', badge: 3, action: 'staff-review' },
+    { icon: <MessageOutlined />, label: '消息通知', badge: 3, action: 'messages' },
+    { icon: <SettingOutlined />, label: '设置', badge: null, action: 'settings' },
   ];
 
   return (
@@ -121,10 +127,12 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             {menuItems.map((item, index) => (
               <div
                 key={item.label}
+                onClick={() => onNavigate?.(item.action)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   padding: '16px 0',
+                  cursor: 'pointer',
                   borderTop:
                     index > 0 ? `1px solid ${THEME.borderLight}` : 'none',
                 }}

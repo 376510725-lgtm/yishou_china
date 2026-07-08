@@ -10,6 +10,14 @@ import {
 } from '@ant-design/icons';
 import { Card, Tag, Avatar, Button, NavBar, THEME } from '../shared/components';
 
+interface AssignedStaff {
+  name: string;
+  avatar: string;
+  color: string;
+  phone: string;
+  skills: string[];
+}
+
 interface OrderDetailPageProps {
   themeColor?: string;
   order: {
@@ -23,10 +31,13 @@ interface OrderDetailPageProps {
     time: string;
     amount: string;
     status: string;
+    assignedStaff?: AssignedStaff;
   };
   onBack: () => void;
   onDispatch?: () => void;
   onAccept?: () => void;
+  onCancel?: () => void;
+  onStaffClick?: (staff: AssignedStaff) => void;
 }
 
 export const OrderDetailPage: React.FC<OrderDetailPageProps> = ({
@@ -35,13 +46,16 @@ export const OrderDetailPage: React.FC<OrderDetailPageProps> = ({
   onBack,
   onDispatch,
   onAccept,
+  onCancel,
+  onStaffClick,
 }) => {
   const STATUS_MAP: Record<string, string> = {
-    pending: '待接单',
+    pending: '待派单',
     accepted: '已接单',
     dispatched: '已派单',
-    serving: '服务中',
+    serving: '进行中',
     completed: '已完成',
+    cancelled: '已取消',
   };
 
   return (
@@ -161,6 +175,7 @@ export const OrderDetailPage: React.FC<OrderDetailPageProps> = ({
               size="small"
               themeColor={themeColor}
               style={{ width: 44, padding: 0 }}
+              onClick={() => window.open(`tel:${order.phone.replace(/\*/g, '0')}`)}
             >
               <PhoneOutlined />
             </Button>
@@ -220,6 +235,64 @@ export const OrderDetailPage: React.FC<OrderDetailPageProps> = ({
           </div>
         </Card>
 
+        {/* 接单人员信息 - 已派单/进行中/已完成 */}
+        {(order.status === 'dispatched' || order.status === 'serving' || order.status === 'completed') && order.assignedStaff && (
+          <Card
+            glow
+            themeColor={themeColor}
+            style={{ marginBottom: 12, cursor: 'pointer' }}
+            onClick={onStaffClick ? () => onStaffClick(order.assignedStaff!) : undefined}
+          >
+            <div
+              style={{
+                fontSize: 15,
+                fontWeight: 500,
+                color: THEME.textPrimary,
+                marginBottom: 16,
+              }}
+            >
+              接单人员
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+              }}
+            >
+              <Avatar letter={order.assignedStaff.avatar} color={order.assignedStaff.color} size={48} />
+              <div style={{ flex: 1 }}>
+                <div
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 500,
+                    color: THEME.textPrimary,
+                    marginBottom: 4,
+                  }}
+                >
+                  {order.assignedStaff.name}
+                </div>
+                <div
+                  style={{
+                    fontSize: 13,
+                    color: THEME.textMuted,
+                    marginBottom: 6,
+                  }}
+                >
+                  {order.assignedStaff.phone}
+                </div>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {order.assignedStaff.skills.map((skill) => (
+                    <Tag key={skill} color={themeColor} bg={`${themeColor}15`}>
+                      {skill}
+                    </Tag>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
+        )}
+
         {/* 费用信息 */}
         <Card style={{ marginBottom: 24 }}>
           <div
@@ -269,24 +342,66 @@ export const OrderDetailPage: React.FC<OrderDetailPageProps> = ({
           </div>
         </Card>
 
+        {/* 操作日志时间线 */}
+        {order.status !== 'pending' && (
+          <Card style={{ marginBottom: 24 }}>
+            <div style={{ fontSize: 15, fontWeight: 500, color: THEME.textPrimary, marginBottom: 16 }}>操作日志</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {[
+                { time: order.time, action: '订单创建', color: THEME.textMuted },
+                { time: '今天 10:30', action: '服务商接单', color: themeColor },
+                ...(order.status === 'dispatched' || order.status === 'serving' || order.status === 'completed' ? [{ time: '今天 10:35', action: '已派单给服务人员', color: THEME.success }] : []),
+                ...(order.status === 'serving' || order.status === 'completed' ? [{ time: '今天 12:05', action: '服务人员开始服务', color: THEME.warning }] : []),
+                ...(order.status === 'completed' ? [{ time: '今天 14:00', action: '服务完成打卡', color: THEME.success }] : []),
+                ...(order.status === 'cancelled' ? [{
+                  time: (order as any).cancelTime || '今天 11:20',
+                  action: (order as any).cancelReason || '订单已取消',
+                  color: THEME.danger,
+                }] : []),
+              ].map((log, i) => (
+                <div key={i} style={{ display: 'flex', gap: 10, paddingBottom: 14, position: 'relative' }}>
+                  <div style={{ width: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: log.color, flexShrink: 0, marginTop: 4 }} />
+                    {i < 3 && <div style={{ flex: 1, width: 1, background: THEME.borderLight, marginTop: 4 }} />}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, color: THEME.textPrimary }}>{log.action}</div>
+                    <div style={{ fontSize: 11, color: THEME.textMuted }}>{log.time}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
+
         {/* 操作按钮 */}
         <div style={{ display: 'flex', gap: 12 }}>
-          {order.status === 'pending' && onAccept && (
-            <Button
-              onClick={onAccept}
-              themeColor={themeColor}
-              style={{ flex: 1 }}
-            >
-              接 单
-            </Button>
-          )}
-          {order.status === 'dispatched' && onDispatch && (
+          {order.status === 'pending' && onDispatch && (
             <Button
               onClick={onDispatch}
               themeColor={themeColor}
               style={{ flex: 1 }}
             >
               派 单
+            </Button>
+          )}
+          {(order.status === 'dispatched' || order.status === 'serving') && onDispatch && (
+            <Button
+              onClick={onDispatch}
+              themeColor={themeColor}
+              style={{ flex: 1 }}
+            >
+              修改派单
+            </Button>
+          )}
+          {['pending', 'accepted', 'dispatched'].includes(order.status) && onCancel && (
+            <Button
+              onClick={onCancel}
+              type="default"
+              themeColor={THEME.danger}
+              style={{ flex: 1 }}
+            >
+              取消订单
             </Button>
           )}
         </div>

@@ -3,13 +3,22 @@
  * 深空暗夜科技风格
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ClockCircleOutlined,
   CameraOutlined,
   PlusOutlined,
+  EnvironmentOutlined,
 } from '@ant-design/icons';
-import { Button, Card, NavBar, THEME } from '../shared/components';
+import { Button, Card, THEME } from '../shared/components';
+
+// 模拟 GPS 位置数据
+const MOCK_LOCATION = {
+  lat: '29.5630',
+  lng: '106.5516',
+  address: '重庆市渝中区解放碑街道XX号',
+  accuracy: '5米',
+};
 
 interface TaskCheckinPageProps {
   themeColor?: string;
@@ -25,6 +34,26 @@ export const TaskCheckinPage: React.FC<TaskCheckinPageProps> = ({
   onCheckin,
 }) => {
   const isStart = mode === 'start';
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleString('zh-CN', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        })
+      );
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div
@@ -120,14 +149,85 @@ export const TaskCheckinPage: React.FC<TaskCheckinPageProps> = ({
             fontSize: 14,
             color: THEME.textSecondary,
             textAlign: 'center',
-            marginBottom: 40,
+            marginBottom: 24,
             lineHeight: 1.6,
           }}
         >
           {isStart
-            ? '点击下方按钮开始服务，系统将记录您的位置'
-            : '请上传服务照片（选填）'}
+            ? '点击下方按钮开始服务，系统将记录您的位置和时间'
+            : '请确认服务信息并上传服务照片'}
         </p>
+
+        {/* 当前时间 */}
+        <Card
+          style={{
+            width: '100%',
+            marginBottom: 12,
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+            }}
+          >
+            <ClockCircleOutlined style={{ fontSize: 20, color: themeColor }} />
+            <div>
+              <div style={{ fontSize: 12, color: THEME.textMuted }}>当前时间</div>
+              <div style={{ fontSize: 15, color: THEME.textPrimary, fontWeight: 500 }}>
+                {currentTime}
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* GPS 位置 */}
+        <Card
+          style={{
+            width: '100%',
+            marginBottom: 24,
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+            }}
+          >
+            <EnvironmentOutlined style={{ fontSize: 20, color: THEME.success, marginTop: 2 }} />
+            <div style={{ flex: 1 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: 6,
+                }}
+              >
+                <span style={{ fontSize: 12, color: THEME.textMuted }}>当前定位</span>
+                <span
+                  style={{
+                    fontSize: 10,
+                    color: THEME.success,
+                    background: `${THEME.success}15`,
+                    padding: '2px 6px',
+                    borderRadius: 4,
+                  }}
+                >
+                  GPS {MOCK_LOCATION.accuracy}
+                </span>
+              </div>
+              <div style={{ fontSize: 14, color: THEME.textPrimary, marginBottom: 4 }}>
+                {MOCK_LOCATION.address}
+              </div>
+              <div style={{ fontSize: 11, color: THEME.textMuted }}>
+                经度: {MOCK_LOCATION.lng} 纬度: {MOCK_LOCATION.lat}
+              </div>
+            </div>
+          </div>
+        </Card>
 
         {/* 上传照片区域 */}
         <Card
@@ -150,7 +250,7 @@ export const TaskCheckinPage: React.FC<TaskCheckinPageProps> = ({
               transition: 'all 0.2s ease',
             }}
           >
-            <PlusOutlined
+            <CameraOutlined
               style={{ fontSize: 32, color: THEME.textMuted, marginBottom: 8 }}
             />
             <span
@@ -159,7 +259,7 @@ export const TaskCheckinPage: React.FC<TaskCheckinPageProps> = ({
                 color: THEME.textMuted,
               }}
             >
-              点击上传服务照片
+              点击拍照（选填）
             </span>
           </div>
         </Card>
@@ -170,7 +270,7 @@ export const TaskCheckinPage: React.FC<TaskCheckinPageProps> = ({
           themeColor={themeColor}
           style={{ width: '100%' }}
         >
-          {isStart ? '开始服务' : '完成打卡'}
+          {isStart ? '开始服务' : '确认完成打卡'}
         </Button>
       </div>
     </div>

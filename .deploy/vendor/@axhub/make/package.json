@@ -1,0 +1,23 @@
+{
+  "name": "@axhub/make",
+  "version": "0.5.3",
+  "description": "Axhub Make management server and admin UI",
+  "type": "module",
+  "bin": {
+    "axhub-make": "./bin/cli.mjs",
+    "make": "./bin/cli.mjs",
+    "make-server": "./bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "scripts",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -10,22 +10,28 @@ import {
   SettingOutlined,
   LogoutOutlined,
   RightOutlined,
+  StarOutlined,
+  CheckCircleOutlined,
+  DollarOutlined,
 } from '@ant-design/icons';
 import { Card, Tag, Avatar, THEME } from '../shared/components';
 
 interface ProfilePageProps {
   themeColor?: string;
   onLogout: () => void;
+  onNavigate?: (page: string) => void;
 }
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({
   themeColor = '#A855F7',
   onLogout,
+  onNavigate,
 }) => {
   const menuItems = [
-    { icon: <UserOutlined />, label: '个人资料', badge: null },
-    { icon: <MessageOutlined />, label: '消息通知', badge: 2 },
-    { icon: <SettingOutlined />, label: '设置', badge: null },
+    { icon: <UserOutlined />, label: '个人资料', badge: null, action: 'profile-edit' },
+    { icon: <StarOutlined />, label: '我的评价', badge: null, action: 'staff-reviews' },
+    { icon: <MessageOutlined />, label: '消息通知', badge: 2, action: 'messages' },
+    { icon: <SettingOutlined />, label: '设置', badge: null, action: 'settings' },
   ];
 
   return (
@@ -167,15 +173,37 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             </div>
           </Card>
 
+          {/* 服务统计卡片 */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 12 }}>
+            {[
+              { icon: <CheckCircleOutlined />, label: '累计接单', value: '156', color: themeColor },
+              { icon: <StarOutlined />, label: '好评率', value: '98%', color: '#F59E0B' },
+              { icon: <CheckCircleOutlined />, label: '本月完成', value: '12', color: THEME.success },
+              { icon: <DollarOutlined />, label: '月收入', value: '¥3,458', color: THEME.danger },
+            ].map(stat => (
+              <Card key={stat.label} style={{ padding: '14px 10px', marginBottom: 0, textAlign: 'center' }}>
+                <div style={{ fontSize: 18, color: stat.color, marginBottom: 4 }}>
+                  {stat.icon}
+                </div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: THEME.textPrimary, marginBottom: 2 }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: 11, color: THEME.textMuted }}>{stat.label}</div>
+              </Card>
+            ))}
+          </div>
+
           {/* 菜单 */}
           <Card>
             {menuItems.map((item, index) => (
               <div
                 key={item.label}
+                onClick={() => onNavigate?.(item.action)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   padding: '16px 0',
+                  cursor: 'pointer',
                   borderTop:
                     index > 0 ? `1px solid ${THEME.borderLight}` : 'none',
                 }}

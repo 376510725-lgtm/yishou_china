@@ -111,7 +111,7 @@ import {
 type AppScreen = 'login' | 'main' | 'service' | 'service-zhuyu' | 'service-zhujie' | 'service-zhuyi' | 'service-zhuju' | 'service-zhuxing' | 'service-liaoyang' | 'service-activity' | 'service-yanglao' | 'service-ganchang' | 'service-juhui' | 'service-bisai' | 'health-yangsheng' | 'calendar-perpetual' | 'chat' | 'post-detail' | 'video-feed' | 'circle-detail' | 'circle-discover' | 'user-profile' | 'my-dynamics' | 'my-favorites' | 'settings' | 'my-profile' | 'contacts' | 'friend-requests' | 'notify-likes' | 'notify-thumbs' | 'notify-comments' | 'notify-fans' | 'create-select' | 'create-image' | 'create-video' | 'circle-announce' | 'circle-members' | 'circle-activity' | 'activity-detail' | 'competition-detail' | 'comment-detail' | 'address-management' | 'change-password' | 'bayu-search' | 'points-mall' | 'points-detail' | 'points-records' | 'order-detail' | 'mall-favorites' | 'mall-address' | 'account-cancellation' | 'notification-settings' | 'privacy-settings' | 'check-update' | 'about-us' | 'friend-detail' | 'my-detail' | 'follow-list' | 'my-wallet' | 'pindan-home' | 'pindan-activity' | 'pindan-product' | 'pindan-confirm' | 'pindan-orders' | 'pindan-order-detail' | 'partner-join' | 'influencer-join' | 'medication-home' | 'medication-add' | 'medication-calendar' | 'medication-detail';
 type LoginMode = 'main' | 'phone-sms' | 'password' | 'register';
 type TabId = 'yishou' | 'bayu' | 'messages' | 'profile';
-type BayuSubTab = 'follow' | 'plaza' | 'hot' | 'circles';
+type BayuSubTab = 'follow' | 'plaza' | 'hot' | 'chatroom';
 type RankSubTab = 'news' | 'labor' | 'star' | 'active';
 type FilterTab = 'all' | 'nearby' | 'rating' | 'price';
 type MsgType = 'text' | 'voice' | 'image';
@@ -248,6 +248,18 @@ interface FollowPost {
   shares?: number;
   date?: string;
   images?: string[]; // 多张图片时使用
+}
+
+interface ChatRoom {
+  id: string;
+  name: string;
+  description: string;
+  tag: string;
+  color: string;
+  onlineCount: number;
+  memberCount: number;
+  lastMessage: string;
+  lastMessageTime: string;
 }
 
 interface BayoutouNews {
@@ -1333,10 +1345,10 @@ const BOTTOM_TABS = [
 ];
 
 const BAYU_SUBS = [
-  { id: 'follow' as BayuSubTab, label: '熟人' },
   { id: 'plaza' as BayuSubTab, label: '同城' },
+  { id: 'follow' as BayuSubTab, label: '熟人' },
   { id: 'hot' as BayuSubTab, label: '排名' },
-  { id: 'circles' as BayuSubTab, label: '霍圈子' },
+  { id: 'chatroom' as BayuSubTab, label: '霍圈子' },
 ];
 
 // ─────────────────────────────────────────────
@@ -1352,14 +1364,14 @@ const FOLLOW_USERS: FollowUser[] = [
 ];
 
 const FOLLOW_POSTS: FollowPost[] = [
-  { id: 1, userId: 1, user: '李秀英', avatar: '李', avatarColor: '#FF6B35', type: 'image', coverSeed: 'dance_park', coverHeight: 180, title: '今天广场舞练习，大家跳得真开心！', likes: 128 },
-  { id: 2, userId: 2, user: '王翠华', avatar: '王', avatarColor: '#52C41A', type: 'video', coverSeed: 'lotus_garden', coverHeight: 220, title: '拍了一段荷花视频，太美了分享给大家', likes: 256 },
-  { id: 3, userId: 3, user: '张师傅', avatar: '张', avatarColor: '#1677FF', type: 'image', coverSeed: 'taichi_morning', coverHeight: 160, title: '早晨太极拳，一招一式都是心静', likes: 89 },
-  { id: 4, userId: 4, user: '赵美云', avatar: '赵', avatarColor: '#EB2F96', type: 'video', coverSeed: 'cooking_healthy', coverHeight: 200, title: '教你做低盐低脂的营养午餐，好吃又健康', likes: 312 },
-  { id: 5, userId: 5, user: '陈大叔', avatar: '陈', avatarColor: '#722ED1', type: 'image', coverSeed: 'calligraphy_art', coverHeight: 190, title: '今日书法练习，写了一幅寿字送给老友', likes: 147 },
-  { id: 6, userId: 6, user: '刘奶奶', avatar: '刘', avatarColor: '#13C2C2', type: 'video', coverSeed: 'knitting_wool', coverHeight: 170, title: '手工毛衣快织好了，给孙子的生日礼物', likes: 203 },
-  { id: 7, userId: 1, user: '李秀英', avatar: '李', avatarColor: '#FF6B35', type: 'image', coverSeed: 'flower_market', coverHeight: 210, title: '逛了早市买了好多花，家里顿时春意盎然', likes: 95 },
-  { id: 8, userId: 3, user: '张师傅', avatar: '张', avatarColor: '#1677FF', type: 'video', coverSeed: 'fishing_river', coverHeight: 185, title: '嘉陵江边钓了一上午，收获颇丰！', likes: 178 },
+  { id: 1, userId: 1, user: '李秀英', avatar: '李', avatarColor: '#FF6B35', type: 'image', coverSeed: 'dance_park', coverHeight: 180, title: '今天广场舞练习，大家跳得真开心！', likes: 128, tags: ['舞蹈'] },
+  { id: 2, userId: 2, user: '王翠华', avatar: '王', avatarColor: '#52C41A', type: 'video', coverSeed: 'lotus_garden', coverHeight: 220, title: '拍了一段荷花视频，太美了分享给大家', likes: 256, tags: ['摄影'] },
+  { id: 3, userId: 3, user: '张师傅', avatar: '张', avatarColor: '#1677FF', type: 'image', coverSeed: 'taichi_morning', coverHeight: 160, title: '早晨太极拳，一招一式都是心静', likes: 89, tags: ['运动'] },
+  { id: 4, userId: 4, user: '赵美云', avatar: '赵', avatarColor: '#EB2F96', type: 'video', coverSeed: 'cooking_healthy', coverHeight: 200, title: '教你做低盐低脂的营养午餐，好吃又健康', likes: 312, tags: ['美食', '养生'] },
+  { id: 5, userId: 5, user: '陈大叔', avatar: '陈', avatarColor: '#722ED1', type: 'image', coverSeed: 'calligraphy_art', coverHeight: 190, title: '今日书法练习，写了一幅寿字送给老友', likes: 147, tags: ['书法'] },
+  { id: 6, userId: 6, user: '刘奶奶', avatar: '刘', avatarColor: '#13C2C2', type: 'video', coverSeed: 'knitting_wool', coverHeight: 170, title: '手工毛衣快织好了，给孙子的生日礼物', likes: 203, tags: ['手工'] },
+  { id: 7, userId: 1, user: '李秀英', avatar: '李', avatarColor: '#FF6B35', type: 'image', coverSeed: 'flower_market', coverHeight: 210, title: '逛了早市买了好多花，家里顿时春意盎然', likes: 95, tags: ['园艺'] },
+  { id: 8, userId: 3, user: '张师傅', avatar: '张', avatarColor: '#1677FF', type: 'video', coverSeed: 'fishing_river', coverHeight: 185, title: '嘉陵江边钓了一上午，收获颇丰！', likes: 178, tags: ['钓鱼'] },
 ];
 
 const VIDEO_POSTS = FOLLOW_POSTS.filter(p => p.type === 'video');
@@ -1420,14 +1432,14 @@ const VIDEO_COMMENTS: VideoComment[] = [
 // Mock Data — Plaza Tab
 // ─────────────────────────────────────────────
 const PLAZA_POSTS: FollowPost[] = [
-  { id: 101, userId: 11, user: '陈大爷', avatar: '陈', avatarColor: '#FA8C16', type: 'image', coverSeed: 'park_morning', coverHeight: 175, title: '晨练归来，精神满满迎接新一天！', likes: 234 },
-  { id: 102, userId: 12, user: '孙阿姨', avatar: '孙', avatarColor: '#52C41A', type: 'video', coverSeed: 'square_dance', coverHeight: 215, title: '广场舞新舞步教学，欢迎大家跟着学！', likes: 387 },
-  { id: 103, userId: 13, user: '刘大叔', avatar: '刘', avatarColor: '#1677FF', type: 'video', coverSeed: 'calligraphy2', coverHeight: 165, title: '今日写了一幅"福"字，心情舒畅', likes: 156 },
-  { id: 104, userId: 14, user: '吴奶奶', avatar: '吴', avatarColor: '#EB2F96', type: 'video', coverSeed: 'garden_flower', coverHeight: 195, title: '阳台上的玫瑰开花了，分享给大家', likes: 428 },
-  { id: 105, userId: 15, user: '周大爷', avatar: '周', avatarColor: '#722ED1', type: 'video', coverSeed: 'fishing2', coverHeight: 185, title: '今天在江边钓到大鱼，开心！', likes: 312 },
-  { id: 106, userId: 16, user: '郑阿姨', avatar: '郑', avatarColor: '#13C2C2', type: 'video', coverSeed: 'cooking2', coverHeight: 170, title: '分享一道简单营养的家常菜做法', likes: 267 },
-  { id: 107, userId: 17, user: '冯大叔', avatar: '冯', avatarColor: '#FF6B35', type: 'video', coverSeed: 'taichi2', coverHeight: 205, title: '太极拳基础动作，跟我一起练！', likes: 198 },
-  { id: 108, userId: 18, user: '蒋奶奶', avatar: '蒋', avatarColor: '#FAAD14', type: 'video', coverSeed: 'knitting2', coverHeight: 185, title: '手工编织小熊，送给小孙女的礼物', likes: 341 },
+  { id: 101, userId: 11, user: '陈大爷', avatar: '陈', avatarColor: '#FA8C16', type: 'image', coverSeed: 'park_morning', coverHeight: 175, title: '晨练归来，精神满满迎接新一天！', likes: 234, tags: ['运动'] },
+  { id: 102, userId: 12, user: '孙阿姨', avatar: '孙', avatarColor: '#52C41A', type: 'video', coverSeed: 'square_dance', coverHeight: 215, title: '广场舞新舞步教学，欢迎大家跟着学！', likes: 387, tags: ['舞蹈'] },
+  { id: 103, userId: 13, user: '刘大叔', avatar: '刘', avatarColor: '#1677FF', type: 'video', coverSeed: 'calligraphy2', coverHeight: 165, title: '今日写了一幅"福"字，心情舒畅', likes: 156, tags: ['书法'] },
+  { id: 104, userId: 14, user: '吴奶奶', avatar: '吴', avatarColor: '#EB2F96', type: 'video', coverSeed: 'garden_flower', coverHeight: 195, title: '阳台上的玫瑰开花了，分享给大家', likes: 428, tags: ['园艺'] },
+  { id: 105, userId: 15, user: '周大爷', avatar: '周', avatarColor: '#722ED1', type: 'video', coverSeed: 'fishing2', coverHeight: 185, title: '今天在江边钓到大鱼，开心！', likes: 312, tags: ['钓鱼'] },
+  { id: 106, userId: 16, user: '郑阿姨', avatar: '郑', avatarColor: '#13C2C2', type: 'video', coverSeed: 'cooking2', coverHeight: 170, title: '分享一道简单营养的家常菜做法', likes: 267, tags: ['美食'] },
+  { id: 107, userId: 17, user: '冯大叔', avatar: '冯', avatarColor: '#FF6B35', type: 'video', coverSeed: 'taichi2', coverHeight: 205, title: '太极拳基础动作，跟我一起练！', likes: 198, tags: ['运动'] },
+  { id: 108, userId: 18, user: '蒋奶奶', avatar: '蒋', avatarColor: '#FAAD14', type: 'video', coverSeed: 'knitting2', coverHeight: 185, title: '手工编织小熊，送给小孙女的礼物', likes: 341, tags: ['手工'] },
 ];
 const PLAZA_VIDEO_POSTS = PLAZA_POSTS.filter(p => p.type === 'video');
 
@@ -1435,16 +1447,33 @@ const PLAZA_VIDEO_POSTS = PLAZA_POSTS.filter(p => p.type === 'video');
 // Mock Data — Hot Tab
 // ─────────────────────────────────────────────
 const HOT_POSTS: FollowPost[] = [
-  { id: 201, userId: 11, user: '陈大爷', avatar: '陈', avatarColor: '#FA8C16', type: 'video', coverSeed: 'hot_dance', coverHeight: 160, title: '重庆夕阳红广场舞大赛视频流出，精彩！', likes: 5823 },
-  { id: 202, userId: 12, user: '孙阿姨', avatar: '孙', avatarColor: '#52C41A', type: 'image', coverSeed: 'hot_health', coverHeight: 160, title: '血压高的人这样吃，效果真的不一样', likes: 4712, images: ['hot_health', 'hot_health2'] },
-  { id: 203, userId: 13, user: '刘大叔', avatar: '刘', avatarColor: '#1677FF', type: 'video', coverSeed: 'hot_taichi', coverHeight: 160, title: '八段锦全套教程，收藏慢慢练！', likes: 3967 },
-  { id: 204, userId: 14, user: '吴奶奶', avatar: '吴', avatarColor: '#EB2F96', type: 'video', coverSeed: 'hot_garden', coverHeight: 160, title: '阳台种菜大丰收，自给自足真开心', likes: 3254 },
-  { id: 205, userId: 15, user: '周大爷', avatar: '周', avatarColor: '#722ED1', type: 'video', coverSeed: 'hot_calligraphy', coverHeight: 160, title: '老年大学书法展览，作品精彩纷呈', likes: 2891 },
-  { id: 206, userId: 16, user: '郑阿姨', avatar: '郑', avatarColor: '#13C2C2', type: 'video', coverSeed: 'hot_music', coverHeight: 160, title: '红歌合唱团表演视频，感动无数人', likes: 2543 },
-  { id: 207, userId: 17, user: '冯大叔', avatar: '冯', avatarColor: '#FF6B35', type: 'video', coverSeed: 'hot_travel', coverHeight: 160, title: '重庆老年旅游团出发，风景美如画', likes: 2134 },
-  { id: 208, userId: 18, user: '蒋奶奶', avatar: '蒋', avatarColor: '#FAAD14', type: 'video', coverSeed: 'hot_cooking', coverHeight: 160, title: '传统重庆火锅做法大公开，赶紧收藏！', likes: 1876 },
+  { id: 201, userId: 11, user: '陈大爷', avatar: '陈', avatarColor: '#FA8C16', type: 'video', coverSeed: 'hot_dance', coverHeight: 160, title: '重庆夕阳红广场舞大赛视频流出，精彩！', likes: 5823, tags: ['舞蹈'] },
+  { id: 202, userId: 12, user: '孙阿姨', avatar: '孙', avatarColor: '#52C41A', type: 'image', coverSeed: 'hot_health', coverHeight: 160, title: '血压高的人这样吃，效果真的不一样', likes: 4712, images: ['hot_health', 'hot_health2'], tags: ['养生'] },
+  { id: 203, userId: 13, user: '刘大叔', avatar: '刘', avatarColor: '#1677FF', type: 'video', coverSeed: 'hot_taichi', coverHeight: 160, title: '八段锦全套教程，收藏慢慢练！', likes: 3967, tags: ['运动'] },
+  { id: 204, userId: 14, user: '吴奶奶', avatar: '吴', avatarColor: '#EB2F96', type: 'video', coverSeed: 'hot_garden', coverHeight: 160, title: '阳台种菜大丰收，自给自足真开心', likes: 3254, tags: ['园艺'] },
+  { id: 205, userId: 15, user: '周大爷', avatar: '周', avatarColor: '#722ED1', type: 'video', coverSeed: 'hot_calligraphy', coverHeight: 160, title: '老年大学书法展览，作品精彩纷呈', likes: 2891, tags: ['书法'] },
+  { id: 206, userId: 16, user: '郑阿姨', avatar: '郑', avatarColor: '#13C2C2', type: 'video', coverSeed: 'hot_music', coverHeight: 160, title: '红歌合唱团表演视频，感动无数人', likes: 2543, tags: ['音乐'] },
+  { id: 207, userId: 17, user: '冯大叔', avatar: '冯', avatarColor: '#FF6B35', type: 'video', coverSeed: 'hot_travel', coverHeight: 160, title: '重庆老年旅游团出发，风景美如画', likes: 2134, tags: ['旅游'] },
+  { id: 208, userId: 18, user: '蒋奶奶', avatar: '蒋', avatarColor: '#FAAD14', type: 'video', coverSeed: 'hot_cooking', coverHeight: 160, title: '传统重庆火锅做法大公开，赶紧收藏！', likes: 1876, tags: ['美食'] },
 ];
 const HOT_VIDEO_POSTS = HOT_POSTS.filter(p => p.type === 'video');
+
+// ─────────────────────────────────────────────
+// Mock Data — 霍圈子（聊天室）
+// ─────────────────────────────────────────────
+const ROOM_TAGS = ['舞蹈', '运动', '美食', '旅行', '养生', '娱乐', '音乐', '艺术', '摄影', '书法', '手工', '钓鱼'];
+const DEFAULT_CHAT_ROOMS: ChatRoom[] = [
+  { id: 'r1', name: '广场舞聊天室', description: '舞蹈爱好者交流，每日打卡练舞心得', tag: '舞蹈', color: '#FF6B35', onlineCount: 12, memberCount: 1283, lastMessage: '明早7点广场集合，不见不散！', lastMessageTime: '刚刚' },
+  { id: 'r2', name: '太极拳交流群', description: '陈氏太极、杨氏太极，修身养性每一天', tag: '运动', color: '#1677FF', onlineCount: 8, memberCount: 856, lastMessage: '今天学了新招式，感觉不错', lastMessageTime: '3分钟前' },
+  { id: 'r3', name: '川菜美食分享', description: '家常川菜做法交流，分享拿手好菜', tag: '美食', color: '#D4380D', onlineCount: 15, memberCount: 643, lastMessage: '今晚做了水煮鱼，太香了！', lastMessageTime: '5分钟前' },
+  { id: 'r4', name: '旅游摄影圈', description: '分享旅途美景，交流摄影技巧', tag: '旅行', color: '#FA8C16', onlineCount: 6, memberCount: 520, lastMessage: '上周去武隆拍的天坑，绝美', lastMessageTime: '10分钟前' },
+  { id: 'r5', name: '养生保健交流', description: '中医养生知识分享，健康生活每一天', tag: '养生', color: '#52C41A', onlineCount: 18, memberCount: 1024, lastMessage: '夏季养生要多吃苦瓜和莲子', lastMessageTime: '15分钟前' },
+  { id: 'r6', name: '麻将棋牌娱乐', description: '约牌搓麻，开心娱乐不赌博', tag: '娱乐', color: '#722ED1', onlineCount: 22, memberCount: 789, lastMessage: '下午有人约麻将吗？三缺一', lastMessageTime: '刚刚' },
+  { id: 'r7', name: '红歌合唱团', description: '经典红歌传唱，回忆激情岁月', tag: '音乐', color: '#EB2F96', onlineCount: 9, memberCount: 934, lastMessage: '这周末排练《歌唱祖国》', lastMessageTime: '20分钟前' },
+  { id: 'r8', name: '书法绘画交流', description: '毛笔字、国画、水彩，艺术人生', tag: '艺术', color: '#08979C', onlineCount: 4, memberCount: 456, lastMessage: '今天完成了一幅山水画', lastMessageTime: '30分钟前' },
+];
+
+
 
 // ─────────────────────────────────────────────
 // Mock Data — 巴渝排名专区
@@ -5457,6 +5486,7 @@ const BayuTab: React.FC<{
   onCreatePost: () => void;
   onDiscoverCircles: () => void;
   onNavigate: (screen: AppScreen) => void;
+  onOpenChat: (roomId: string) => void;
   followedCircles: string[];
   onFollow: (name: string) => void;
   onUnfollow: (name: string) => void;
@@ -5465,7 +5495,7 @@ const BayuTab: React.FC<{
   onShare: () => void;
   userPoints: number;
   onSetUserPoints: (fn: number | ((prev: number) => number)) => void;
-}> = ({ onOpenPost, onOpenVideo, onOpenComment, onOpenCircle, onOpenUserProfile, onCreatePost, onDiscoverCircles, onNavigate, followedCircles, onFollow, onUnfollow, yishouSubTab, setYishouSubTab, onShare, userPoints, onSetUserPoints }) => {
+}> = ({ onOpenPost, onOpenVideo, onOpenComment, onOpenCircle, onOpenUserProfile, onCreatePost, onDiscoverCircles, onNavigate, onOpenChat, followedCircles, onFollow, onUnfollow, yishouSubTab, setYishouSubTab, onShare, userPoints, onSetUserPoints }) => {
   const [sub, setSub] = [yishouSubTab, setYishouSubTab];
   const [rankSubTab, setRankSubTab] = useState<RankSubTab>('news');
   const [circleManage, setCircleManage] = useState(false);
@@ -5479,6 +5509,9 @@ const BayuTab: React.FC<{
   const [videoProgress, setVideoProgress] = useState(0); // 视频播放进度（0-100）
   const [countdown, setCountdown] = useState(5); // 圆圈倒计时
   const [countdownDone, setCountdownDone] = useState(false); // 倒计时是否完成
+  const [chatRooms, setChatRooms] = useState<ChatRoom[]>(DEFAULT_CHAT_ROOMS);
+  const [showCreateRoom, setShowCreateRoom] = useState(false);
+  const [newRoomForm, setNewRoomForm] = useState({ name: '', description: '', tag: '' });
   const followAutoScrollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const followVideoWheelLock = useRef(false);
   const followVideoTouchStartY = useRef<number | null>(null);
@@ -6175,60 +6208,121 @@ const BayuTab: React.FC<{
         </div>
       )}
 
-      {/* ── Circles tab ── */}
-      {sub === 'circles' && (
-        <div className="flex flex-col" style={{ background: PAGE_BG }}>
-          {/* 工具栏 */}
-          <div className="flex items-center justify-between px-4 pt-3 pb-2">
-            <span style={{ fontSize: 15, fontWeight: 600, color: '#1A1A1A' }}>
-              {circleManage ? '管理圈子' : `我的圈子 (${followedCircles.length})`}
-            </span>
-            <div className="flex items-center gap-2">
-              {!circleManage && (
-                <button onClick={() => onDiscoverCircles()}
-                  className="flex items-center gap-1 border-0 cursor-pointer rounded-xl px-3 py-1.5"
-                  style={{ background: PRIMARY, color: 'white', fontSize: 13, fontWeight: 500 }}>
-                  <SearchOutlined style={{ fontSize: 14 }} /> 发现圈子
-                </button>
-              )}
-              <button
-                onClick={() => setCircleManage(m => !m)}
-                className="border-0 cursor-pointer rounded-xl px-3 py-1.5"
-                style={{ background: circleManage ? PRIMARY : `${PRIMARY}15`, color: circleManage ? 'white' : PRIMARY, fontSize: 13, fontWeight: 600, border: circleManage ? 'none' : `1px solid ${PRIMARY}40` }}>
-                {circleManage ? '完成' : '管理'}
-              </button>
+      {/* ── Chatroom tab（霍圈子）── */}
+      {sub === 'chatroom' && (
+        <div className="flex flex-col" style={{ background: PAGE_BG, height: '100%', position: 'relative' }}>
+          {/* 白色顶栏 */}
+          <div className="flex items-center justify-end px-4 py-3 flex-shrink-0" style={{ background: 'white', borderBottom: '1px solid #F0F0F0' }} />
+          {/* 列表区域 */}
+          <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
+            <div className="flex flex-col gap-3 p-4" style={{ paddingBottom: 100 }}>
+              {/* 创建新圈子入口 */}
+              <div className="rounded-2xl flex items-center justify-between cursor-pointer active:scale-[0.98] transition-transform"
+                style={{ background: '#FFF7F2', padding: '14px 18px', border: `1.5px dashed ${PRIMARY}35` }}
+                onClick={() => setShowCreateRoom(true)}>
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center rounded-xl" style={{ width: 46, height: 46, background: `${PRIMARY}12`, border: `1px dashed ${PRIMARY}40` }}>
+                    <PlusOutlined style={{ fontSize: 24, color: PRIMARY }} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A' }}>创建新圈子</div>
+                    <div style={{ fontSize: 12, color: '#999', marginTop: 2 }}>找到志同道合的朋友</div>
+                  </div>
+                </div>
+                <div style={{ fontSize: 22, color: PRIMARY, fontWeight: 300 }}>›</div>
+              </div>
+              {/* 房间列表 */}
+              {chatRooms.map(room => (
+                <div key={room.id} className="rounded-2xl transition-all active:scale-[0.98]"
+                  style={{ background: 'white', padding: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center rounded-xl flex-shrink-0"
+                      style={{ width: 50, height: 50, background: `${room.color}12`, border: `1.5px solid ${room.color}30` }}>
+                      <span style={{ fontSize: 22, color: room.color, fontWeight: 700 }}>{room.name[0]}</span>
+                    </div>
+                    <div className="flex-1 flex flex-col justify-center" style={{ minWidth: 0, gap: 4 }}>
+                      <div className="flex items-center gap-2" style={{ minWidth: 0 }}>
+                        <span className="truncate" style={{ fontSize: 15, fontWeight: 700, color: '#1A1A1A', whiteSpace: 'nowrap' }}>{room.name}</span>
+                        <span className="rounded-full px-1.5 py-0.5 flex-shrink-0" style={{ fontSize: 10, background: `${room.color}12`, color: room.color, whiteSpace: 'nowrap' }}>{room.tag}</span>
+                        <span className="flex-shrink-0" style={{ fontSize: 11, color: '#CCC', marginLeft: 'auto', whiteSpace: 'nowrap' }}>{room.lastMessageTime}</span>
+                      </div>
+                      <div className="flex items-center gap-2" style={{ minWidth: 0 }}>
+                        <span style={{ fontSize: 12, color: '#888', whiteSpace: 'nowrap' }}>{room.memberCount} 人</span>
+                        <span style={{ fontSize: 12, color: '#52C41A', whiteSpace: 'nowrap' }}>● {room.onlineCount} 在线</span>
+                      </div>
+                      <div className="truncate" style={{ fontSize: 12, color: '#999', whiteSpace: 'nowrap' }}>{room.lastMessage}</div>
+                    </div>
+                    <button className="flex-shrink-0 rounded-full border-0 cursor-pointer active:scale-95 transition-transform"
+                      style={{ padding: '7px 14px', background: PRIMARY, color: 'white', fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}
+                      onClick={() => onOpenChat(room.id)}>
+                      进入聊天
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* 已关注列表 */}
-          <div className="flex flex-col gap-3 px-3 pb-4">
-            {followedCircles.length === 0 && (
-              <div className="py-12 text-center" style={{ fontSize: 14, color: '#BBB' }}>还没有加入任何圈子，去发现一下吧</div>
-            )}
-            {ALL_CIRCLES.filter(c => followedCircles.includes(c.name)).map(c => (
-              <div key={c.name} className="flex items-center justify-between p-4 rounded-2xl" style={{ background: 'white', border: '1px solid #EBEBEB' }}>
-                <div className="flex items-center gap-3">
-                  {circleManage && (
-                    <button
-                      onClick={() => onUnfollow(c.name)}
-                      className="flex items-center justify-center rounded-full border-0 cursor-pointer flex-shrink-0"
-                      style={{ width: 24, height: 24, background: '#FF4D4F', color: 'white', fontSize: 16, lineHeight: 1 }}>−</button>
-                  )}
-                  <div className="flex items-center justify-center rounded-xl text-white font-bold"
-                    style={{ width: 46, height: 46, background: c.color, fontSize: 17 }}>{c.name[0]}</div>
+          {/* 创建圈子弹窗 - 限制在手机框内 */}
+          {showCreateRoom && (
+            <div className="absolute inset-0 flex items-end justify-center z-50" style={{ background: 'rgba(0,0,0,0.45)' }}>
+              <div className="w-full rounded-t-3xl bg-white flex flex-col"
+                style={{ maxHeight: '85%', animation: 'slideUp 0.2s ease' }}
+                onClick={e => e.stopPropagation()}>
+                <div className="flex items-center justify-between px-5 py-4 border-b flex-shrink-0" style={{ borderColor: '#F0F0F0' }}>
+                  <span style={{ fontSize: 17, fontWeight: 700 }}>创建新圈子</span>
+                  <button className="border-0 bg-transparent cursor-pointer" onClick={() => setShowCreateRoom(false)}>
+                    <CloseOutlined style={{ fontSize: 18, color: '#999' }} />
+                  </button>
+                </div>
+                <div className="px-5 py-4 flex flex-col gap-4 overflow-y-auto" style={{ flex: 1 }}>
                   <div>
-                    <div style={{ fontSize: 15, fontWeight: 600, color: '#1A1A1A' }}>{c.name}</div>
-                    <div style={{ fontSize: 13, color: '#999', marginTop: 2 }}>{c.members.toLocaleString()}人 · {c.tag}</div>
+                    <div style={{ fontSize: 13, color: '#666', marginBottom: 6 }}>圈子名称</div>
+                    <input className="w-full rounded-xl border px-3 py-2.5" style={{ borderColor: '#E8E8E8', fontSize: 15 }}
+                      placeholder="给你的圈子起个名字" value={newRoomForm.name}
+                      onChange={e => setNewRoomForm(prev => ({ ...prev, name: e.target.value }))} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, color: '#666', marginBottom: 6 }}>圈子简介</div>
+                    <input className="w-full rounded-xl border px-3 py-2.5" style={{ borderColor: '#E8E8E8', fontSize: 15 }}
+                      placeholder="简单介绍一下这个圈子" value={newRoomForm.description}
+                      onChange={e => setNewRoomForm(prev => ({ ...prev, description: e.target.value }))} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, color: '#666', marginBottom: 6 }}>标签</div>
+                    <div className="flex flex-wrap gap-2">
+                      {ROOM_TAGS.map(tag => (
+                        <span key={tag} onClick={() => setNewRoomForm(prev => ({ ...prev, tag: prev.tag === tag ? '' : tag }))}
+                          className="rounded-full px-3 py-1 cursor-pointer transition-all"
+                          style={{ fontSize: 13, background: newRoomForm.tag === tag ? PRIMARY : '#F5F5F5', color: newRoomForm.tag === tag ? 'white' : '#666', border: newRoomForm.tag === tag ? `1px solid ${PRIMARY}` : '1px solid #E8E8E8' }}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                {!circleManage && (
-                  <button onClick={() => onOpenCircle(c)}
-                    className="rounded-xl cursor-pointer border-0 text-white font-medium"
-                    style={{ background: c.color, fontSize: 13, fontWeight: 600, padding: '7px 18px' }}>进入</button>
-                )}
+                <div className="px-5 py-4 flex-shrink-0" style={{ borderTop: '1px solid #F0F0F0' }}>
+                  <button onClick={() => {
+                    if (!newRoomForm.name.trim()) return;
+                    const colors = ['#FF6B35', '#1677FF', '#52C41A', '#722ED1', '#EB2F96', '#FA8C16', '#08979C', '#D4380D'];
+                    const newRoom: ChatRoom = {
+                      id: `r${Date.now()}`, name: newRoomForm.name.trim(),
+                      description: newRoomForm.description.trim() || '新的圈子，欢迎加入', tag: newRoomForm.tag || '社交',
+                      color: colors[Math.floor(Math.random() * colors.length)], onlineCount: 1, memberCount: 1,
+                      lastMessage: '圈子刚建立，快来聊天吧！', lastMessageTime: '刚刚',
+                    };
+                    setChatRooms(prev => [newRoom, ...prev]);
+                    setNewRoomForm({ name: '', description: '', tag: '' });
+                    setShowCreateRoom(false);
+                  }} disabled={!newRoomForm.name.trim()}
+                    className="w-full rounded-2xl text-white font-bold border-0 cursor-pointer transition-all active:scale-[0.98]"
+                    style={{ fontSize: 16, padding: '12px 0', background: newRoomForm.name.trim() ? PRIMARY : '#D9D9D9', opacity: newRoomForm.name.trim() ? 1 : 0.5 }}>
+                    创建圈子
+                  </button>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -7484,18 +7578,18 @@ const POINTS_HOT_BANNERS = [
 
 // 商城商品数据
 const MALL_PRODUCTS = [
-  { id: 1, name: '电子血压计（语音款）', image: 'https://picsum.photos/seed/bp-monitor/400/400', images: ['https://picsum.photos/seed/bp-monitor/400/400', 'https://picsum.photos/seed/bp2/400/400', 'https://picsum.photos/seed/bp3/400/400'], points: 5000, cash: 0, priceType: 'points', stock: '充足', category: 'health' as const, tags: ['热门', '语音播报'], remaining: 50, desc: '高清大屏显示，语音播报功能，适合老年人使用。全自动智能加压，一键操作，方便快捷。', detailImages: ['https://picsum.photos/seed/bp-detail1/400/400', 'https://picsum.photos/seed/bp-detail2/400/400'], purchaseNotes: ['正品保证', '7天无理由退换', '全国联保'], afterSalesNotes: ['质量问题包退换', '客服电话：400-xxx-xxxx'], specs: { label: '颜色', options: ['白色', '蓝色'] }, isVideo: true },
-  { id: 2, name: '颈椎按摩仪智能款', image: 'https://picsum.photos/seed/neck-massager/400/400', images: ['https://picsum.photos/seed/neck-massager/400/400', 'https://picsum.photos/seed/neck2/400/400'], points: 600, cash: 30, priceType: 'hybrid', stock: '充足', category: 'health' as const, tags: ['热卖'], remaining: 80, desc: '仿真人按摩手法，16档力度调节，恒温热敷，续航持久。', detailImages: ['https://picsum.photos/seed/massage-detail1/400/400'], purchaseNotes: ['正品保证', '15天无忧退换'], afterSalesNotes: ['一年质保', '运费险'], specs: { label: '型号', options: ['标准版', '升级版'] }, isVideo: true },
-  { id: 3, name: '液体钙软胶囊礼盒装', image: 'https://picsum.photos/seed/calcium/400/400', images: ['https://picsum.photos/seed/calcium/400/400', 'https://picsum.photos/seed/calcium2/400/400'], points: 1800, cash: 0, priceType: 'points', stock: '充足', category: 'gift' as const, tags: ['新品'], remaining: 120, desc: '美国进口钙源，易吸收，礼盒包装精美，送礼自用两相宜。', detailImages: ['https://picsum.photos/seed/calcium-detail/400/400'], purchaseNotes: ['正品保障', '防伪查询'], afterSalesNotes: ['质量问题包退'], specs: { label: '规格', options: ['60粒装', '120粒装'] } },
-  { id: 4, name: '智能足浴盆全自动加热', image: 'https://picsum.photos/seed/foot-bath/400/400', images: ['https://picsum.photos/seed/foot-bath/400/400', 'https://picsum.photos/seed/foot2/400/400'], points: 6800, cash: 0, priceType: 'points', stock: '紧张', remaining: 12, desc: '太极按摩盘，滚轮刮痧，自动恒温，PTC加热，安全省心。', detailImages: ['https://picsum.photos/seed/footbath-detail/400/400'], purchaseNotes: ['品质保障', '送货上门'], afterSalesNotes: ['30天退换', '一年保修'], specs: { label: '容量', options: ['8L', '12L'] } },
-  { id: 5, name: '有机五谷杂粮礼盒 2kg', image: 'https://picsum.photos/seed/grain-box/400/400', images: ['https://picsum.photos/seed/grain-box/400/400'], points: 0, cash: 39.9, priceType: 'cash', stock: '充足', category: 'gift' as const, tags: ['精选'], remaining: 200, desc: '精选有机杂粮，营养均衡，礼盒包装精美，过节送礼首选。', detailImages: ['https://picsum.photos/seed/grain-detail/400/400'], purchaseNotes: ['有机认证', '破损包赔'], afterSalesNotes: ['七天退换'], specs: { label: '口味', options: ['五谷杂粮', '粗粮组合'] } },
-  { id: 6, name: '野生蜂蜜500g正宗土蜂蜜', image: 'https://picsum.photos/seed/honey/400/400', images: ['https://picsum.photos/seed/honey/400/400', 'https://picsum.photos/seed/honey2/400/400'], points: 500, cash: 25, priceType: 'hybrid', stock: '充足', category: 'gift' as const, tags: ['热卖', '正宗'], remaining: 60, desc: '深山野生蜂蜜，纯天然无添加，花香浓郁，口感醇厚。', detailImages: ['https://picsum.photos/seed/honey-detail/400/400'], purchaseNotes: ['假一赔十', '质检报告'], afterSalesNotes: ['质量问题包退'], specs: { label: '蜜种', options: ['百花蜜', '槐花蜜'] } },
-  { id: 7, name: '新疆核桃坚果礼盒', image: 'https://picsum.photos/seed/walnut/400/400', images: ['https://picsum.photos/seed/walnut/400/400'], points: 0, cash: 59.9, priceType: 'cash', stock: '充足', category: 'gift' as const, tags: ['精选'], remaining: 150, desc: '新疆原产地直供，手剥核桃仁，独立小包装，食用方便。', detailImages: ['https://picsum.photos/seed/walnut-detail/400/400'], purchaseNotes: ['产地直发', '新鲜保障'], afterSalesNotes: ['破损包退'], specs: { label: '净含量', options: ['500g', '1kg'] } },
-  { id: 8, name: '多功能按摩披肩肩颈一体', image: 'https://picsum.photos/seed/massage-shoulder/400/400', images: ['https://picsum.photos/seed/massage-shoulder/400/400', 'https://picsum.photos/seed/shoulder2/400/400'], points: 1200, cash: 0, priceType: 'points', stock: '充足', category: 'hobby' as const, tags: ['新品'], remaining: 45, desc: '仿真人揉捏，恒温热敷，多部位可用，充电式设计。', detailImages: ['https://picsum.photos/seed/shoulder-detail/400/400'], purchaseNotes: ['正品保障', '全国联保'], afterSalesNotes: ['一年质保', '运费险'], specs: { label: '颜色', options: ['灰色', '米色'] } },
-  { id: 9, name: '便携式电子体温计耳温枪', image: 'https://picsum.photos/seed/thermometer/400/400', images: ['https://picsum.photos/seed/thermometer/400/400'], points: 900, cash: 0, priceType: 'points', stock: '充足', category: 'health' as const, tags: ['热门'], remaining: 100, desc: '一秒测温，精准快速，LED大屏显示，静音设计，适合婴幼儿。', detailImages: ['https://picsum.photos/seed/thermometer-detail/400/400'], purchaseNotes: ['医疗器械认证', '精准测温'], afterSalesNotes: ['质量问题包退'], specs: { label: '型号', options: ['基础款', '高端款'] } },
-  { id: 10, name: '304不锈钢保温杯480ml', image: 'https://picsum.photos/seed/thermos/400/400', images: ['https://picsum.photos/seed/thermos/400/400', 'https://picsum.photos/seed/thermos2/400/400'], points: 500, cash: 0, priceType: 'points', stock: '充足', category: 'coupon' as const, tags: ['热卖'], remaining: 200, desc: '食品级304不锈钢，12小时保温保冷，一键开盖设计。', detailImages: ['https://picsum.photos/seed/thermos-detail/400/400'], purchaseNotes: ['正品保证', '质检合格'], afterSalesNotes: ['一年质保', '破损包赔'], specs: { label: '颜色', options: ['银色', '黑色', '白色'] } },
-  { id: 11, name: '老年轻便健步鞋防滑舒适', image: 'https://picsum.photos/seed/shoes/400/400', images: ['https://picsum.photos/seed/shoes/400/400'], points: 1200, cash: 0, priceType: 'points', stock: '充足', category: 'hobby' as const, tags: ['舒适', '防滑'], remaining: 80, desc: '超轻透气，防滑鞋底，魔术贴设计，穿脱方便，专为老年人设计。', detailImages: ['https://picsum.photos/seed/shoes-detail/400/400'], purchaseNotes: ['正品保障', '尺码标准'], afterSalesNotes: ['七天试穿', '质量问题包退'], specs: { label: '尺码', options: ['38', '39', '40', '41', '42'] } },
-  { id: 12, name: '太极服套装春夏款透气', image: 'https://picsum.photos/seed/taichi/400/400', images: ['https://picsum.photos/seed/taichi/400/400', 'https://picsum.photos/seed/taichi2/400/400'], points: 3500, cash: 0, priceType: 'points', stock: '充足', category: 'hobby' as const, tags: ['新品'], remaining: 35, desc: '太极服套装，透气速干，宽松舒适，传统款式，修炼必备。', detailImages: ['https://picsum.photos/seed/taichi-detail/400/400'], purchaseNotes: ['品质面料', '做工精细'], afterSalesNotes: ['尺码问题可换'], specs: { label: '尺码', options: ['M', 'L', 'XL', 'XXL'] } },
+  { id: 1, name: '电子血压计（语音款）', image: 'https://picsum.photos/seed/bp-monitor/400/400', images: ['https://picsum.photos/seed/bp-monitor/400/400', 'https://picsum.photos/seed/bp2/400/400', 'https://picsum.photos/seed/bp3/400/400'], points: 5000, cash: 0, priceType: 'points', stock: '充足', category: 'health' as const, tags: ['热门', '语音播报'], remaining: 50, desc: '高清大屏显示，语音播报功能，适合老年人使用。全自动智能加压，一键操作，方便快捷。', detailImages: ['https://picsum.photos/seed/bp-detail1/400/400', 'https://picsum.photos/seed/bp-detail2/400/400'], purchaseNotes: ['正品保证', '7天无理由退换', '全国联保'], afterSalesNotes: ['质量问题包退换', '客服电话：400-xxx-xxxx'], specs: { label: '颜色', options: ['白色', '蓝色'] }, isVideo: true, jdPrice: 268, taobaoPrice: 218 },
+  { id: 2, name: '颈椎按摩仪智能款', image: 'https://picsum.photos/seed/neck-massager/400/400', images: ['https://picsum.photos/seed/neck-massager/400/400', 'https://picsum.photos/seed/neck2/400/400'], points: 600, cash: 30, priceType: 'hybrid', stock: '充足', category: 'health' as const, tags: ['热卖'], remaining: 80, desc: '仿真人按摩手法，16档力度调节，恒温热敷，续航持久。', detailImages: ['https://picsum.photos/seed/massage-detail1/400/400'], purchaseNotes: ['正品保证', '15天无忧退换'], afterSalesNotes: ['一年质保', '运费险'], specs: { label: '型号', options: ['标准版', '升级版'] }, isVideo: true, jdPrice: 199, taobaoPrice: 158 },
+  { id: 3, name: '液体钙软胶囊礼盒装', image: 'https://picsum.photos/seed/calcium/400/400', images: ['https://picsum.photos/seed/calcium/400/400', 'https://picsum.photos/seed/calcium2/400/400'], points: 1800, cash: 0, priceType: 'points', stock: '充足', category: 'gift' as const, tags: ['新品'], remaining: 120, desc: '美国进口钙源，易吸收，礼盒包装精美，送礼自用两相宜。', detailImages: ['https://picsum.photos/seed/calcium-detail/400/400'], purchaseNotes: ['正品保障', '防伪查询'], afterSalesNotes: ['质量问题包退'], specs: { label: '规格', options: ['60粒装', '120粒装'] }, jdPrice: 198, taobaoPrice: 158 },
+  { id: 4, name: '智能足浴盆全自动加热', image: 'https://picsum.photos/seed/foot-bath/400/400', images: ['https://picsum.photos/seed/foot-bath/400/400', 'https://picsum.photos/seed/foot2/400/400'], points: 6800, cash: 0, priceType: 'points', stock: '紧张', remaining: 12, desc: '太极按摩盘，滚轮刮痧，自动恒温，PTC加热，安全省心。', detailImages: ['https://picsum.photos/seed/footbath-detail/400/400'], purchaseNotes: ['品质保障', '送货上门'], afterSalesNotes: ['30天退换', '一年保修'], specs: { label: '容量', options: ['8L', '12L'] }, jdPrice: 398, taobaoPrice: 328 },
+  { id: 5, name: '有机五谷杂粮礼盒 2kg', image: 'https://picsum.photos/seed/grain-box/400/400', images: ['https://picsum.photos/seed/grain-box/400/400'], points: 0, cash: 39.9, priceType: 'cash', stock: '充足', category: 'gift' as const, tags: ['精选'], remaining: 200, desc: '精选有机杂粮，营养均衡，礼盒包装精美，过节送礼首选。', detailImages: ['https://picsum.photos/seed/grain-detail/400/400'], purchaseNotes: ['有机认证', '破损包赔'], afterSalesNotes: ['七天退换'], specs: { label: '口味', options: ['五谷杂粮', '粗粮组合'] }, jdPrice: 68, taobaoPrice: 52 },
+  { id: 6, name: '野生蜂蜜500g正宗土蜂蜜', image: 'https://picsum.photos/seed/honey/400/400', images: ['https://picsum.photos/seed/honey/400/400', 'https://picsum.photos/seed/honey2/400/400'], points: 500, cash: 25, priceType: 'hybrid', stock: '充足', category: 'gift' as const, tags: ['热卖', '正宗'], remaining: 60, desc: '深山野生蜂蜜，纯天然无添加，花香浓郁，口感醇厚。', detailImages: ['https://picsum.photos/seed/honey-detail/400/400'], purchaseNotes: ['假一赔十', '质检报告'], afterSalesNotes: ['质量问题包退'], specs: { label: '蜜种', options: ['百花蜜', '槐花蜜'] }, jdPrice: 88, taobaoPrice: 68 },
+  { id: 7, name: '新疆核桃坚果礼盒', image: 'https://picsum.photos/seed/walnut/400/400', images: ['https://picsum.photos/seed/walnut/400/400'], points: 0, cash: 59.9, priceType: 'cash', stock: '充足', category: 'gift' as const, tags: ['精选'], remaining: 150, desc: '新疆原产地直供，手剥核桃仁，独立小包装，食用方便。', detailImages: ['https://picsum.photos/seed/walnut-detail/400/400'], purchaseNotes: ['产地直发', '新鲜保障'], afterSalesNotes: ['破损包退'], specs: { label: '净含量', options: ['500g', '1kg'] }, jdPrice: 98, taobaoPrice: 78 },
+  { id: 8, name: '多功能按摩披肩肩颈一体', image: 'https://picsum.photos/seed/massage-shoulder/400/400', images: ['https://picsum.photos/seed/massage-shoulder/400/400', 'https://picsum.photos/seed/shoulder2/400/400'], points: 1200, cash: 0, priceType: 'points', stock: '充足', category: 'hobby' as const, tags: ['新品'], remaining: 45, desc: '仿真人揉捏，恒温热敷，多部位可用，充电式设计。', detailImages: ['https://picsum.photos/seed/shoulder-detail/400/400'], purchaseNotes: ['正品保障', '全国联保'], afterSalesNotes: ['一年质保', '运费险'], specs: { label: '颜色', options: ['灰色', '米色'] }, jdPrice: 168, taobaoPrice: 138 },
+  { id: 9, name: '便携式电子体温计耳温枪', image: 'https://picsum.photos/seed/thermometer/400/400', images: ['https://picsum.photos/seed/thermometer/400/400'], points: 900, cash: 0, priceType: 'points', stock: '充足', category: 'health' as const, tags: ['热门'], remaining: 100, desc: '一秒测温，精准快速，LED大屏显示，静音设计，适合婴幼儿。', detailImages: ['https://picsum.photos/seed/thermometer-detail/400/400'], purchaseNotes: ['医疗器械认证', '精准测温'], afterSalesNotes: ['质量问题包退'], specs: { label: '型号', options: ['基础款', '高端款'] }, jdPrice: 89, taobaoPrice: 68 },
+  { id: 10, name: '304不锈钢保温杯480ml', image: 'https://picsum.photos/seed/thermos/400/400', images: ['https://picsum.photos/seed/thermos/400/400', 'https://picsum.photos/seed/thermos2/400/400'], points: 500, cash: 0, priceType: 'points', stock: '充足', category: 'coupon' as const, tags: ['热卖'], remaining: 200, desc: '食品级304不锈钢，12小时保温保冷，一键开盖设计。', detailImages: ['https://picsum.photos/seed/thermos-detail/400/400'], purchaseNotes: ['正品保证', '质检合格'], afterSalesNotes: ['一年质保', '破损包赔'], specs: { label: '颜色', options: ['银色', '黑色', '白色'] }, jdPrice: 89, taobaoPrice: 68 },
+  { id: 11, name: '老年轻便健步鞋防滑舒适', image: 'https://picsum.photos/seed/shoes/400/400', images: ['https://picsum.photos/seed/shoes/400/400'], points: 1200, cash: 0, priceType: 'points', stock: '充足', category: 'hobby' as const, tags: ['舒适', '防滑'], remaining: 80, desc: '超轻透气，防滑鞋底，魔术贴设计，穿脱方便，专为老年人设计。', detailImages: ['https://picsum.photos/seed/shoes-detail/400/400'], purchaseNotes: ['正品保障', '尺码标准'], afterSalesNotes: ['七天试穿', '质量问题包退'], specs: { label: '尺码', options: ['38', '39', '40', '41', '42'] }, jdPrice: 168, taobaoPrice: 128 },
+  { id: 12, name: '太极服套装春夏款透气', image: 'https://picsum.photos/seed/taichi/400/400', images: ['https://picsum.photos/seed/taichi/400/400', 'https://picsum.photos/seed/taichi2/400/400'], points: 3500, cash: 0, priceType: 'points', stock: '充足', category: 'hobby' as const, tags: ['新品'], remaining: 35, desc: '太极服套装，透气速干，宽松舒适，传统款式，修炼必备。', detailImages: ['https://picsum.photos/seed/taichi-detail/400/400'], purchaseNotes: ['品质面料', '做工精细'], afterSalesNotes: ['尺码问题可换'], specs: { label: '尺码', options: ['M', 'L', 'XL', 'XXL'] }, jdPrice: 128, taobaoPrice: 98 },
 ];
 
 // 商城用户数据
@@ -7589,14 +7683,14 @@ const PointsMallScreen: React.FC<{
     </div>
   );
 
-  // 热门推荐双列卡片
+  // 好物推荐单列卡片（图片在上，信息在下）
   const HotProductCard = ({ product, onClick }: { product: any; onClick?: () => void }) => (
     <div className="rounded-2xl overflow-hidden bg-white cursor-pointer active:scale-95 transition-transform" onClick={onClick}>
-      <div className="relative">
-        <img src={product.image} alt={product.name} className="w-full object-cover" style={{ height: 140 }} />
+      <div className="relative" style={{ height: 180 }}>
+        <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
         {product.isVideo && (
           <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.3)' }}>
-            <PlayCircleFilled style={{ fontSize: 40, color: 'white' }} />
+            <PlayCircleFilled style={{ fontSize: 44, color: 'white' }} />
           </div>
         )}
         {product.tags && product.tags[0] && (
@@ -7605,11 +7699,36 @@ const PointsMallScreen: React.FC<{
           </div>
         )}
       </div>
-      <div className="p-2">
-        <div className="line-clamp-2" style={{ fontSize: 13, fontWeight: 600, color: '#1A1A1A', lineHeight: 1.4, marginBottom: 4 }}>
+      <div className="p-3">
+        <div className="line-clamp-2" style={{ fontSize: 15, fontWeight: 600, color: '#1A1A1A', lineHeight: 1.4, marginBottom: 6 }}>
           {product.name}
         </div>
-        <div style={{ fontSize: 14, fontWeight: 800, color: RED }}>{formatPrice(product)}</div>
+        <div className="flex items-baseline gap-2" style={{ marginBottom: 6 }}>
+          <span style={{ fontSize: 18, fontWeight: 800, color: RED }}>{formatPrice(product)}</span>
+          {product.tags && product.tags.length > 1 && (
+            <span className="rounded-full px-1.5 py-0.5" style={{ fontSize: 10, background: '#FFF1F0', color: RED, border: '1px solid #FFA39E' }}>
+              {product.tags[1]}
+            </span>
+          )}
+        </div>
+        {/* 对比价 */}
+        {product.jdPrice && product.taobaoPrice && (
+          <div className="flex items-center gap-2 mt-2 rounded-xl px-3 py-2" style={{ background: '#FFF5F2', border: '1px solid #FFE8E0' }}>
+            <div className="flex items-center gap-1.5">
+              <div className="flex items-center justify-center rounded-md flex-shrink-0" style={{ width: 22, height: 22, background: '#E1251B' }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: 'white', lineHeight: 1 }}>JD</span>
+              </div>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#888' }}>¥{product.jdPrice}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="flex items-center justify-center rounded-md flex-shrink-0" style={{ width: 22, height: 22, background: '#FF5000' }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'white', lineHeight: 1 }}>淘</span>
+              </div>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#888' }}>¥{product.taobaoPrice}</span>
+            </div>
+            <span className="rounded-full px-2 py-0.5 flex-shrink-0" style={{ fontSize: 11, fontWeight: 600, color: '#52C41A', background: 'white', border: '1px solid #B7EB8F' }}>更省钱</span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -7659,15 +7778,15 @@ const PointsMallScreen: React.FC<{
         </div>
       </div>
 
-      {/* 热门推荐 - 双列卡片 */}
+      {/* 好物推荐 - 单列卡片 */}
       <div className="mx-4 mt-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <span style={{ fontSize: 18, fontWeight: 700 }}>🔥</span>
-            <span style={{ fontSize: 17, fontWeight: 700 }}>热门推荐</span>
+            <GiftOutlined style={{ fontSize: 20, color: '#FF6B35' }} />
+            <span style={{ fontSize: 17, fontWeight: 700 }}>好物推荐</span>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="flex flex-col gap-3">
           {MALL_PRODUCTS.filter(p => p.tags?.includes('热卖') || p.tags?.includes('热门')).slice(0, 4).map(product => (
             <HotProductCard key={product.id} product={product} onClick={() => onOpenDetail({ ...product, points: product.points || 0, cash: product.cash || 0 })} />
           ))}
@@ -13111,7 +13230,7 @@ const Component: React.FC = () => {
               </div>
               )}
               <div className="flex-1 overflow-y-auto" style={{ background: activeTab === 'profile' ? 'transparent' : (activeTab === 'yishou' && (yishouSubTab === 'follow' || yishouSubTab === 'plaza')) ? '#000' : PAGE_BG, position: 'relative' }}>
-                {activeTab === 'bayu' && <BayuTab onOpenPost={openPost} onOpenVideo={openVideo} onOpenComment={openComment} onOpenCircle={openCircle} onOpenUserProfile={openUserProfile} onCreatePost={() => pushScreen('create-select')} onDiscoverCircles={() => pushScreen('circle-discover')} onNavigate={pushScreen} followedCircles={followedCircles} onFollow={(name) => setFollowedCircles(prev => [...prev, name])} onUnfollow={(name) => setFollowedCircles(prev => prev.filter(n => n !== name))} yishouSubTab={yishouSubTab} setYishouSubTab={setYishouSubTab} onShare={onShare} userPoints={userPoints} onSetUserPoints={setUserPoints} />}
+                {activeTab === 'bayu' && <BayuTab onOpenPost={openPost} onOpenVideo={openVideo} onOpenComment={openComment} onOpenCircle={openCircle} onOpenUserProfile={openUserProfile} onCreatePost={() => pushScreen('create-select')} onDiscoverCircles={() => pushScreen('circle-discover')} onNavigate={pushScreen} onOpenChat={(roomId) => { setActiveChatId(1); pushScreen('chat'); }} followedCircles={followedCircles} onFollow={(name) => setFollowedCircles(prev => [...prev, name])} onUnfollow={(name) => setFollowedCircles(prev => prev.filter(n => n !== name))} yishouSubTab={yishouSubTab} setYishouSubTab={setYishouSubTab} onShare={onShare} userPoints={userPoints} onSetUserPoints={setUserPoints} />}
                 {activeTab === 'yishou' && <YishouTab onOpenService={openService} onOpenHealth={openHealth} onNavigate={pushScreen} onOpenActivity={(activity) => { setActiveActivity(activity); pushScreen('activity-detail'); }} />}
                 {activeTab === 'messages' && <MessagesTab onOpenChat={openChat} onOpenContacts={() => pushScreen('contacts')} onOpenNotifyLikes={() => pushScreen('notify-likes')} onOpenNotifyThumbs={() => pushScreen('notify-thumbs')} onOpenNotifyComments={() => pushScreen('notify-comments')} onOpenNotifyFans={() => pushScreen('notify-fans')} />}
                 {activeTab === 'profile' && <ProfileTab onNavigate={pushScreen} setActiveVideoPool={setActiveVideoPool} setProfileVideoStartId={setProfileVideoStartId} setActivePost={setActivePost} setMallInitialTab={setMallInitialTab} />}

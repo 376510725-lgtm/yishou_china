@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-25T06:53:34.246Z",
+  "updatedAt": "2026-07-03T07:19:21.883Z",
   "prototypes": [
     {
-      "id": "item:prototypes:service-app",
+      "id": "item-prototypes-management",
       "kind": "item",
-      "title": "service-app",
-      "itemKey": "prototypes/service-app"
+      "title": "management",
+      "itemKey": "prototypes/management"
     },
     {
-      "id": "item:prototypes:management",
+      "id": "item-prototypes-service-app",
       "kind": "item",
-      "title": "益寿巴渝后台管理系统",
-      "itemKey": "prototypes/management"
+      "title": "service app",
+      "itemKey": "prototypes/service-app"
     },
     {
       "id": "item:prototypes:yishou-app",

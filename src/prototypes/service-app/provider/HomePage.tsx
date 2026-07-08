@@ -10,47 +10,20 @@ import {
   TeamOutlined,
   BellOutlined,
 } from '@ant-design/icons';
-import { Card, THEME } from '../shared/components';
+import { Card, Tag, Avatar, Button, THEME } from '../shared/components';
 
-// 模拟数据
-const ORDER_LIST = [
-  {
-    id: 'DD202406010001',
-    user: '张阿姨',
-    avatar: '张',
-    color: THEME.providerPrimary,
-    phone: '138****5678',
-    service: '助餐',
-    address: '渝中区解放碑街道XX号',
-    time: '今天 12:00',
-    amount: '¥68.00',
-    status: 'pending',
-  },
-  {
-    id: 'DD202406010002',
-    user: '李大爷',
-    avatar: '李',
-    color: THEME.success,
-    phone: '139****8765',
-    service: '助洁',
-    address: '江北区观音桥街道XX号',
-    time: '明天 09:00',
-    amount: '¥128.00',
-    status: 'dispatched',
-  },
-  {
-    id: 'DD202406010003',
-    user: '王奶奶',
-    avatar: '王',
-    color: THEME.warning,
-    phone: '137****2345',
-    service: '助医',
-    address: '南岸区南坪街道XX号',
-    time: '今天 15:30',
-    amount: '¥198.00',
-    status: 'serving',
-  },
-];
+interface OrderInfo {
+  id: string;
+  user: string;
+  avatar: string;
+  color: string;
+  phone: string;
+  service: string;
+  address: string;
+  time: string;
+  amount: string;
+  status: string;
+}
 
 const SERVICE_TYPES = [
   { label: '助餐', icon: '🍽️' },
@@ -65,8 +38,11 @@ interface HomePageProps {
   themeColor?: string;
   settleStatus?: 'none' | 'pending' | 'rejected' | 'approved';
   onNavigate: (screen: string) => void;
-  onOrderClick: (order: typeof ORDER_LIST[0]) => void;
+  onOrderClick: (order: OrderInfo) => void;
   onTabChange?: (tab: string) => void;
+  orders?: OrderInfo[];
+  stats?: { pending: number; dispatched: number; serving: number; completed: number };
+  todayIncome?: string;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
@@ -75,12 +51,17 @@ export const HomePage: React.FC<HomePageProps> = ({
   onNavigate,
   onOrderClick,
   onTabChange,
+  orders: propOrders,
+  stats: propStats,
+  todayIncome = '¥1,268.00',
 }) => {
-  // 统计数据
+  const orderList = propOrders ?? [];
+  const p = propStats || { pending: 3, dispatched: 2, serving: 5, completed: 28 };
   const stats = [
-    { label: '待处理订单', value: 3, color: THEME.danger },
-    { label: '进行中', value: 5, color: THEME.warning },
-    { label: '今日完成', value: 28, color: THEME.success },
+    { label: '待派单', value: p.pending, color: THEME.danger },
+    { label: '已派单', value: p.dispatched, color: '#00D4FF' },
+    { label: '进行中', value: p.serving, color: THEME.warning },
+    { label: '已完成', value: p.completed, color: THEME.success },
   ];
 
   // 快捷操作
@@ -127,7 +108,16 @@ export const HomePage: React.FC<HomePageProps> = ({
             工作台
           </span>
         </div>
-        <BellOutlined style={{ fontSize: 20, color: THEME.textMuted }} />
+        <div
+          onClick={() => onNavigate('messages')}
+          style={{ position: 'relative', cursor: 'pointer' }}
+        >
+          <BellOutlined style={{ fontSize: 20, color: THEME.textPrimary }} />
+          <div style={{
+            position: 'absolute', top: -3, right: -4, width: 8, height: 8,
+            borderRadius: '50%', background: THEME.danger
+          }} />
+        </div>
       </div>
 
       {/* 内容区域 - 顶部留出标题栏空间，可滚动 */}
@@ -349,6 +339,48 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             ))}
           </div>
+        </Card>
+
+        {/* 今日收入 */}
+        <Card style={{ marginBottom: 16 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+            <div>
+              <div style={{ fontSize: 13, color: THEME.textSecondary, marginBottom: 4 }}>今日收入</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: themeColor }}>{todayIncome}</div>
+            </div>
+            <span
+              onClick={() => { onTabChange?.('orders'); onNavigate('orders'); }}
+              style={{ fontSize: 13, color: themeColor, cursor: 'pointer', paddingBottom: 6 }}
+            >
+              详情 →
+            </span>
+          </div>
+        </Card>
+
+        {/* 最新订单 */}
+        <Card style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 15, fontWeight: 600, color: THEME.textPrimary, marginBottom: 12, display: 'flex', justifyContent: 'space-between' }}>
+            <span>最新订单</span>
+            <span style={{ fontSize: 12, color: themeColor, cursor: 'pointer' }} onClick={() => { onTabChange?.('orders'); onNavigate('orders'); }}>全部 →</span>
+          </div>
+          {orderList.slice(0, 5).map((order) => (
+            <div key={order.id} onClick={() => onOrderClick(order)} style={{
+              display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0',
+              borderTop: `1px solid ${THEME.borderLight}`, cursor: 'pointer'
+            }}>
+              <Avatar letter={order.avatar} color={order.color} size={36} />
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 14, color: THEME.textPrimary }}>{order.user} · {order.service}</div>
+                <div style={{ fontSize: 12, color: THEME.textMuted }}>{order.time}</div>
+              </div>
+              <span style={{ fontSize: 14, fontWeight: 600, color: themeColor }}>{order.amount}</span>
+            </div>
+          ))}
+          {orderList.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '20px 0', color: THEME.textMuted, fontSize: 13 }}>
+              暂无订单
+            </div>
+          )}
         </Card>
 
       </div>

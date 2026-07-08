@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "conversations": [
+    {
+      "threadId": "codex-fbcf92b8-c1f6-4833-ac0b-515a714979d7",
+      "title": "？",
+      "createdAt": "2026-07-07T03:35:58.366Z",
+      "updatedAt": "2026-07-07T03:36:39.684Z",
+      "archivedAt": null,
+      "deletedAt": null,
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "provider": "codex",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "permissionMode": "bypassPermissions",
+      "status": "active",
+      "builtinToolSettings": {
+        "image-generation": {
+          "enabled": true,
+          "preservePrompt": true,
+          "requestTimeoutMs": 240000
+        },
+        "user-choice": {
+          "enabled": true,
+          "waitTimeoutMs": 120000,
+          "allowCustomInput": true,
+          "customInputLabel": "自定义"
+        }
+      },
+      "providerSessionId": "019f3aa5-a2d4-7392-999e-5572dffe9186",
+      "sourcePath": "C:\\Users\\WXD\\.codex\\sessions\\2026\\07\\07\\rollout-2026-07-07T11-36-06-019f3aa5-a2d4-7392-999e-5572dffe9186.jsonl",
+      "sourceKind": "codex-jsonl",
+      "lastSeenMtime": 1783395399553.0513,
+      "lastActiveAt": "2026-07-07T03:36:39.553Z"
+    }
+  ],
+  "sessions": [
+    {
+      "threadId": "codex-fbcf92b8-c1f6-4833-ac0b-515a714979d7",
+      "acpSessionId": "019f3aa5-a2d4-7392-999e-5572dffe9186",
+      "provider": "codex",
+      "workspacePath": "D:\\王旭东\\Codex-project\\yishou_china",
+      "model": null,
+      "modeId": null,
+      "thoughtLevel": null,
+      "createdAt": "2026-07-07T03:36:07.265Z",
+      "lastActivityAt": "2026-07-07T03:36:39.659Z",
+      "closedAt": null
+    }
+  ],
+  "messages": {
+    "codex-fbcf92b8-c1f6-4833-ac0b-515a714979d7": {
+      "messages": [
+        {
+          "id": "2g9TGvbdpvfF4mbV",
+          "parent_id": null,
+          "format": "ai-sdk/v6",
+          "content": {
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "？"
+              }
+            ],
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "running",
+                  "threadId": "codex-fbcf92b8-c1f6-4833-ac0b-515a714979d7",
+                  "acpSessionId": null,
+                  "error": null,
+                  "updatedAt": 1783395358382
+                }
+              }
+            },
+            "id": "2g9TGvbdpvfF4mbV"
+          },
+          "createdAt": "2026-07-07T03:35:58.383Z",
+          "updatedAt": "2026-07-07T03:36:39.672Z"
+        },
+        {
+          "id": "assistant-mra3k09y-yxk53m9iwlq",
+          "parent_id": "2g9TGvbdpvfF4mbV",
+          "format": "ai-sdk/v6",
+          "content": {
+            "id": "assistant-mra3k09y-yxk53m9iwlq",
+            "metadata": {
+              "custom": {
+                "acpRun": {
+                  "status": "completed",
+                  "threadId": "codex-fbcf92b8-c1f6-4833-ac0b-515a714979d7",
+                  "acpSessionId": "019f3aa5-a2d4-7392-999e-5572dffe9186",
+                  "error": null,
+                  "updatedAt": 1783395399618
+                }
+              }
+            },
+            "role": "assistant",
+            "parts": [
+              {
+                "type": "step-start"
+              },
+              {
+                "type": "text",
+                "text": "Warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.\n\nReconnecting... 1/5\n\nReconnecting... 2/5\n\nReconnecting... 3/5\n\nReconnecting... 4/5\n\nReconnecting... 5/5\n\nunexpected status 403 Forbidden: 预扣费额度失败, 用户剩余额度: ＄0.000800, 需要预扣费额度: ＄0.221534 (request id: 20260707033638923237715AEL5xREE), url: https://nty-hk.zhouyang168.top/v1/responses\n\n",
+                "state": "streaming"
+              }
+            ]
+          },
+          "createdAt": "2026-07-07T03:36:13.097Z",
+          "updatedAt": "2026-07-07T03:36:39.684Z"
+        }
+      ],
+      "headId": "assistant-mra3k09y-yxk53m9iwlq"
+    }
+  }
+}

@@ -3,7 +3,7 @@
  * 深空暗夜科技风格
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   CheckCircleOutlined,
   LockOutlined,
@@ -23,20 +23,45 @@ interface LoginPageProps {
   onRegister: (role: Role) => void;
 }
 
+// 记住上次角色
+const getSavedRole = (): Role => {
+  try { return (localStorage.getItem('lastRole') as Role) || 'provider'; }
+  catch { return 'provider'; }
+};
+
 export const LoginPage: React.FC<LoginPageProps> = ({
   themeColor = THEME.providerPrimary,
   onLogin,
   onRegister,
 }) => {
-  const [role, setRole] = useState<Role>('provider');
+  const [role, setRole] = useState<Role>(getSavedRole);
   const [loginMode, setLoginMode] = useState<LoginMode>('code');
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
   const [agreementChecked, setAgreementChecked] = useState(false);
   const [codeFocused, setCodeFocused] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // 清除倒计时
+  useEffect(() => {
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+
+  const sendCode = () => {
+    if (countdown > 0 || !phone) return;
+    setCountdown(60);
+    timerRef.current = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) { if (timerRef.current) clearInterval(timerRef.current); return 0; }
+        return prev - 1;
+      });
+    }, 1000);
+  };
 
   const handleLogin = () => {
+    try { localStorage.setItem('lastRole', role); } catch {}
     onLogin(role);
   };
 
@@ -240,20 +265,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({
             />
           </div>
           <button
+            onClick={sendCode}
+            disabled={countdown > 0}
             style={{
               height: 52,
               padding: '0 12px',
-              background: `${themeColor}15`,
-              color: themeColor,
-              border: `1px solid ${themeColor}30`,
+              background: countdown > 0 ? THEME.bgInput : `${themeColor}15`,
+              color: countdown > 0 ? THEME.textMuted : themeColor,
+              border: `1px solid ${countdown > 0 ? THEME.borderLight : themeColor}30`,
               borderRadius: 10,
               fontSize: 12,
               fontWeight: 500,
-              cursor: 'pointer',
+              cursor: countdown > 0 ? 'default' : 'pointer',
               whiteSpace: 'nowrap',
+              minWidth: 90,
             }}
           >
-            获取验证码
+            {countdown > 0 ? `${countdown}s后重发` : '获取验证码'}
           </button>
         </div>
       ) : (
@@ -396,15 +424,5 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     </div>
   );
 };
-
-// 辅助函数
-function adjustColor(hex: string, percent: number): string {
-  const num = parseInt(hex.replace('#', ''), 16);
-  const amt = Math.round(2.55 * percent);
-  const R = Math.max(Math.min((num >> 16) + amt, 255), 0);
-  const G = Math.max(Math.min(((num >> 8) & 0x00ff) + amt, 255), 0);
-  const B = Math.max(Math.min((num & 0x0000ff) + amt, 255), 0);
-  return `#${((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1)}`;
-}
 
 export default LoginPage;
