@@ -7718,13 +7718,13 @@ const PointsMallScreen: React.FC<{
               <div className="flex items-center justify-center rounded-md flex-shrink-0" style={{ width: 22, height: 22, background: '#E1251B' }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: 'white', lineHeight: 1 }}>JD</span>
               </div>
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#888' }}>¥{product.jdPrice}</span>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#888', textDecoration: 'line-through' }}>¥{product.jdPrice}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="flex items-center justify-center rounded-md flex-shrink-0" style={{ width: 22, height: 22, background: '#FF5000' }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: 'white', lineHeight: 1 }}>淘</span>
               </div>
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#888' }}>¥{product.taobaoPrice}</span>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#888', textDecoration: 'line-through' }}>¥{product.taobaoPrice}</span>
             </div>
             <span className="rounded-full px-2 py-0.5 flex-shrink-0" style={{ fontSize: 11, fontWeight: 600, color: '#52C41A', background: 'white', border: '1px solid #B7EB8F' }}>更省钱</span>
           </div>
@@ -12956,8 +12956,8 @@ const Component: React.FC = () => {
   const [activeMyDetailId, setActiveMyDetailId] = useState<number | null>(null);
   const [navStack, setNavStack] = useState<AppScreen[]>([]);
   const [savedActiveTab, setSavedActiveTab] = useState<TabId>('bayu');
-  const [yishouSubTab, setYishouSubTab] = useState<BayuSubTab>('follow');
-  const [savedYishouSubTab, setSavedYishouSubTab] = useState<BayuSubTab>('follow');
+  const [yishouSubTab, setYishouSubTab] = useState<BayuSubTab>('plaza');
+  const [savedYishouSubTab, setSavedYishouSubTab] = useState<BayuSubTab>('plaza');
   const [showShare, setShowShare] = useState(false);
   const [followedCircles, setFollowedCircles] = useState<string[]>(CIRCLES.map(c => c.name));
   const [showMsgPlusMenu, setShowMsgPlusMenu] = useState(false);
@@ -13230,7 +13230,7 @@ const Component: React.FC = () => {
               </div>
               )}
               <div className="flex-1 overflow-y-auto" style={{ background: activeTab === 'profile' ? 'transparent' : (activeTab === 'yishou' && (yishouSubTab === 'follow' || yishouSubTab === 'plaza')) ? '#000' : PAGE_BG, position: 'relative' }}>
-                {activeTab === 'bayu' && <BayuTab onOpenPost={openPost} onOpenVideo={openVideo} onOpenComment={openComment} onOpenCircle={openCircle} onOpenUserProfile={openUserProfile} onCreatePost={() => pushScreen('create-select')} onDiscoverCircles={() => pushScreen('circle-discover')} onNavigate={pushScreen} onOpenChat={(roomId) => { setActiveChatId(1); pushScreen('chat'); }} followedCircles={followedCircles} onFollow={(name) => setFollowedCircles(prev => [...prev, name])} onUnfollow={(name) => setFollowedCircles(prev => prev.filter(n => n !== name))} yishouSubTab={yishouSubTab} setYishouSubTab={setYishouSubTab} onShare={onShare} userPoints={userPoints} onSetUserPoints={setUserPoints} />}
+                {activeTab === 'bayu' && <BayuTab onOpenPost={openPost} onOpenVideo={openVideo} onOpenComment={openComment} onOpenCircle={openCircle} onOpenUserProfile={openUserProfile} onCreatePost={() => pushScreen('create-select')} onDiscoverCircles={() => pushScreen('circle-discover')} onNavigate={pushScreen} onOpenChat={(roomId) => { setSavedYishouSubTab(yishouSubTab); setActiveChatId(1); pushScreen('chat'); }} followedCircles={followedCircles} onFollow={(name) => setFollowedCircles(prev => [...prev, name])} onUnfollow={(name) => setFollowedCircles(prev => prev.filter(n => n !== name))} yishouSubTab={yishouSubTab} setYishouSubTab={setYishouSubTab} onShare={onShare} userPoints={userPoints} onSetUserPoints={setUserPoints} />}
                 {activeTab === 'yishou' && <YishouTab onOpenService={openService} onOpenHealth={openHealth} onNavigate={pushScreen} onOpenActivity={(activity) => { setActiveActivity(activity); pushScreen('activity-detail'); }} />}
                 {activeTab === 'messages' && <MessagesTab onOpenChat={openChat} onOpenContacts={() => pushScreen('contacts')} onOpenNotifyLikes={() => pushScreen('notify-likes')} onOpenNotifyThumbs={() => pushScreen('notify-thumbs')} onOpenNotifyComments={() => pushScreen('notify-comments')} onOpenNotifyFans={() => pushScreen('notify-fans')} />}
                 {activeTab === 'profile' && <ProfileTab onNavigate={pushScreen} setActiveVideoPool={setActiveVideoPool} setProfileVideoStartId={setProfileVideoStartId} setActivePost={setActivePost} setMallInitialTab={setMallInitialTab} />}
