@@ -108,10 +108,10 @@ import {
 // ─────────────────────────────────────────────
 // Types
 // ─────────────────────────────────────────────
-type AppScreen = 'login' | 'main' | 'service' | 'service-zhuyu' | 'service-zhujie' | 'service-zhuyi' | 'service-zhuju' | 'service-zhuxing' | 'service-liaoyang' | 'service-activity' | 'service-yanglao' | 'service-ganchang' | 'service-juhui' | 'service-bisai' | 'health-yangsheng' | 'calendar-perpetual' | 'chat' | 'post-detail' | 'video-feed' | 'circle-detail' | 'circle-discover' | 'user-profile' | 'my-dynamics' | 'my-favorites' | 'settings' | 'my-profile' | 'contacts' | 'friend-requests' | 'notify-likes' | 'notify-thumbs' | 'notify-comments' | 'notify-fans' | 'create-select' | 'create-image' | 'create-video' | 'circle-announce' | 'circle-members' | 'circle-activity' | 'activity-detail' | 'competition-detail' | 'comment-detail' | 'address-management' | 'change-password' | 'bayu-search' | 'points-mall' | 'points-detail' | 'points-records' | 'order-detail' | 'mall-favorites' | 'mall-address' | 'account-cancellation' | 'notification-settings' | 'privacy-settings' | 'check-update' | 'about-us' | 'friend-detail' | 'my-detail' | 'follow-list' | 'my-wallet' | 'pindan-home' | 'pindan-activity' | 'pindan-product' | 'pindan-confirm' | 'pindan-orders' | 'pindan-order-detail' | 'partner-join' | 'influencer-join' | 'medication-home' | 'medication-add' | 'medication-calendar' | 'medication-detail';
+type AppScreen = 'login' | 'main' | 'service' | 'service-zhuyu' | 'service-zhujie' | 'service-zhuyi' | 'service-zhuju' | 'service-zhuxing' | 'service-liaoyang' | 'service-activity' | 'service-yanglao' | 'service-ganchang' | 'service-juhui' | 'service-bisai' | 'health-yangsheng' | 'calendar-perpetual' | 'chat' | 'post-detail' | 'video-feed' | 'circle-detail' | 'circle-discover' | 'user-profile' | 'my-dynamics' | 'my-favorites' | 'settings' | 'my-profile' | 'contacts' | 'friend-requests' | 'notify-likes' | 'notify-thumbs' | 'notify-comments' | 'notify-fans' | 'create-select' | 'create-image' | 'create-video' | 'circle-announce' | 'circle-members' | 'circle-activity' | 'activity-detail' | 'competition-detail' | 'comment-detail' | 'address-management' | 'change-password' | 'bayu-search' | 'points-mall' | 'points-detail' | 'points-records' | 'order-detail' | 'mall-favorites' | 'mall-address' | 'account-cancellation' | 'notification-settings' | 'privacy-settings' | 'check-update' | 'about-us' | 'friend-detail' | 'my-detail' | 'follow-list' | 'my-wallet' | 'pindan-home' | 'pindan-activity' | 'pindan-product' | 'pindan-confirm' | 'pindan-orders' | 'pindan-order-detail' | 'partner-join' | 'influencer-join' | 'medication-home' | 'medication-add' | 'medication-calendar' | 'medication-detail' | 'community-detail';
 type LoginMode = 'main' | 'phone-sms' | 'password' | 'register';
 type TabId = 'yishou' | 'bayu' | 'messages' | 'profile';
-type BayuSubTab = 'follow' | 'plaza' | 'hot' | 'chatroom';
+type BayuSubTab = 'follow' | 'plaza' | 'hot' | 'chatroom' | 'community';
 type RankSubTab = 'news' | 'labor' | 'star' | 'active';
 type FilterTab = 'all' | 'nearby' | 'rating' | 'price';
 type MsgType = 'text' | 'voice' | 'image';
@@ -1349,6 +1349,61 @@ const BAYU_SUBS = [
   { id: 'follow' as BayuSubTab, label: '熟人' },
   { id: 'hot' as BayuSubTab, label: '排名' },
   { id: 'chatroom' as BayuSubTab, label: '霍圈子' },
+  { id: 'community' as BayuSubTab, label: '社区' },
+];
+
+// ─────────────────────────────────────────────
+// Mock Data — Community Tab (社区)
+// ─────────────────────────────────────────────
+type CommunityCategory = { id: string; name: string; icon: string; cover: string; videoCount: number; description: string; };
+type CommunityVideo = { id: string; categoryId: string; title: string; cover: string; author: string; authorAvatar: string; views: number; duration?: string; likes?: number; contentType?: 'video' | 'article'; };
+
+const COMMUNITY_CATEGORIES: CommunityCategory[] = [
+  { id: 'weight-loss', name: '欧冠减肥', icon: '🏃', cover: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=360&h=200&fit=crop', videoCount: 28, description: '中老年科学减脂，健康瘦身不反弹' },
+  { id: 'food', name: '巴渝美食', icon: '🍜', cover: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=360&h=200&fit=crop', videoCount: 45, description: '地道巴渝风味，家常美食教程' },
+  { id: 'taiji', name: '养生太极', icon: '☯️', cover: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=360&h=200&fit=crop', videoCount: 36, description: '太极功法教学，修身养性' },
+  { id: 'dance', name: '广场舞教学', icon: '💃', cover: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=360&h=200&fit=crop', videoCount: 52, description: '热门广场舞曲，跟练教学' },
+  { id: 'tcm', name: '中医推拿', icon: '🖐️', cover: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=360&h=200&fit=crop', videoCount: 22, description: '中医养生推拿，穴位保健' },
+  { id: 'fishing', name: '山城钓鱼', icon: '🎣', cover: 'https://images.unsplash.com/photo-1498855926480-d98e83099315?w=360&h=200&fit=crop', videoCount: 19, description: '重庆钓鱼好去处，钓友交流' },
+  { id: 'calligraphy', name: '书法绘画', icon: '✍️', cover: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=360&h=200&fit=crop', videoCount: 31, description: '书法绘画入门，陶冶情操' },
+  { id: 'travel', name: '旅游打卡', icon: '📷', cover: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=360&h=200&fit=crop', videoCount: 68, description: '重庆周边游，美景打卡攻略' },
+];
+
+const COMMUNITY_VIDEOS: CommunityVideo[] = [
+  // 欧冠减肥
+  { id: 'cv1', categoryId: 'weight-loss', title: '每天20分钟，中老年燃脂操，不伤膝盖轻松瘦', cover: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=720&h=400&fit=crop', author: '健康教练老李', authorAvatar: '李', views: 12800, duration: '12:30', likes: 892 },
+  { id: 'cv2', categoryId: 'weight-loss', title: '65岁阿姨减肥成功，分享一日三餐食谱', cover: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=720&h=400&fit=crop', author: '张阿姨的日常', authorAvatar: '张', views: 35600, duration: '08:15', likes: 2350 },
+  { id: 'cv3', categoryId: 'weight-loss', title: '晚饭这样吃，一个月瘦8斤不反弹', cover: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=720&h=400&fit=crop', author: '营养师小陈', authorAvatar: '陈', views: 9200, duration: '15:40', likes: 678 },
+  // 巴渝美食
+  { id: 'cv4', categoryId: 'food', title: '正宗重庆小面教程，从熬油开始教你', cover: 'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=720&h=400&fit=crop', author: '山城厨娘', authorAvatar: '厨', views: 45600, duration: '18:20', likes: 3120 },
+  { id: 'cv5', categoryId: 'food', title: '自制泡椒凤爪，比买的还好吃', cover: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=720&h=400&fit=crop', author: '刘姐私房菜', authorAvatar: '刘', views: 23400, duration: '10:55', likes: 1567 },
+  // 养生太极
+  { id: 'cv6', categoryId: 'taiji', title: '太极拳24式完整教学（慢动作分解）', cover: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=720&h=400&fit=crop', author: '太极刘师傅', authorAvatar: '刘', views: 67800, duration: '32:10', likes: 4520 },
+  { id: 'cv7', categoryId: 'taiji', title: '八段锦跟练版，每天一遍百病消', cover: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=720&h=400&fit=crop', author: '老赵养生堂', authorAvatar: '赵', views: 89200, duration: '14:30', likes: 6230 },
+  // 广场舞教学
+  { id: 'cv8', categoryId: 'dance', title: '最炫民族风广场舞教学（镜面分解动作）', cover: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=720&h=400&fit=crop', author: '红霞舞蹈队', authorAvatar: '红', views: 102000, duration: '25:40', likes: 8900 },
+  { id: 'cv9', categoryId: 'dance', title: '2025新舞曲《草原情歌》跟跳教学', cover: 'https://images.unsplash.com/photo-1526925539332-aa3b66e35444?w=720&h=400&fit=crop', author: '快乐妈妈团', authorAvatar: '妈', views: 45600, duration: '16:20', likes: 3400 },
+  // 中医推拿
+  { id: 'cv10', categoryId: 'tcm', title: '颈椎不舒服？学会这3个穴位，告别酸痛', cover: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=720&h=400&fit=crop', author: '中医王大夫', authorAvatar: '王', views: 23400, duration: '11:15', likes: 1890 },
+  { id: 'cv11', categoryId: 'tcm', title: '足底按摩教程，对应五脏六腑，做完很舒服', cover: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=720&h=400&fit=crop', author: '推拿师老周', authorAvatar: '周', views: 15600, duration: '20:05', likes: 970 },
+  // 山城钓鱼
+  { id: 'cv12', categoryId: 'fishing', title: '长寿湖钓鱼实拍，连杆大板鲫太过瘾了', cover: 'https://images.unsplash.com/photo-1498855926480-d98e83099315?w=720&h=400&fit=crop', author: '老周钓鱼日记', authorAvatar: '周', views: 31000, duration: '13:50', likes: 2340 },
+  { id: 'cv13', categoryId: 'fishing', title: '新手野钓入门：选竿选漂打窝子全教程', cover: 'https://images.unsplash.com/photo-1567459169668-95d355371bda?w=720&h=400&fit=crop', author: '钓鱼达人老王', authorAvatar: '王', views: 18900, duration: '22:30', likes: 1560 },
+  // 书法绘画
+  { id: 'cv14', categoryId: 'calligraphy', title: '楷书入门：欧体基本笔画演示', cover: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=720&h=400&fit=crop', author: '墨缘书社', authorAvatar: '墨', views: 8900, duration: '28:45', likes: 670 },
+  { id: 'cv15', categoryId: 'calligraphy', title: '工笔牡丹教学，零基础也能画国画', cover: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=720&h=400&fit=crop', author: '丹青阁', authorAvatar: '青', views: 12300, duration: '35:10', likes: 890 },
+  // 旅游打卡
+  { id: 'cv16', categoryId: 'travel', title: '武隆天生三桥，65岁以上门票免费', cover: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=720&h=400&fit=crop', author: '行走巴渝', authorAvatar: '行', views: 56700, duration: '09:40', likes: 4200 },
+  { id: 'cv17', categoryId: 'travel', title: '大足石刻深度游，千年佛雕震撼人心', cover: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=720&h=400&fit=crop', author: '文史老张', authorAvatar: '张', views: 34500, duration: '16:20', likes: 2670 },
+  // 图文内容（无播放按钮、无时长、显示阅读数）
+  { id: 'ca1', categoryId: 'weight-loss', title: '中老年人减肥误区：这些方法越减越伤身', cover: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=720&h=400&fit=crop', author: '李医生谈健康', authorAvatar: '李', views: 8600, likes: 420, contentType: 'article' },
+  { id: 'ca2', categoryId: 'food', title: '重庆人夏天必吃的10道凉菜，爽口开胃', cover: 'https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=720&h=400&fit=crop', author: '山城美食家', authorAvatar: '食', views: 15200, likes: 680, contentType: 'article' },
+  { id: 'ca3', categoryId: 'taiji', title: '太极拳日常习练心得：坚持三个月的变化', cover: 'https://images.unsplash.com/photo-1562088287-bde35a1ea164?w=720&h=400&fit=crop', author: '老陈的太极日记', authorAvatar: '陈', views: 5400, likes: 310, contentType: 'article' },
+  { id: 'ca4', categoryId: 'dance', title: '广场舞选曲指南：适合中老年的舞曲推荐', cover: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=720&h=400&fit=crop', author: '舞蹈人生', authorAvatar: '舞', views: 12300, likes: 550, contentType: 'article' },
+  { id: 'ca5', categoryId: 'tcm', title: '十个常用穴位图解，每天按揉养生保健', cover: 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=720&h=400&fit=crop', author: '中医养生百科', authorAvatar: '养', views: 21800, likes: 890, contentType: 'article' },
+  { id: 'ca6', categoryId: 'fishing', title: '重庆周边十大免费野钓地点汇总攻略', cover: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=720&h=400&fit=crop', author: '钓鱼俱乐部', authorAvatar: '钓', views: 9800, likes: 470, contentType: 'article' },
+  { id: 'ca7', categoryId: 'calligraphy', title: '零基础学书法：笔墨纸砚怎么选不踩坑', cover: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=720&h=400&fit=crop', author: '文房四宝说', authorAvatar: '文', views: 7400, likes: 360, contentType: 'article' },
+  { id: 'ca8', categoryId: 'travel', title: '渝东南自驾游攻略：一路风光美不胜收', cover: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=720&h=400&fit=crop', author: '巴渝行者', authorAvatar: '行', views: 28000, likes: 1200, contentType: 'article' },
 ];
 
 // ─────────────────────────────────────────────
@@ -5495,7 +5550,8 @@ const BayuTab: React.FC<{
   onShare: () => void;
   userPoints: number;
   onSetUserPoints: (fn: number | ((prev: number) => number)) => void;
-}> = ({ onOpenPost, onOpenVideo, onOpenComment, onOpenCircle, onOpenUserProfile, onCreatePost, onDiscoverCircles, onNavigate, onOpenChat, followedCircles, onFollow, onUnfollow, yishouSubTab, setYishouSubTab, onShare, userPoints, onSetUserPoints }) => {
+  onOpenCommunityDetail: (categoryId: string) => void;
+}> = ({ onOpenPost, onOpenVideo, onOpenComment, onOpenCircle, onOpenUserProfile, onCreatePost, onDiscoverCircles, onNavigate, onOpenChat, followedCircles, onFollow, onUnfollow, yishouSubTab, setYishouSubTab, onShare, userPoints, onSetUserPoints, onOpenCommunityDetail }) => {
   const [sub, setSub] = [yishouSubTab, setYishouSubTab];
   const [rankSubTab, setRankSubTab] = useState<RankSubTab>('news');
   const [circleManage, setCircleManage] = useState(false);
@@ -5512,6 +5568,8 @@ const BayuTab: React.FC<{
   const [chatRooms, setChatRooms] = useState<ChatRoom[]>(DEFAULT_CHAT_ROOMS);
   const [showCreateRoom, setShowCreateRoom] = useState(false);
   const [newRoomForm, setNewRoomForm] = useState({ name: '', description: '', tag: '' });
+  // 社区状态
+  const [communitySearch, setCommunitySearch] = useState('');
   const followAutoScrollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const followVideoWheelLock = useRef(false);
   const followVideoTouchStartY = useRef<number | null>(null);
@@ -5635,12 +5693,12 @@ const BayuTab: React.FC<{
 
   return (
     <div className="flex flex-col" style={{ background: (sub === 'follow' || sub === 'plaza') ? '#000' : 'white', position: 'relative', height: '100%' }}>
-      {/* Sub tab nav — 无边框，底部短线条指示器，右侧搜索图标 */}
-      <div className="flex items-end justify-between px-2 flex-shrink-0" style={{ borderBottom: '1px solid transparent', position: 'relative', zIndex: 35, background: 'transparent' }}>
+      {/* Sub tab nav — 无边框，底部短线条指示器，右侧搜索图标（5项加宽间距） */}
+      <div className="flex items-end justify-between px-0 flex-shrink-0" style={{ borderBottom: '1px solid transparent', position: 'relative', zIndex: 35, background: 'transparent' }}>
         <div className="flex items-end">
           {BAYU_SUBS.map((s) => (
             <div key={s.id} onClick={() => setSub(s.id)} className="relative cursor-pointer px-4 py-3.5 flex-shrink-0"
-              style={{ fontSize: 17, fontWeight: sub === s.id ? 600 : 400, color: sub === s.id ? '#FF6B35' : (sub === 'follow' || sub === 'plaza' ? 'white' : '#888888'), transition: 'color 0.2s' }}>
+              style={{ fontSize: 16, fontWeight: sub === s.id ? 600 : 400, color: sub === s.id ? '#FF6B35' : (sub === 'follow' || sub === 'plaza' ? 'white' : '#888888'), transition: 'color 0.2s' }}>
               {s.label}
               {sub === s.id && (
                 <div style={{
@@ -6211,11 +6269,9 @@ const BayuTab: React.FC<{
       {/* ── Chatroom tab（霍圈子）── */}
       {sub === 'chatroom' && (
         <div className="flex flex-col" style={{ background: PAGE_BG, height: '100%', position: 'relative' }}>
-          {/* 白色顶栏 */}
-          <div className="flex items-center justify-end px-4 py-3 flex-shrink-0" style={{ background: 'white', borderBottom: '1px solid #F0F0F0' }} />
           {/* 列表区域 */}
-          <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
-            <div className="flex flex-col gap-3 p-4" style={{ paddingBottom: 100 }}>
+          <div className="flex-1 overflow-y-auto pt-3" style={{ minHeight: 0 }}>
+            <div className="flex flex-col gap-3 px-4 pb-4" style={{ paddingBottom: 100 }}>
               {/* 创建新圈子入口 */}
               <div className="rounded-2xl flex items-center justify-between cursor-pointer active:scale-[0.98] transition-transform"
                 style={{ background: '#FFF7F2', padding: '14px 18px', border: `1.5px dashed ${PRIMARY}35` }}
@@ -6323,6 +6379,54 @@ const BayuTab: React.FC<{
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* ── Community tab（社区）── */}
+      {sub === 'community' && (
+        /* 社区主页 — 分类标签墙 */
+        <div className="flex flex-col" style={{ background: '#F5F5F5', height: '100%', overflow: 'hidden' }}>
+          {/* 搜索栏 */}
+          <div className="px-4 py-3 flex-shrink-0" style={{ background: 'white', borderBottom: '1px solid #F0F0F0' }}>
+            <div className="flex items-center gap-2 px-3 py-2 rounded-2xl" style={{ background: '#F5F5F5' }}>
+              <SearchOutlined style={{ fontSize: 16, color: '#999' }} />
+              <input
+                className="flex-1 border-0 bg-transparent outline-none"
+                style={{ fontSize: 14, color: '#333' }}
+                placeholder="搜索社区分类或视频"
+                value={communitySearch}
+                onChange={e => setCommunitySearch(e.target.value)}
+              />
+            </div>
+          </div>
+          {/* 分类卡片墙 */}
+          <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ minHeight: 0 }}>
+            <div className="text-base font-semibold mb-3" style={{ color: '#1A1A1A' }}>全部分类</div>
+            <div className="grid grid-cols-2 gap-2" style={{ paddingBottom: 100 }}>
+              {COMMUNITY_CATEGORIES.filter(c => !communitySearch || c.name.includes(communitySearch) || c.description.includes(communitySearch)).map(cat => {
+                const catVideos = COMMUNITY_VIDEOS.filter(v => v.categoryId === cat.id);
+                return (
+                  <div key={cat.id} onClick={() => onOpenCommunityDetail(cat.id)}
+                    className="bg-white rounded-lg overflow-hidden cursor-pointer active:scale-[0.98] transition-transform"
+                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                    <div style={{ position: 'relative' }}>
+                      <img src={cat.cover} alt={cat.name} style={{ width: '100%', height: 120, objectFit: 'cover' }} />
+                      <span style={{ position: 'absolute', top: 6, right: 6, background: 'rgba(0,0,0,0.55)', color: 'white', fontSize: 10, padding: '2px 7px', borderRadius: 4, fontWeight: 500 }}>{cat.videoCount}个内容</span>
+                    </div>
+                    <div className="px-2.5 py-2">
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <span style={{ fontSize: 17 }}>{cat.icon}</span>
+                        <span style={{ fontSize: 14, fontWeight: 600, color: '#1A1A1A' }}>{cat.name}</span>
+                      </div>
+                      <div>
+                        <span style={{ fontSize: 12, color: '#999' }}>{cat.description}</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       )}
 
@@ -9305,6 +9409,7 @@ const FollowListScreen: React.FC<{
   const [activeTab, setActiveTab] = useState<FollowTab>('mutual');
   const [searchText, setSearchText] = useState('');
   const [followingSet, setFollowingSet] = useState<Set<number>>(new Set(FOLLOWING_USERS.map(u => u.id)));
+  const [mutualSet, setMutualSet] = useState<Set<number>>(new Set(MUTUAL_USERS.map(u => u.id)));
 
   const getData = () => {
     if (activeTab === 'mutual') return MUTUAL_USERS;
@@ -9318,6 +9423,15 @@ const FollowListScreen: React.FC<{
 
   const handleFollowToggle = (userId: number) => {
     setFollowingSet(prev => {
+      const next = new Set(prev);
+      if (next.has(userId)) next.delete(userId);
+      else next.add(userId);
+      return next;
+    });
+  };
+
+  const handleMutualToggle = (userId: number) => {
+    setMutualSet(prev => {
       const next = new Set(prev);
       if (next.has(userId)) next.delete(userId);
       else next.add(userId);
@@ -9409,7 +9523,13 @@ const FollowListScreen: React.FC<{
               {/* 操作按钮 */}
               <div className="flex-shrink-0">
                 {activeTab === 'mutual' && (
-                  <div className="rounded-full px-3 py-1.5 text-xs" style={{ background: '#F0F0F0', color: '#888' }}>已互关</div>
+                  mutualSet.has(user.id) ? (
+                    <button onClick={() => handleMutualToggle(user.id)} className="rounded-full px-3 py-1.5 text-xs border-0 cursor-pointer"
+                      style={{ background: '#FFF3E0', color: PRIMARY, fontWeight: 600 }}>已互关</button>
+                  ) : (
+                    <button onClick={() => handleMutualToggle(user.id)} className="rounded-full px-3 py-1.5 text-xs border-0 cursor-pointer"
+                      style={{ background: PRIMARY, color: 'white', fontWeight: 600 }}>回关</button>
+                  )
                 )}
                 {activeTab === 'followers' && (
                   followingSet.has(user.id) ? (
@@ -12951,6 +13071,7 @@ const Component: React.FC = () => {
   const [favToastVisible, setFavToastVisible] = useState(false);
   useEffect(() => { if (favToastVisible) setTimeout(() => setFavToastVisible(false), 2000); }, [favToastVisible]);
   const [activeCircle, setActiveCircle] = useState<CircleInfo | null>(null);
+  const [activeCommunityCategoryId, setActiveCommunityCategoryId] = useState<string | null>(null);
   const [activeUserId, setActiveUserId] = useState<number | null>(null);
   const [activeFriendId, setActiveFriendId] = useState<number | null>(null);
   const [activeMyDetailId, setActiveMyDetailId] = useState<number | null>(null);
@@ -13093,6 +13214,7 @@ const Component: React.FC = () => {
   const openComment = (post: FollowPost) => { if (activeTab === 'bayu') { setSavedActiveTab(activeTab); setSavedYishouSubTab(yishouSubTab); } setActiveCommentPost(post); pushScreen('comment-detail'); };
   const openVideo = (post: FollowPost, pool?: FollowPost[], isFromFavorites?: boolean, isFromMyDynamics?: boolean) => { if (activeTab === 'bayu') { setSavedActiveTab(activeTab); setSavedYishouSubTab(yishouSubTab); } setActiveVideoStartId(post.id); setActiveVideoPool(pool ?? VIDEO_POSTS); setIsVideoFromFavorites(isFromFavorites ?? false); setIsVideoFromMyDynamics(isFromMyDynamics ?? false); pushScreen('video-feed'); };
   const openCircle = (circle: CircleInfo) => { if (activeTab === 'bayu') { setSavedActiveTab(activeTab); setSavedYishouSubTab(yishouSubTab); } setActiveCircle(circle); pushScreen('circle-detail'); };
+  const openCommunityDetail = (categoryId: string) => { setSavedYishouSubTab('community'); setActiveCommunityCategoryId(categoryId); pushScreen('community-detail'); };
   const openUserProfile = (userId: number) => {
     if (!USER_PROFILES[userId]) return;
     if (activeTab === 'bayu') { setSavedActiveTab(activeTab); setSavedYishouSubTab(yishouSubTab); }
@@ -13230,7 +13352,7 @@ const Component: React.FC = () => {
               </div>
               )}
               <div className="flex-1 overflow-y-auto" style={{ background: activeTab === 'profile' ? 'transparent' : (activeTab === 'yishou' && (yishouSubTab === 'follow' || yishouSubTab === 'plaza')) ? '#000' : PAGE_BG, position: 'relative' }}>
-                {activeTab === 'bayu' && <BayuTab onOpenPost={openPost} onOpenVideo={openVideo} onOpenComment={openComment} onOpenCircle={openCircle} onOpenUserProfile={openUserProfile} onCreatePost={() => pushScreen('create-select')} onDiscoverCircles={() => pushScreen('circle-discover')} onNavigate={pushScreen} onOpenChat={(roomId) => { setSavedYishouSubTab(yishouSubTab); setActiveChatId(1); pushScreen('chat'); }} followedCircles={followedCircles} onFollow={(name) => setFollowedCircles(prev => [...prev, name])} onUnfollow={(name) => setFollowedCircles(prev => prev.filter(n => n !== name))} yishouSubTab={yishouSubTab} setYishouSubTab={setYishouSubTab} onShare={onShare} userPoints={userPoints} onSetUserPoints={setUserPoints} />}
+                {activeTab === 'bayu' && <BayuTab onOpenPost={openPost} onOpenVideo={openVideo} onOpenComment={openComment} onOpenCircle={openCircle} onOpenUserProfile={openUserProfile} onCreatePost={() => pushScreen('create-select')} onDiscoverCircles={() => pushScreen('circle-discover')} onNavigate={pushScreen} onOpenChat={(roomId) => { setSavedYishouSubTab(yishouSubTab); setActiveChatId(1); pushScreen('chat'); }} followedCircles={followedCircles} onFollow={(name) => setFollowedCircles(prev => [...prev, name])} onUnfollow={(name) => setFollowedCircles(prev => prev.filter(n => n !== name))} yishouSubTab={yishouSubTab} setYishouSubTab={setYishouSubTab} onShare={onShare} userPoints={userPoints} onSetUserPoints={setUserPoints} onOpenCommunityDetail={openCommunityDetail} />}
                 {activeTab === 'yishou' && <YishouTab onOpenService={openService} onOpenHealth={openHealth} onNavigate={pushScreen} onOpenActivity={(activity) => { setActiveActivity(activity); pushScreen('activity-detail'); }} />}
                 {activeTab === 'messages' && <MessagesTab onOpenChat={openChat} onOpenContacts={() => pushScreen('contacts')} onOpenNotifyLikes={() => pushScreen('notify-likes')} onOpenNotifyThumbs={() => pushScreen('notify-thumbs')} onOpenNotifyComments={() => pushScreen('notify-comments')} onOpenNotifyFans={() => pushScreen('notify-fans')} />}
                 {activeTab === 'profile' && <ProfileTab onNavigate={pushScreen} setActiveVideoPool={setActiveVideoPool} setProfileVideoStartId={setProfileVideoStartId} setActivePost={setActivePost} setMallInitialTab={setMallInitialTab} />}
@@ -15177,6 +15299,74 @@ const Component: React.FC = () => {
           {/* ── CIRCLE DETAIL SCREEN ── */}
           {screen === 'circle-detail' && activeCircle && (
             <CircleDetailScreen circle={activeCircle} onBack={goBack} onOpenPost={openPost} onOpenVideo={openVideo} onOpenUserProfile={openUserProfile} onNavigate={pushScreen} onGoActivity={() => pushScreen('service-activity')} />
+          )}
+
+          {/* ── COMMUNITY DETAIL SCREEN（社区分类视频详情页，全屏无顶部菜单）── */}
+          {screen === 'community-detail' && activeCommunityCategoryId && (
+            <div className="flex flex-col" style={{ height: '100%', overflow: 'hidden', background: '#F5F5F5' }}>
+              {/* 顶部导航 */}
+              <div className="flex items-center justify-center px-4 py-3 flex-shrink-0" style={{ background: 'white', borderBottom: '1px solid #F0F0F0', paddingTop: 12, position: 'relative' }}>
+                <button onClick={goBack} className="border-0 bg-transparent cursor-pointer p-1" style={{ fontSize: 20, color: '#1A1A1A', position: 'absolute', left: 12 }}>
+                  <ArrowLeftOutlined />
+                </button>
+                <span style={{ fontSize: 17, fontWeight: 700, color: '#1A1A1A' }}>
+                  {(() => { const cat = COMMUNITY_CATEGORIES.find(c => c.id === activeCommunityCategoryId); return cat ? `${cat.icon} ${cat.name}` : ''; })()}
+                </span>
+              </div>
+              {/* 内容列表 — 一排一个，视频与图文混合 */} 
+              <div className="flex-1 overflow-y-auto px-4 py-3" style={{ minHeight: 0 }}>
+                <div className="flex flex-col gap-4" style={{ paddingBottom: 100 }}>
+                  {COMMUNITY_VIDEOS.filter(v => v.categoryId === activeCommunityCategoryId).map(item => {
+                    const isVideo = item.contentType !== 'article';
+                    return (
+                    <div key={item.id} className="bg-white rounded-2xl overflow-hidden cursor-pointer" style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
+                      <div style={{ position: 'relative' }}>
+                        <img src={item.cover} alt={item.title} style={{ width: '100%', height: 200, objectFit: 'cover' }} />
+                        {isVideo && (
+                          <>
+                            {/* 播放按钮 */}
+                            <div className="flex items-center justify-center rounded-full" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 48, height: 48, background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(2px)' }}>
+                              <PlayCircleFilled style={{ fontSize: 28, color: 'white' }} />
+                            </div>
+                            {/* 时长标签 */}
+                            <div style={{ position: 'absolute', bottom: 8, right: 8, background: 'rgba(0,0,0,0.75)', color: 'white', fontSize: 12, padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>
+                              {item.duration}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      <div className="p-3">
+                        <div style={{ fontSize: 16, fontWeight: 600, color: '#1A1A1A', lineHeight: 1.4, marginBottom: 10 }}>
+                          {item.title}
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-center rounded-full flex-shrink-0" style={{ width: 28, height: 28, background: PRIMARY, color: 'white', fontSize: 12, fontWeight: 700 }}>
+                              {item.authorAvatar}
+                            </div>
+                            <span style={{ fontSize: 13, color: '#666' }}>{item.author}</span>
+                          </div>
+                          <div className="flex items-center gap-3" style={{ fontSize: 12, color: '#999' }}>
+                            {isVideo ? (
+                              <>
+                                <span>{item.views >= 10000 ? `${(item.views / 10000).toFixed(1)}万` : item.views} 播放</span>
+                                <span>❤ {item.likes}</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>{item.views >= 10000 ? `${(item.views / 10000).toFixed(1)}万` : item.views} 阅读</span>
+                                <span>❤ {item.likes}</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                  })}
+                </div>
+              </div>
+            </div>
           )}
 
           {/* ── CIRCLE ANNOUNCE SCREEN ── */}

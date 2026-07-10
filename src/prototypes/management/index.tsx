@@ -28,7 +28,7 @@ import {
   LikeOutlined, CommentOutlined, UploadOutlined,
   BankOutlined, MoreOutlined, SwapOutlined, CheckCircleOutlined, FireOutlined,
   ShoppingOutlined, PlusCircleOutlined, MinusCircleOutlined, SettingOutlined,
-  ShareAltOutlined,
+  ShareAltOutlined, TagsOutlined,
 } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
@@ -39,12 +39,12 @@ const PRIMARY = '#FF6B35';
 
 // ─── Mock 数据 ────────────────────────────────────────────
 const USERS = [
-  { id: 1, nickname: '张大爷', phone: '138****1234', region: '重庆市渝中区', status: 'active', registerDate: '2025-06-12', postCount: 42, points: 1280, followers: 128, following: 36, gender: 'male', age: 68, lastLogin: '2026-04-06 08:12', device: 'iPhone 14', auths: { wechat: true, alipay: true, qq: false } },
-  { id: 2, nickname: '李奶奶', phone: '139****5678', region: '重庆市南岸区', status: 'active', registerDate: '2025-07-03', postCount: 18, points: 860, followers: 64, following: 22, gender: 'female', age: 72, lastLogin: '2026-04-05 14:30', device: 'HUAWEI Mate 60', auths: { wechat: true, alipay: false, qq: false } },
-  { id: 3, nickname: '王老汉', phone: '137****9012', region: '重庆市江北区', status: 'banned', registerDate: '2025-08-15', postCount: 5, points: 120, followers: 8, following: 5, gender: 'male', age: 65, lastLogin: '2026-03-20 10:00', device: 'OPPO Reno 10', auths: { wechat: false, alipay: false, qq: false } },
-  { id: 4, nickname: '赵阿姨', phone: '136****3456', region: '重庆市沙坪坝区', status: 'active', registerDate: '2025-09-01', postCount: 67, points: 2340, followers: 312, following: 88, gender: 'female', age: 63, lastLogin: '2026-04-06 09:45', device: 'vivo X100', auths: { wechat: true, alipay: true, qq: true } },
-  { id: 5, nickname: '陈大妈', phone: '135****7890', region: '重庆市九龙坡区', status: 'active', registerDate: '2025-10-20', postCount: 31, points: 980, followers: 97, following: 41, gender: 'female', age: 70, lastLogin: '2026-04-04 16:20', device: 'Xiaomi 14', auths: { wechat: false, alipay: true, qq: false } },
-  { id: 6, nickname: '刘师傅', phone: '134****2345', region: '重庆市渝北区', status: 'active', registerDate: '2025-11-08', postCount: 24, points: 760, followers: 156, following: 29, gender: 'male', age: 61, lastLogin: '2026-04-06 07:55', device: 'Samsung S24', auths: { wechat: true, alipay: false, qq: true } },
+  { id: 1, nickname: '张大爷', phone: '138****1234', region: '重庆市渝中区', status: 'active', registerDate: '2025-06-12', postCount: 42, points: 1280, followers: 128, following: 36, gender: 'male', age: 68, lastLogin: '2026-04-06 08:12', device: 'iPhone 14', auths: { wechat: true, alipay: true, qq: false }, tags: ['t1', 't4', 't27'] },
+  { id: 2, nickname: '李奶奶', phone: '139****5678', region: '重庆市南岸区', status: 'active', registerDate: '2025-07-03', postCount: 18, points: 860, followers: 64, following: 22, gender: 'female', age: 72, lastLogin: '2026-04-05 14:30', device: 'HUAWEI Mate 60', auths: { wechat: true, alipay: false, qq: false }, tags: ['t2', 't7', 't30'] },
+  { id: 3, nickname: '王老汉', phone: '137****9012', region: '重庆市江北区', status: 'banned', registerDate: '2025-08-15', postCount: 5, points: 120, followers: 8, following: 5, gender: 'male', age: 65, lastLogin: '2026-03-20 10:00', device: 'OPPO Reno 10', auths: { wechat: false, alipay: false, qq: false }, tags: ['t12'] },
+  { id: 4, nickname: '赵阿姨', phone: '136****3456', region: '重庆市沙坪坝区', status: 'active', registerDate: '2025-09-01', postCount: 67, points: 2340, followers: 312, following: 88, gender: 'female', age: 63, lastLogin: '2026-04-06 09:45', device: 'vivo X100', auths: { wechat: true, alipay: true, qq: true }, tags: ['t1', 't5', 't9', 't29'] },
+  { id: 5, nickname: '陈大妈', phone: '135****7890', region: '重庆市九龙坡区', status: 'active', registerDate: '2025-10-20', postCount: 31, points: 980, followers: 97, following: 41, gender: 'female', age: 70, lastLogin: '2026-04-04 16:20', device: 'Xiaomi 14', auths: { wechat: false, alipay: true, qq: false }, tags: ['t2', 't6', 't31'] },
+  { id: 6, nickname: '刘师傅', phone: '134****2345', region: '重庆市渝北区', status: 'active', registerDate: '2025-11-08', postCount: 24, points: 760, followers: 156, following: 29, gender: 'male', age: 61, lastLogin: '2026-04-06 07:55', device: 'Samsung S24', auths: { wechat: true, alipay: false, qq: true }, tags: ['t1', 't8', 't10'] },
 ];
 
 // 用户动态 Mock 数据（扩展字段：views/favorites/duration）
@@ -539,11 +539,11 @@ const POINT_RULES = [
 const CONTENTS = [
   { id: 1, type: 'image', title: '今日养生早餐分享', author: '张大爷', authorId: 1, createTime: '2026-04-06 09:12', status: 'pending', content: '今天给大家分享一下我的养生早餐，燕麦粥配红枣枸杞，营养又健康。坚持吃了一个月，感觉精神状态好多了。', likes: 0, comments: 0, favorites: 0, views: 23, shares: 0, thumbnail: 'https://picsum.photos/seed/1/400/300' },
   { id: 2, type: 'video', title: '太极二十四式教学', author: '刘师傅', authorId: 2, createTime: '2026-04-06 10:45', status: 'pending', content: '太极拳是中华传统武术，今天教大家二十四式的前八式，适合初学者练习。', likes: 0, comments: 0, favorites: 0, views: 45, shares: 0, duration: '12:30', thumbnail: 'https://picsum.photos/seed/2/400/300' },
-  { id: 3, type: 'image', title: '重庆春日踏青记录', author: '李奶奶', authorId: 3, createTime: '2026-04-05 15:30', status: 'approved', content: '周末和老伴去南山植物园踏青，春天的花开得真美，拍了好多照片分享给大家。', likes: 156, comments: 23, favorites: 45, views: 892, shares: 32, reviewedAt: '2026-04-05 16:20', reviewer: '审核员A', thumbnail: 'https://picsum.photos/seed/3/400/300' },
+  { id: 3, type: 'image', title: '重庆春日踏青记录', author: '李奶奶', authorId: 3, createTime: '2026-04-05 15:30', status: 'approved', content: '周末和老伴去南山植物园踏青，春天的花开得真美，拍了好多照片分享给大家。', likes: 156, comments: 23, favorites: 45, views: 892, shares: 32, reviewedAt: '2026-04-05 16:20', reviewer: '审核员A', tags: ['t17', 't21'], thumbnail: 'https://picsum.photos/seed/3/400/300' },
   { id: 4, type: 'image', title: '某违规内容', author: '王老汉', authorId: 4, createTime: '2026-04-04 08:00', status: 'rejected', content: '包含不实信息的内容...', likes: 2, comments: 1, favorites: 0, views: 34, shares: 0, reviewedAt: '2026-04-04 09:15', reviewer: '审核员B', rejectReason: '内容违规：包含虚假医疗信息，可能误导用户', thumbnail: 'https://picsum.photos/seed/4/400/300' },
-  { id: 5, type: 'video', title: '广场舞新编舞蹈', author: '赵阿姨', authorId: 5, createTime: '2026-04-03 14:20', status: 'approved', content: '我们舞蹈队新编的广场舞，节奏欢快，动作简单易学，欢迎大家一起来跳。', likes: 234, comments: 67, favorites: 89, views: 1523, shares: 56, duration: '8:45', reviewedAt: '2026-04-03 15:10', reviewer: '审核员A', thumbnail: 'https://picsum.photos/seed/5/400/300' },
+  { id: 5, type: 'video', title: '广场舞新编舞蹈', author: '赵阿姨', authorId: 5, createTime: '2026-04-03 14:20', status: 'approved', content: '我们舞蹈队新编的广场舞，节奏欢快，动作简单易学，欢迎大家一起来跳。', likes: 234, comments: 67, favorites: 89, views: 1523, shares: 56, duration: '8:45', reviewedAt: '2026-04-03 15:10', reviewer: '审核员A', tags: ['t20', 't22'], thumbnail: 'https://picsum.photos/seed/5/400/300' },
   { id: 6, type: 'image', title: '家常菜谱：红烧肉', author: '陈大妈', authorId: 6, createTime: '2026-04-06 11:30', status: 'pending', content: '分享一道经典川菜红烧肉的做法，肥而不腻，入口即化。用料：五花肉500g、冰糖、酱油、料酒...', likes: 0, comments: 0, favorites: 0, views: 12, shares: 0, thumbnail: 'https://picsum.photos/seed/6/400/300' },
-  { id: 7, type: 'video', title: '书法入门教学', author: '孙老师', authorId: 7, createTime: '2026-04-05 09:00', status: 'approved', content: '书法是中国传统艺术，今天教大家楷书基本笔画的写法，从横竖撇捺开始练习。', likes: 189, comments: 34, favorites: 67, views: 1045, shares: 45, duration: '15:20', reviewedAt: '2026-04-05 10:30', reviewer: '审核员C', thumbnail: 'https://picsum.photos/seed/7/400/300' },
+  { id: 7, type: 'video', title: '书法入门教学', author: '孙老师', authorId: 7, createTime: '2026-04-05 09:00', status: 'approved', content: '书法是中国传统艺术，今天教大家楷书基本笔画的写法，从横竖撇捺开始练习。', likes: 189, comments: 34, favorites: 67, views: 1045, shares: 45, duration: '15:20', reviewedAt: '2026-04-05 10:30', reviewer: '审核员C', tags: ['t18', 't19', 't22'], thumbnail: 'https://picsum.photos/seed/7/400/300' },
   { id: 8, type: 'image', title: '社区活动照片集锦', author: '周大爷', authorId: 8, createTime: '2026-04-04 16:45', status: 'approved', content: '上周社区组织的春游活动，大家玩得很开心，这里整理了一些精彩瞬间。', likes: 267, comments: 45, favorites: 78, views: 1234, shares: 89, reviewedAt: '2026-04-04 17:20', reviewer: '审核员A', thumbnail: 'https://picsum.photos/seed/8/400/300' },
   { id: 9, type: 'video', title: '涉嫌广告推广', author: '某用户', authorId: 9, createTime: '2026-04-03 10:15', status: 'rejected', content: '推广某保健品的视频内容...', likes: 5, comments: 2, favorites: 1, views: 67, shares: 0, duration: '5:30', reviewedAt: '2026-04-03 11:00', reviewer: '审核员B', rejectReason: '涉及敏感信息：未经授权的商业广告推广', thumbnail: 'https://picsum.photos/seed/9/400/300' },
   { id: 10, type: 'image', title: '手工编织教程', author: '吴奶奶', authorId: 10, createTime: '2026-04-06 08:20', status: 'pending', content: '教大家编织一个简单的杯垫，材料简单，适合新手学习。', likes: 0, comments: 0, favorites: 0, views: 8, shares: 0, thumbnail: 'https://picsum.photos/seed/10/400/300' },
@@ -576,6 +576,94 @@ const ACCOUNTS = [
   { id: 3, username: 'yuelao_op', company: '益寿巴渝平台', role: '运营专员', status: 'active', lastLogin: '2026-03-31 09:10' },
   { id: 4, username: 'partner_yzy', company: '渝中区民政局', role: '企业合作方', status: 'active', lastLogin: '2026-03-28 14:00' },
   { id: 5, username: 'partner_nan', company: '南岸区老龄委', role: '企业合作方', status: 'inactive', lastLogin: '2026-02-15 10:00' },
+];
+
+// ─── 标签管理 Mock 数据 ────────────────────────────────────
+const TAG_CATEGORIES = [
+  { id: 'user-activity', name: '活跃度', targetType: 'user', sort: 1 },
+  { id: 'user-interest', name: '兴趣偏好', targetType: 'user', sort: 2 },
+  { id: 'user-identity', name: '身份特征', targetType: 'user', sort: 3 },
+  { id: 'user-location', name: '区域位置', targetType: 'user', sort: 4 },
+  { id: 'user-risk', name: '风险标签', targetType: 'user', sort: 5 },
+  { id: 'content-topic', name: '内容主题', targetType: 'content', sort: 1 },
+  { id: 'content-format', name: '内容形式', targetType: 'content', sort: 2 },
+  { id: 'content-quality', name: '内容质量', targetType: 'content', sort: 3 },
+  { id: 'content-location', name: '区域位置', targetType: 'content', sort: 4 },
+  { id: 'content-risk', name: '风险标注', targetType: 'content', sort: 5 },
+];
+
+const TAGS = [
+  // 用户标签 - 活跃度
+  { id: 't1', categoryId: 'user-activity', name: '活跃用户', color: '#52c41a', targetType: 'user', sort: 1, status: 'active', usageCount: 128, createTime: '2025-06-01' },
+  { id: 't2', categoryId: 'user-activity', name: '普通用户', color: '#1890ff', targetType: 'user', sort: 2, status: 'active', usageCount: 456, createTime: '2025-06-01' },
+  { id: 't3', categoryId: 'user-activity', name: '潜沉用户', color: '#8c8c8c', targetType: 'user', sort: 3, status: 'active', usageCount: 89, createTime: '2025-06-01' },
+  // 用户标签 - 兴趣偏好
+  { id: 't4', categoryId: 'user-interest', name: '养生达人', color: '#52c41a', targetType: 'user', sort: 1, status: 'active', usageCount: 67, createTime: '2025-07-01' },
+  { id: 't5', categoryId: 'user-interest', name: '书法爱好者', color: '#1890ff', targetType: 'user', sort: 2, status: 'active', usageCount: 42, createTime: '2025-07-01' },
+  { id: 't6', categoryId: 'user-interest', name: '太极爱好者', color: '#722ed1', targetType: 'user', sort: 3, status: 'active', usageCount: 56, createTime: '2025-07-01' },
+  { id: 't7', categoryId: 'user-interest', name: '舞蹈爱好者', color: '#eb2f96', targetType: 'user', sort: 4, status: 'active', usageCount: 34, createTime: '2025-07-01' },
+  { id: 't8', categoryId: 'user-interest', name: '钓鱼爱好者', color: '#13c2c2', targetType: 'user', sort: 5, status: 'active', usageCount: 21, createTime: '2025-08-01' },
+  // 用户标签 - 身份特征
+  { id: 't9', categoryId: 'user-identity', name: '退休教师', color: '#fa8c16', targetType: 'user', sort: 1, status: 'active', usageCount: 18, createTime: '2025-08-01' },
+  { id: 't10', categoryId: 'user-identity', name: '社区骨干', color: '#13c2c2', targetType: 'user', sort: 2, status: 'active', usageCount: 23, createTime: '2025-08-01' },
+  { id: 't11', categoryId: 'user-identity', name: '舞蹈队队长', color: '#eb2f96', targetType: 'user', sort: 3, status: 'active', usageCount: 8, createTime: '2025-09-01' },
+  // 用户标签 - 风险标签
+  { id: 't12', categoryId: 'user-risk', name: '疑似营销', color: '#f5222d', targetType: 'user', sort: 1, status: 'active', usageCount: 5, createTime: '2025-09-01' },
+  { id: 't13', categoryId: 'user-risk', name: '需关注', color: '#faad14', targetType: 'user', sort: 2, status: 'active', usageCount: 12, createTime: '2025-09-01' },
+  // 用户标签 - 区域位置
+  { id: 't27', categoryId: 'user-location', name: '渝中区', color: '#1890ff', targetType: 'user', sort: 1, status: 'active', usageCount: 45, createTime: '2025-10-01' },
+  { id: 't28', categoryId: 'user-location', name: '江北区', color: '#52c41a', targetType: 'user', sort: 2, status: 'active', usageCount: 38, createTime: '2025-10-01' },
+  { id: 't29', categoryId: 'user-location', name: '沙坪坝区', color: '#722ed1', targetType: 'user', sort: 3, status: 'active', usageCount: 32, createTime: '2025-10-01' },
+  { id: 't30', categoryId: 'user-location', name: '南岸区', color: '#fa8c16', targetType: 'user', sort: 4, status: 'active', usageCount: 28, createTime: '2025-10-01' },
+  { id: 't31', categoryId: 'user-location', name: '九龙坡区', color: '#13c2c2', targetType: 'user', sort: 5, status: 'active', usageCount: 25, createTime: '2025-10-01' },
+  { id: 't32', categoryId: 'user-location', name: '巴南区', color: '#eb2f96', targetType: 'user', sort: 6, status: 'active', usageCount: 20, createTime: '2025-10-01' },
+  // 内容标签 - 内容主题
+  { id: 't14', categoryId: 'content-topic', name: '养生保健', color: '#52c41a', targetType: 'content', sort: 1, status: 'active', usageCount: 156, createTime: '2025-06-01' },
+  { id: 't15', categoryId: 'content-topic', name: '太极教学', color: '#722ed1', targetType: 'content', sort: 2, status: 'active', usageCount: 89, createTime: '2025-06-01' },
+  { id: 't16', categoryId: 'content-topic', name: '美食分享', color: '#fa8c16', targetType: 'content', sort: 3, status: 'active', usageCount: 134, createTime: '2025-06-01' },
+  { id: 't17', categoryId: 'content-topic', name: '旅游攻略', color: '#13c2c2', targetType: 'content', sort: 4, status: 'active', usageCount: 78, createTime: '2025-07-01' },
+  { id: 't18', categoryId: 'content-topic', name: '书法艺术', color: '#1890ff', targetType: 'content', sort: 5, status: 'active', usageCount: 45, createTime: '2025-07-01' },
+  // 内容标签 - 内容形式
+  { id: 't19', categoryId: 'content-format', name: '图文教程', color: '#1890ff', targetType: 'content', sort: 1, status: 'active', usageCount: 210, createTime: '2025-06-01' },
+  { id: 't20', categoryId: 'content-format', name: '视频教学', color: '#722ed1', targetType: 'content', sort: 2, status: 'active', usageCount: 98, createTime: '2025-06-01' },
+  { id: 't21', categoryId: 'content-format', name: '日常分享', color: '#52c41a', targetType: 'content', sort: 3, status: 'active', usageCount: 267, createTime: '2025-06-01' },
+  // 内容标签 - 内容质量
+  { id: 't22', categoryId: 'content-quality', name: '优质内容', color: '#52c41a', targetType: 'content', sort: 1, status: 'active', usageCount: 34, createTime: '2025-08-01' },
+  { id: 't23', categoryId: 'content-quality', name: '推荐置顶', color: '#fa8c16', targetType: 'content', sort: 2, status: 'active', usageCount: 12, createTime: '2025-08-01' },
+  { id: 't24', categoryId: 'content-quality', name: '普通内容', color: '#8c8c8c', targetType: 'content', sort: 3, status: 'active', usageCount: 189, createTime: '2025-08-01' },
+  // 内容标签 - 区域位置
+  { id: 't33', categoryId: 'content-location', name: '重庆本地', color: '#1890ff', targetType: 'content', sort: 1, status: 'active', usageCount: 112, createTime: '2025-10-01' },
+  { id: 't34', categoryId: 'content-location', name: '渝中区', color: '#52c41a', targetType: 'content', sort: 2, status: 'active', usageCount: 56, createTime: '2025-10-01' },
+  { id: 't35', categoryId: 'content-location', name: '江北区', color: '#722ed1', targetType: 'content', sort: 3, status: 'active', usageCount: 48, createTime: '2025-10-01' },
+  { id: 't36', categoryId: 'content-location', name: '沙坪坝区', color: '#fa8c16', targetType: 'content', sort: 4, status: 'active', usageCount: 35, createTime: '2025-10-01' },
+  { id: 't37', categoryId: 'content-location', name: '南岸区', color: '#13c2c2', targetType: 'content', sort: 5, status: 'active', usageCount: 30, createTime: '2025-10-01' },
+  { id: 't38', categoryId: 'content-location', name: '巴南区', color: '#eb2f96', targetType: 'content', sort: 6, status: 'active', usageCount: 22, createTime: '2025-10-01' },
+  // 内容标签 - 风险标注
+  { id: 't25', categoryId: 'content-risk', name: '含敏感词', color: '#f5222d', targetType: 'content', sort: 1, status: 'active', usageCount: 3, createTime: '2025-09-01' },
+  { id: 't26', categoryId: 'content-risk', name: '需二次审核', color: '#faad14', targetType: 'content', sort: 2, status: 'active', usageCount: 7, createTime: '2025-09-01' },
+];
+
+const USER_TAGS = [
+  { userId: 1, tagId: 't1', assignedBy: 'admin', assignedAt: '2025-08-15' },
+  { userId: 1, tagId: 't4', assignedBy: 'admin', assignedAt: '2025-08-15' },
+  { userId: 2, tagId: 't2', assignedBy: 'admin', assignedAt: '2025-09-01' },
+  { userId: 3, tagId: 't12', assignedBy: 'auditor01', assignedAt: '2026-01-20' },
+  { userId: 4, tagId: 't7', assignedBy: 'admin', assignedAt: '2025-10-01' },
+  { userId: 4, tagId: 't11', assignedBy: 'admin', assignedAt: '2025-10-01' },
+  { userId: 4, tagId: 't1', assignedBy: 'admin', assignedAt: '2025-10-01' },
+  { userId: 5, tagId: 't9', assignedBy: 'auditor01', assignedAt: '2025-11-10' },
+  { userId: 6, tagId: 't6', assignedBy: 'admin', assignedAt: '2025-12-05' },
+];
+
+const CONTENT_TAGS = [
+  { contentId: 3, tagId: 't21', assignedBy: '审核员A', assignedAt: '2026-04-05' },
+  { contentId: 3, tagId: 't17', assignedBy: '审核员A', assignedAt: '2026-04-05' },
+  { contentId: 5, tagId: 't20', assignedBy: '审核员A', assignedAt: '2026-04-03' },
+  { contentId: 5, tagId: 't7', assignedBy: '审核员A', assignedAt: '2026-04-03' },
+  { contentId: 7, tagId: 't18', assignedBy: '审核员C', assignedAt: '2026-04-05' },
+  { contentId: 7, tagId: 't20', assignedBy: '审核员C', assignedAt: '2026-04-05' },
+  { contentId: 8, tagId: 't21', assignedBy: '审核员A', assignedAt: '2026-04-04' },
+  { contentId: 8, tagId: 't22', assignedBy: '审核员A', assignedAt: '2026-04-04' },
 ];
 
 // ─── 登录页 ───────────────────────────────────────────────
@@ -991,6 +1079,10 @@ const UserPage: React.FC<{ selectedUser?: any; setSelectedUser?: (user: any) => 
   const [postDetailModal, setPostDetailModal] = useState(false);
   const [selectedPost, setSelectedPost] = useState<any>(null);
   const [grantPointsModal, setGrantPointsModal] = useState(false);
+  // 用户标签编辑弹窗
+  const [userTagEditModal, setUserTagEditModal] = useState(false);
+  const [editUserTagUser, setEditUserTagUser] = useState<any>(null);
+  const [editUserTagIds, setEditUserTagIds] = useState<string[]>([]);
 
   // 作品筛选状态
   const [postTypeFilter, setPostTypeFilter] = useState<string>('all');
@@ -1040,6 +1132,21 @@ const UserPage: React.FC<{ selectedUser?: any; setSelectedUser?: (user: any) => 
       { title: '年龄', dataIndex: 'age', width: 60 },
       { title: '地区', dataIndex: 'region', width: 140 },
       { title: '注册日期', dataIndex: 'registerDate', width: 100 },
+      { title: '标签数量', width: 100, render: (_: any, row: any) => {
+        const count = row.tags ? row.tags.length : 0;
+        return (
+          <a
+            onClick={() => {
+              setEditUserTagUser(row);
+              setEditUserTagIds(row.tags ? [...row.tags] : []);
+              setUserTagEditModal(true);
+            }}
+            style={{ color: PRIMARY, cursor: 'pointer' }}
+          >
+            <Tag color={count > 0 ? 'blue' : 'default'}>{count}</Tag>
+          </a>
+        );
+      }},
       { title: '动态数', dataIndex: 'postCount', width: 80 },
       { title: '粉丝数', dataIndex: 'followers', width: 80 },
       { title: '积分', dataIndex: 'points', width: 80 },
@@ -1230,6 +1337,115 @@ const UserPage: React.FC<{ selectedUser?: any; setSelectedUser?: (user: any) => 
             </Form.Item>
           </Form>
           <div className="text-xs text-gray-400 mt-2">重置后用户需使用新密码重新登录，原密码立即失效。</div>
+        </Modal>
+
+        {/* 用户标签编辑弹窗 */}
+        <Modal
+          title={
+            <Space>
+              <span>编辑用户标签</span>
+              <Tag color="blue">可多选</Tag>
+            </Space>
+          }
+          open={userTagEditModal}
+          onCancel={() => { setUserTagEditModal(false); setEditUserTagUser(null); setEditUserTagIds([]); }}
+          width={640}
+          footer={[
+            <Button key="cancel" onClick={() => { setUserTagEditModal(false); setEditUserTagUser(null); setEditUserTagIds([]); }}>取消</Button>,
+            <Button key="save" type="primary" style={{ background: PRIMARY, borderColor: PRIMARY }}
+              onClick={() => {
+                if (editUserTagUser) {
+                  editUserTagUser.tags = [...editUserTagIds];
+                  message.success('用户标签已保存');
+                }
+                setUserTagEditModal(false);
+                setEditUserTagUser(null);
+                setEditUserTagIds([]);
+              }}>
+              保存 {editUserTagIds.length > 0 ? `(${editUserTagIds.length})` : ''}
+            </Button>,
+          ]}
+        >
+          {editUserTagUser && (
+            <div>
+              {/* 用户摘要 */}
+              <div className="mb-4 p-3 bg-gray-50 rounded">
+                <div className="flex items-center gap-3 mb-2">
+                  <Avatar size={36} style={{ background: PRIMARY }}>{editUserTagUser.nickname[0]}</Avatar>
+                  <div>
+                    <Text strong style={{ fontSize: 15 }}>{editUserTagUser.nickname}</Text>
+                    <br/>
+                    <Text type="secondary" style={{ fontSize: 12 }}>{editUserTagUser.phone} · {editUserTagUser.region}</Text>
+                  </div>
+                </div>
+              </div>
+
+              {/* 标签选择区域 */}
+              <div className="mb-2">
+                <Text strong style={{ fontSize: 14 }}>
+                  <Tag color="orange" style={{ marginRight: 6 }}>编辑</Tag>
+                  为该用户选择合适的标签（可多选）：
+                </Text>
+              </div>
+
+              {/* 按分类展示标签 */}
+              <div className="mb-3 p-3" style={{ border: '1px solid #f0f0f0', borderRadius: 8, maxHeight: 360, overflowY: 'auto' }}>
+                {TAG_CATEGORIES
+                  .filter(c => c.targetType === 'user')
+                  .sort((a, b) => a.sort - b.sort)
+                  .map(cat => {
+                    const catTags = TAGS.filter(t => t.categoryId === cat.id && t.targetType === 'user' && t.status === 'active');
+                    if (catTags.length === 0) return null;
+                    return (
+                      <div key={cat.id} style={{ marginBottom: 16 }}>
+                        <Text type="secondary" style={{ fontSize: 12, marginBottom: 8, display: 'block' }}>{cat.name}</Text>
+                        <div className="flex gap-2 flex-wrap">
+                          {catTags.map(tag => {
+                            const isSelected = editUserTagIds.includes(tag.id);
+                            return (
+                              <Tag key={tag.id}
+                                color={isSelected ? tag.color : undefined}
+                                style={{
+                                  cursor: 'pointer', padding: '2px 10px', fontSize: 13,
+                                  border: isSelected ? `1px solid ${tag.color}` : '1px solid #d9d9d9',
+                                  background: isSelected ? tag.color : '#fff',
+                                  color: isSelected ? '#fff' : tag.color,
+                                  transition: 'all 0.2s',
+                                }}
+                                onClick={() => {
+                                  setEditUserTagIds(prev =>
+                                    isSelected ? prev.filter(id => id !== tag.id) : [...prev, tag.id]
+                                  );
+                                }}
+                              >{tag.name}</Tag>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+
+              {/* 已选标签概览 */}
+              {editUserTagIds.length > 0 && (
+                <div className="p-3 rounded" style={{ background: '#f6ffed', border: '1px solid #b7eb8f' }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>已选择 {editUserTagIds.length} 个标签：</Text>
+                  <div className="mt-2 flex gap-2 flex-wrap">
+                    {editUserTagIds.map(tid => {
+                      const t = TAGS.find(tag => tag.id === tid);
+                      if (!t) return null;
+                      return (
+                        <Tag key={tid} color={t.color} closable
+                          onClose={() => setEditUserTagIds(prev => prev.filter(id => id !== tid))}>
+                          {t.name}
+                        </Tag>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </Modal>
       </div>
     );
@@ -2236,6 +2452,17 @@ const ContentPage: React.FC<{
   const [rejectReason, setRejectReason] = useState('');
   const [rejectType, setRejectType] = useState('custom');
   const [batchReject, setBatchReject] = useState(false);
+  // 打标相关状态
+  const [taggingModal, setTaggingModal] = useState(false);
+  const [taggingContent, setTaggingContent] = useState<any>(null);
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
+  // 批量打标相关状态
+  const [batchTagging, setBatchTagging] = useState(false);
+  const [batchTaggingIds, setBatchTaggingIds] = useState<(string | number)[]>([]);
+  // 查看/编辑标签弹窗
+  const [tagEditModal, setTagEditModal] = useState(false);
+  const [editTagContent, setEditTagContent] = useState<any>(null);
+  const [editTagIds, setEditTagIds] = useState<string[]>([]);
 
   const statusMap: Record<string, {color: string; label: string}> = {
     pending: { color: 'warning', label: '待审核' },
@@ -2305,25 +2532,55 @@ const ContentPage: React.FC<{
     setDetailModal(true);
   };
 
-  // 单条通过
+  // 单条通过 → 打开打标弹窗
   const handleApprove = (record: any) => {
-    message.success('审核通过');
+    setTaggingContent(record);
+    setSelectedTagIds(record.tags || []);
+    setTaggingModal(true);
   };
 
-  // 单条拒绝
+  // 单条拒绝 → 直接打开拒绝原因弹窗
   const handleReject = (record: any) => {
     setSelectedContent(record);
     setBatchReject(false);
     setRejectModal(true);
   };
 
-  // 批量通过
-  const handleBatchApprove = () => {
-    message.success(`已批量通过 ${selectedRowKeys.length} 条内容`);
-    setSelectedRowKeys([]);
+  // 打标弹窗：确认打标 → 直接审核通过
+  const confirmTaggingApprove = () => {
+    if (batchTagging) {
+      CONTENTS.filter(c => batchTaggingIds.includes(c.id)).forEach(c => {
+        c.tags = [...selectedTagIds];
+        c.status = 'approved';
+        c.reviewedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+        c.reviewer = '当前审核员';
+      });
+      message.success(`已批量通过 ${batchTaggingIds.length} 条内容`);
+      setSelectedRowKeys([]);
+    } else if (taggingContent) {
+      taggingContent.tags = [...selectedTagIds];
+      taggingContent.status = 'approved';
+      taggingContent.reviewedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+      taggingContent.reviewer = '当前审核员';
+      message.success('审核通过');
+    }
+    setTaggingModal(false);
+    setTaggingContent(null);
+    setSelectedTagIds([]);
+    setBatchTagging(false);
+    setBatchTaggingIds([]);
   };
 
-  // 批量拒绝
+
+  // 批量通过 → 打开打标弹窗
+  const handleBatchApprove = () => {
+    setBatchTagging(true);
+    setBatchTaggingIds([...selectedRowKeys]);
+    setSelectedTagIds([]);
+    setTaggingModal(true);
+  };
+
+  // 批量拒绝 → 直接打开拒绝原因弹窗
   const handleBatchReject = () => {
     setBatchReject(true);
     setRejectModal(true);
@@ -2336,11 +2593,24 @@ const ContentPage: React.FC<{
       return;
     }
     if (batchReject) {
+      CONTENTS.filter(c => selectedRowKeys.includes(c.id)).forEach(c => {
+        c.status = 'rejected';
+        c.rejectReason = rejectReason;
+        c.reviewedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+        c.reviewer = '当前审核员';
+      });
       message.success(`已批量拒绝 ${selectedRowKeys.length} 条内容`);
       setSelectedRowKeys([]);
     } else {
+      if (selectedContent) {
+        selectedContent.status = 'rejected';
+        selectedContent.rejectReason = rejectReason;
+        selectedContent.reviewedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+        selectedContent.reviewer = '当前审核员';
+      }
       message.success('已拒绝');
     }
+    setBatchReject(false);
     setRejectModal(false);
     setRejectReason('');
     setRejectType('custom');
@@ -2357,6 +2627,21 @@ const ContentPage: React.FC<{
     { title: '作者', dataIndex: 'author', render: (v: string, row: any) =>
       <a onClick={() => { setActivePage('user'); setSelectedUser(USERS.find(u => u.id === row.authorId)); }} style={{ color: PRIMARY }}>{v}</a>
     },
+    { title: '标签数量', width: 100, render: (_: any, row: any) => {
+      const count = row.tags ? row.tags.length : 0;
+      return (
+        <a
+          onClick={() => {
+            setEditTagContent(row);
+            setEditTagIds(row.tags ? [...row.tags] : []);
+            setTagEditModal(true);
+          }}
+          style={{ color: PRIMARY, cursor: 'pointer' }}
+        >
+          <Tag color={count > 0 ? 'blue' : 'default'}>{count}</Tag>
+        </a>
+      );
+    }},
     { title: '发布时间', dataIndex: 'createTime', width: 150 },
     { title: '互动数据', width: 180, render: (_: any, row: any) => (
       <Space size={16}>
@@ -2372,9 +2657,7 @@ const ContentPage: React.FC<{
         <Button size="small" icon={<EyeOutlined />} onClick={() => viewDetail(row)}>详情</Button>
         {mode === 'review' && row.status === 'pending' && (
           <>
-            <Popconfirm title="确认通过？" onConfirm={() => handleApprove(row)} okText="通过" okButtonProps={{ style: { background: '#52c41a', borderColor: '#52c41a' } }}>
-              <Button size="small" style={{ color: '#52c41a', borderColor: '#52c41a' }}>通过</Button>
-            </Popconfirm>
+            <Button size="small" style={{ color: '#52c41a', borderColor: '#52c41a' }} onClick={() => handleApprove(row)}>通过</Button>
             <Button size="small" danger onClick={() => handleReject(row)}>拒绝</Button>
           </>
         )}
@@ -2492,9 +2775,7 @@ const ContentPage: React.FC<{
             display: 'flex', alignItems: 'center', gap: 16,
           }}>
             <Text>已选 <Text strong style={{ color: PRIMARY }}>{selectedRowKeys.length}</Text> 项</Text>
-            <Popconfirm title={`确认通过 ${selectedRowKeys.length} 条内容？`} onConfirm={handleBatchApprove} okText="确认" okButtonProps={{ style: { background: '#52c41a', borderColor: '#52c41a' } }}>
-              <Button type="primary" style={{ background: '#52c41a', borderColor: '#52c41a' }}>批量通过</Button>
-            </Popconfirm>
+            <Button type="primary" style={{ background: '#52c41a', borderColor: '#52c41a' }} onClick={handleBatchApprove}>批量通过</Button>
             <Button danger onClick={handleBatchReject}>批量拒绝</Button>
             <Button onClick={() => setSelectedRowKeys([])}>取消选择</Button>
           </div>
@@ -2509,9 +2790,8 @@ const ContentPage: React.FC<{
         width={720}
         footer={selectedContent?.status === 'pending' ? [
           <Button key="cancel" onClick={() => setDetailModal(false)}>关闭</Button>,
-          <Popconfirm key="approve" title="确认通过？" onConfirm={() => { handleApprove(selectedContent); setDetailModal(false); }} okText="通过" okButtonProps={{ style: { background: '#52c41a', borderColor: '#52c41a' } }}>
-            <Button type="primary" style={{ background: '#52c41a', borderColor: '#52c41a' }}>通过</Button>
-          </Popconfirm>,
+          <Button key="approve" type="primary" style={{ background: '#52c41a', borderColor: '#52c41a' }}
+            onClick={() => { handleApprove(selectedContent); setDetailModal(false); }}>通过</Button>,
           <Button key="reject" danger onClick={() => { setDetailModal(false); handleReject(selectedContent); }}>拒绝</Button>,
         ] : [
           <Button key="close" onClick={() => setDetailModal(false)}>关闭</Button>
@@ -2577,6 +2857,19 @@ const ContentPage: React.FC<{
               <Statistic title="浏览" value={selectedContent.views} prefix={<EyeOutlined />} />
             </div>
 
+            {/* 已有标签展示 */}
+            {selectedContent.tags && selectedContent.tags.length > 0 && (
+              <div className="mb-4">
+                <Text type="secondary" style={{ fontSize: 12, marginBottom: 6, display: 'block' }}>内容标签：</Text>
+                <div className="flex gap-2 flex-wrap">
+                  {selectedContent.tags.map((tid: string) => {
+                    const tag = TAGS.find(t => t.id === tid);
+                    return tag ? <Tag key={tid} color={tag.color}>{tag.name}</Tag> : null;
+                  })}
+                </div>
+              </div>
+            )}
+
             {selectedContent.reviewedAt && (
               <div className="mt-4 p-3 bg-blue-50 rounded">
                 <Text strong>审核信息</Text>
@@ -2591,6 +2884,269 @@ const ContentPage: React.FC<{
                       </div>
                     </div>
                   )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </Modal>
+
+      {/* 打标弹窗 - 审核时打标签 */}
+      <Modal
+        title={
+          <Space>
+            <span>审核通过 - 打标</span>
+            <Tag color="blue">可多选</Tag>
+          </Space>
+        }
+        open={taggingModal}
+        onCancel={() => {
+          setTaggingModal(false);
+          setTaggingContent(null);
+          setSelectedTagIds([]);
+          setBatchTagging(false);
+          setBatchTaggingIds([]);
+        }}
+        width={batchTagging ? 720 : 640}
+        footer={[
+          <Button key="cancel" onClick={() => {
+            setTaggingModal(false);
+            setTaggingContent(null);
+            setSelectedTagIds([]);
+            setBatchTagging(false);
+            setBatchTaggingIds([]);
+          }}>
+            取消
+          </Button>,
+          <Button key="approve" type="primary" style={{ background: '#52c41a', borderColor: '#52c41a' }}
+            onClick={confirmTaggingApprove}>
+            确认打标{selectedTagIds.length > 0 ? ` (${selectedTagIds.length})` : ''}
+          </Button>,
+        ]}
+      >
+        {(taggingContent || batchTagging) && (
+          <div>
+            {/* 内容摘要 */}
+            {batchTagging ? (
+              <div className="mb-4 p-3 bg-gray-50 rounded">
+                <div className="flex items-center gap-3 mb-2">
+                  <Tag color="blue">批量打标</Tag>
+                  <Text strong style={{ fontSize: 15 }}>共 {batchTaggingIds.length} 条作品</Text>
+                </div>
+                <Text type="secondary">选中的作品将被打上相同的标签</Text>
+                <div className="mt-2 flex gap-2 flex-wrap" style={{ maxHeight: 80, overflowY: 'auto' }}>
+                  {CONTENTS.filter(c => batchTaggingIds.includes(c.id)).slice(0, 5).map(c => (
+                    <Tag key={c.id} color={c.type === 'image' ? 'blue' : 'green'}>{c.title}</Tag>
+                  ))}
+                  {batchTaggingIds.length > 5 && <Tag>+{batchTaggingIds.length - 5}</Tag>}
+                </div>
+              </div>
+            ) : (
+              <div className="mb-4 p-3 bg-gray-50 rounded">
+                <div className="flex items-center gap-3 mb-2">
+                  <Tag color={taggingContent.type === 'image' ? 'blue' : 'green'}>
+                    {taggingContent.type === 'image' ? '图文' : '视频'}
+                  </Tag>
+                  <Text strong style={{ fontSize: 15 }}>{taggingContent.title}</Text>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Avatar size={28} style={{ background: PRIMARY }}>{taggingContent.author[0]}</Avatar>
+                  <Text type="secondary">{taggingContent.author}</Text>
+                  <Text type="secondary">·</Text>
+                  <Text type="secondary">{taggingContent.createTime}</Text>
+                </div>
+              </div>
+            )}
+
+            {/* 标签选择区域 */}
+            <div className="mb-2">
+              <Text strong style={{ fontSize: 14 }}>
+                <Tag color="orange" style={{ marginRight: 6 }}>打标</Tag>
+                请为{batchTagging ? '这批作品' : '该内容'}选择合适的标签（可多选）：
+              </Text>
+            </div>
+
+            {/* 按分类展示标签 */}
+            <div className="mb-3 p-3" style={{ border: '1px solid #f0f0f0', borderRadius: 8, maxHeight: 360, overflowY: 'auto' }}>
+              {TAG_CATEGORIES
+                .filter(c => c.targetType === 'content')
+                .sort((a, b) => a.sort - b.sort)
+                .map(cat => {
+                  const catTags = TAGS.filter(t => t.categoryId === cat.id && t.status === 'active');
+                  if (catTags.length === 0) return null;
+                  return (
+                    <div key={cat.id} className="mb-3" style={{ marginBottom: cat === TAG_CATEGORIES.filter(c => c.targetType === 'content').slice(-1)[0] ? 0 : 16 }}>
+                      <Text type="secondary" style={{ fontSize: 12, marginBottom: 8, display: 'block' }}>
+                        {cat.name}
+                      </Text>
+                      <div className="flex gap-2 flex-wrap">
+                        {catTags.map(tag => {
+                          const isSelected = selectedTagIds.includes(tag.id);
+                          return (
+                            <Tag
+                              key={tag.id}
+                              color={isSelected ? tag.color : undefined}
+                              style={{
+                                cursor: 'pointer',
+                                padding: '2px 10px',
+                                fontSize: 13,
+                                border: isSelected ? `1px solid ${tag.color}` : '1px solid #d9d9d9',
+                                background: isSelected ? tag.color : '#fff',
+                                color: isSelected ? '#fff' : tag.color,
+                                transition: 'all 0.2s',
+                              }}
+                              onClick={() => {
+                                setSelectedTagIds(prev =>
+                                  isSelected
+                                    ? prev.filter(id => id !== tag.id)
+                                    : [...prev, tag.id]
+                                );
+                              }}
+                            >
+                              {tag.name}
+                            </Tag>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+
+              {TAGS.filter(t => t.targetType === 'content' && t.status === 'active').length === 0 && (
+                <div className="text-center py-8">
+                  <Text type="secondary">暂无可用标签，请先在标签管理中创建内容标签</Text>
+                </div>
+              )}
+            </div>
+
+            {/* 已选标签概览 */}
+            {selectedTagIds.length > 0 && (
+              <div className="p-3 rounded" style={{ background: '#f6ffed', border: '1px solid #b7eb8f' }}>
+                <Text type="secondary" style={{ fontSize: 12 }}>已选择 {selectedTagIds.length} 个标签：</Text>
+                <div className="mt-2 flex gap-2 flex-wrap">
+                  {selectedTagIds.map(tid => {
+                    const t = TAGS.find(tag => tag.id === tid);
+                    if (!t) return null;
+                    return (
+                      <Tag key={tid} color={t.color} closable
+                        onClose={() => setSelectedTagIds(prev => prev.filter(id => id !== tid))}>
+                        {t.name}
+                      </Tag>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </Modal>
+
+      {/* 标签查看/编辑弹窗 */}
+      <Modal
+        title={
+          <Space>
+            <span>编辑作品标签</span>
+            <Tag color="blue">可多选</Tag>
+          </Space>
+        }
+        open={tagEditModal}
+        onCancel={() => { setTagEditModal(false); setEditTagContent(null); setEditTagIds([]); }}
+        width={640}
+        footer={[
+          <Button key="cancel" onClick={() => { setTagEditModal(false); setEditTagContent(null); setEditTagIds([]); }}>取消</Button>,
+          <Button key="save" type="primary" style={{ background: PRIMARY, borderColor: PRIMARY }}
+            onClick={() => {
+              if (editTagContent) {
+                editTagContent.tags = [...editTagIds];
+                message.success('标签已保存');
+              }
+              setTagEditModal(false);
+              setEditTagContent(null);
+              setEditTagIds([]);
+            }}>
+            保存 {editTagIds.length > 0 ? `(${editTagIds.length})` : ''}
+          </Button>,
+        ]}
+      >
+        {editTagContent && (
+          <div>
+            {/* 内容摘要 */}
+            <div className="mb-4 p-3 bg-gray-50 rounded">
+              <div className="flex items-center gap-3 mb-2">
+                <Tag color={editTagContent.type === 'image' ? 'blue' : 'green'}>
+                  {editTagContent.type === 'image' ? '图文' : '视频'}
+                </Tag>
+                <Text strong style={{ fontSize: 15 }}>{editTagContent.title}</Text>
+              </div>
+              <div className="flex items-center gap-3">
+                <Avatar size={28} style={{ background: PRIMARY }}>{editTagContent.author[0]}</Avatar>
+                <Text type="secondary">{editTagContent.author}</Text>
+                <Text type="secondary">·</Text>
+                <Text type="secondary">{editTagContent.createTime}</Text>
+              </div>
+            </div>
+
+            {/* 标签选择区域 */}
+            <div className="mb-2">
+              <Text strong style={{ fontSize: 14 }}>
+                <Tag color="orange" style={{ marginRight: 6 }}>编辑</Tag>
+                为该作品选择合适的标签（可多选）：
+              </Text>
+            </div>
+
+            {/* 按分类展示标签 */}
+            <div className="mb-3 p-3" style={{ border: '1px solid #f0f0f0', borderRadius: 8, maxHeight: 360, overflowY: 'auto' }}>
+              {TAG_CATEGORIES
+                .filter(c => c.targetType === 'content')
+                .sort((a, b) => a.sort - b.sort)
+                .map(cat => {
+                  const catTags = TAGS.filter(t => t.categoryId === cat.id && t.status === 'active');
+                  if (catTags.length === 0) return null;
+                  return (
+                    <div key={cat.id} style={{ marginBottom: 16 }}>
+                      <Text type="secondary" style={{ fontSize: 12, marginBottom: 8, display: 'block' }}>{cat.name}</Text>
+                      <div className="flex gap-2 flex-wrap">
+                        {catTags.map(tag => {
+                          const isSelected = editTagIds.includes(tag.id);
+                          return (
+                            <Tag key={tag.id}
+                              color={isSelected ? tag.color : undefined}
+                              style={{
+                                cursor: 'pointer', padding: '2px 10px', fontSize: 13,
+                                border: isSelected ? `1px solid ${tag.color}` : '1px solid #d9d9d9',
+                                background: isSelected ? tag.color : '#fff',
+                                color: isSelected ? '#fff' : tag.color,
+                                transition: 'all 0.2s',
+                              }}
+                              onClick={() => {
+                                setEditTagIds(prev =>
+                                  isSelected ? prev.filter(id => id !== tag.id) : [...prev, tag.id]
+                                );
+                              }}
+                            >{tag.name}</Tag>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+
+            {/* 已选标签概览 */}
+            {editTagIds.length > 0 && (
+              <div className="p-3 rounded" style={{ background: '#f6ffed', border: '1px solid #b7eb8f' }}>
+                <Text type="secondary" style={{ fontSize: 12 }}>已选择 {editTagIds.length} 个标签：</Text>
+                <div className="mt-2 flex gap-2 flex-wrap">
+                  {editTagIds.map(tid => {
+                    const t = TAGS.find(tag => tag.id === tid);
+                    if (!t) return null;
+                    return (
+                      <Tag key={tid} color={t.color} closable
+                        onClose={() => setEditTagIds(prev => prev.filter(id => id !== tid))}>
+                        {t.name}
+                      </Tag>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -5041,6 +5597,416 @@ const ServiceProviderPage: React.FC = () => {
   );
 };
 
+// ─── 标签管理 ──────────────────────────────────────────────
+const TagPage: React.FC<{ targetType: 'user' | 'content' }> = ({ targetType }) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [searchText, setSearchText] = useState('');
+  const [tagModal, setTagModal] = useState(false);
+  const [editingTag, setEditingTag] = useState<any>(null);
+  const [categoryModal, setCategoryModal] = useState(false);
+  const [editingCategory, setEditingCategory] = useState<any>(null);
+
+  // 根据 targetType 筛选分类和标签
+  const categories = TAG_CATEGORIES.filter(c => c.targetType === targetType).sort((a, b) => a.sort - b.sort);
+  const tags = TAGS.filter(t => t.targetType === targetType);
+
+  // 强制刷新（用于列表更新后触发重渲染）
+  const [, forceUpdate] = useState(0);
+
+  // 筛选后的标签
+  const filteredTags = tags.filter(t => {
+    if (selectedCategory && t.categoryId !== selectedCategory) return false;
+    if (searchText && !t.name.includes(searchText)) return false;
+    return true;
+  });
+
+  const stats = {
+    total: tags.length,
+    active: tags.filter(t => t.status === 'active').length,
+    disabled: tags.filter(t => t.status === 'disabled').length,
+    topTag: [...tags].sort((a, b) => b.usageCount - a.usageCount)[0],
+  };
+
+  // 打开新增/编辑分类弹窗
+  const openCategoryModal = (cat?: any) => {
+    setEditingCategory(cat || null);
+    setCategoryModal(true);
+  };
+
+  // 保存分类
+  const handleSaveCategory = (values: any) => {
+    if (editingCategory) {
+      editingCategory.name = values.name;
+      editingCategory.sort = values.sort;
+      message.success('分类已更新');
+    } else {
+      TAG_CATEGORIES.push({
+        id: targetType + '-' + Date.now(),
+        name: values.name,
+        targetType,
+        sort: categories.length + 1,
+      });
+      message.success('分类已创建');
+    }
+    setCategoryModal(false);
+    setEditingCategory(null);
+    forceUpdate(prev => prev + 1);
+  };
+
+  // 删除分类
+  const handleDeleteCategory = (catId: string) => {
+    // 检查该分类下是否有标签
+    const hasTags = TAGS.some(t => t.categoryId === catId);
+    if (hasTags) {
+      message.warning('该分类下还有标签，无法删除');
+      return;
+    }
+    const idx = TAG_CATEGORIES.findIndex(c => c.id === catId);
+    if (idx > -1) {
+      TAG_CATEGORIES.splice(idx, 1);
+      if (selectedCategory === catId) setSelectedCategory('');
+      message.success('分类已删除');
+      forceUpdate(prev => prev + 1);
+    }
+  };
+
+  // 打开新增/编辑标签弹窗
+  const openTagModal = (tag?: any) => {
+    setEditingTag(tag || null);
+    setTagModal(true);
+  };
+
+  // 保存标签
+  const handleSaveTag = (values: any) => {
+    if (editingTag) {
+      // 编辑：更新已有标签
+      Object.assign(editingTag, values, { status: values.status || editingTag.status });
+    } else {
+      // 新增：push 新标签
+      const newTag = {
+        id: 't' + Date.now(),
+        ...values,
+        targetType,
+        usageCount: 0,
+        createTime: dayjs().format('YYYY-MM-DD'),
+      };
+      TAGS.push(newTag as any);
+    }
+    setTagModal(false);
+    message.success(editingTag ? '标签已更新' : '标签已创建');
+  };
+
+  // 删除标签
+  const handleDeleteTag = (tagId: string) => {
+    const idx = TAGS.findIndex(t => t.id === tagId);
+    if (idx > -1) {
+      TAGS.splice(idx, 1);
+      message.success('标签已删除');
+    }
+  };
+
+  // 切换标签状态
+  const toggleTagStatus = (tag: any) => {
+    tag.status = tag.status === 'active' ? 'disabled' : 'active';
+    message.success(tag.status === 'active' ? '标签已启用' : '标签已禁用');
+    // 触发重渲染
+    setSelectedCategory(prev => prev);
+  };
+
+  // 获取分类名
+  const getCategoryName = (categoryId: string) => {
+    return TAG_CATEGORIES.find(c => c.id === categoryId)?.name || categoryId;
+  };
+
+  const tagCols = [
+    { title: '标签名', dataIndex: 'name', key: 'name', width: 140,
+      render: (text: string, record: any) => (
+        <Tag color={record.color}>{text}</Tag>
+      ),
+    },
+    { title: '所属分类', dataIndex: 'categoryId', key: 'categoryId', width: 100,
+      render: (id: string) => getCategoryName(id),
+    },
+    { title: '颜色', dataIndex: 'color', key: 'color', width: 80,
+      render: (color: string) => <div style={{ width: 24, height: 24, borderRadius: 4, background: color, border: '1px solid #e8e8e8' }} />,
+    },
+    { title: '使用次数', dataIndex: 'usageCount', key: 'usageCount', width: 90, sorter: (a: any, b: any) => a.usageCount - b.usageCount },
+    { title: '状态', dataIndex: 'status', key: 'status', width: 80,
+      render: (status: string) => (
+        <Badge status={status === 'active' ? 'success' : 'default'} text={status === 'active' ? '启用' : '禁用'} />
+      ),
+    },
+    { title: '创建时间', dataIndex: 'createTime', key: 'createTime', width: 110 },
+    {
+      title: '操作', key: 'action', width: 160,
+      render: (_: any, record: any) => (
+        <Space size="small">
+          <Button type="link" size="small" icon={<EditOutlined />} onClick={() => openTagModal(record)}>编辑</Button>
+          <Button type="link" size="small" onClick={() => toggleTagStatus(record)}>
+            {record.status === 'active' ? '禁用' : '启用'}
+          </Button>
+          <Popconfirm title="确定删除该标签？" onConfirm={() => handleDeleteTag(record.id)}>
+            <Button type="link" size="small" danger icon={<DeleteOutlined />} />
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
+  return (
+    <div>
+      <div className="mb-4">
+        <Title level={4} style={{ margin: 0 }}>{targetType === 'user' ? '用户标签' : '内容标签'}</Title>
+      </div>
+
+      {/* 统计卡片 */}
+      <Row gutter={16} className="mb-4">
+        <Col span={6}>
+          <Card size="small">
+            <Statistic
+              title="标签总数"
+              value={stats.total}
+              prefix={<TagsOutlined style={{ color: PRIMARY }} />}
+              valueStyle={{ color: PRIMARY, fontSize: 24 }}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card size="small">
+            <Statistic
+              title="已启用"
+              value={stats.active}
+              prefix={<CheckCircleOutlined style={{ color: '#52c41a' }} />}
+              valueStyle={{ color: '#52c41a', fontSize: 24 }}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card size="small">
+            <Statistic
+              title="已禁用"
+              value={stats.disabled}
+              prefix={<StopOutlined style={{ color: '#8c8c8c' }} />}
+              valueStyle={{ color: '#8c8c8c', fontSize: 24 }}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card size="small">
+            <Statistic
+              title="使用最多"
+              value={stats.topTag?.name || '-'}
+              valueStyle={{ fontSize: 16, color: '#666' }}
+            />
+          </Card>
+        </Col>
+      </Row>
+
+      <Card className="page-card" style={{ padding: 0 }}>
+        <div className="flex" style={{ minHeight: 440 }}>
+          {/* 左侧分类树 */}
+          <div style={{ width: 200, borderRight: '1px solid #f0f0f0', padding: '8px 0', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', marginBottom: 4 }}>
+              <span style={{ fontSize: 12, color: '#999' }}>标签分类</span>
+              <Button
+                type="text"
+                size="small"
+                icon={<PlusOutlined />}
+                style={{ fontSize: 12, color: PRIMARY, padding: 0, height: 20 }}
+                onClick={() => openCategoryModal()}
+              >
+                添加
+              </Button>
+            </div>
+            <div style={{ flex: 1, overflow: 'auto' }}>
+              {/* 全部选项 */}
+              <div
+                className="category-tree-item"
+                style={{
+                  padding: '6px 12px',
+                  cursor: 'pointer',
+                  fontSize: 13,
+                  background: selectedCategory === '' ? '#e6f7ff' : 'transparent',
+                  color: selectedCategory === '' ? PRIMARY : '#333',
+                  borderRadius: 0,
+                }}
+                onClick={() => setSelectedCategory('')}
+              >
+                全部
+              </div>
+              {/* 分类列表 */}
+              {categories.map(cat => (
+                <div
+                  key={cat.id}
+                  className="category-tree-item"
+                  style={{
+                    padding: '6px 12px',
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    background: selectedCategory === cat.id ? '#e6f7ff' : 'transparent',
+                    color: selectedCategory === cat.id ? PRIMARY : '#333',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    borderRadius: 0,
+                  }}
+                  onClick={() => setSelectedCategory(selectedCategory === cat.id ? '' : cat.id)}
+                >
+                  <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{cat.name}</span>
+                  <span className="category-actions" style={{ display: 'inline-flex', gap: 2, marginLeft: 4 }}>
+                    <Button
+                      type="text"
+                      size="small"
+                      icon={<EditOutlined />}
+                      style={{ fontSize: 11, padding: 0, height: 18, width: 18, color: '#999' }}
+                      onClick={(e) => { e.stopPropagation(); openCategoryModal(cat); }}
+                    />
+                    <Popconfirm
+                      title="确定删除该分类？"
+                      description="删除后不可恢复"
+                      onConfirm={(e) => { handleDeleteCategory(cat.id); }}
+                      onCancel={(e) => { }}
+                      okText="删除"
+                      cancelText="取消"
+                    >
+                      <Button
+                        type="text"
+                        size="small"
+                        danger
+                        icon={<DeleteOutlined />}
+                        style={{ fontSize: 11, padding: 0, height: 18, width: 18 }}
+                        onClick={(e) => { e.stopPropagation(); }}
+                      />
+                    </Popconfirm>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 右侧标签列表 */}
+          <div className="flex-1 p-4">
+            <div className="flex justify-between items-center mb-3">
+              <Input
+                placeholder="搜索标签名…"
+                prefix={<SearchOutlined />}
+                value={searchText}
+                onChange={e => setSearchText(e.target.value)}
+                style={{ width: 240 }}
+                allowClear
+              />
+              <Button type="primary" icon={<PlusOutlined />} onClick={() => openTagModal()}>
+                新建标签
+              </Button>
+            </div>
+            <Table
+              columns={tagCols}
+              dataSource={filteredTags}
+              rowKey="id"
+              size="middle"
+              pagination={{ pageSize: 10, showSizeChanger: false, showTotal: (total: number) => `共 ${total} 个标签` }}
+            />
+          </div>
+        </div>
+      </Card>
+
+      {/* 新增/编辑标签弹窗 */}
+      <Modal
+        title={editingTag ? '编辑标签' : '新建标签'}
+        open={tagModal}
+        onCancel={() => setTagModal(false)}
+        onOk={() => {
+          const form = document.getElementById('tag-form') as HTMLFormElement;
+          if (form) form.requestSubmit();
+        }}
+        okText="保存"
+        width={480}
+      >
+        <Form
+          id="tag-form"
+          layout="vertical"
+          initialValues={editingTag ? {
+            name: editingTag.name,
+            categoryId: editingTag.categoryId,
+            color: editingTag.color,
+            status: editingTag.status,
+          } : {}}
+          onFinish={handleSaveTag}
+        >
+          <Form.Item
+            name="name"
+            label="标签名称"
+            rules={[{ required: true, message: '请输入标签名称' }]}
+          >
+            <Input placeholder="例如：养生达人、太极教学…" maxLength={10} />
+          </Form.Item>
+          <Form.Item
+            name="categoryId"
+            label="所属分类"
+            rules={[{ required: true, message: '请选择分类' }]}
+          >
+            <Select placeholder="选择标签分类">
+              {categories.map(c => (
+                <Select.Option key={c.id} value={c.id}>{c.name}</Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="color"
+            label="标签颜色"
+            rules={[{ required: true, message: '请选择颜色' }]}
+          >
+            <Select placeholder="选择颜色">
+              <Select.Option value="#f5222d"><span style={{ color: '#f5222d' }}>● 红色</span></Select.Option>
+              <Select.Option value="#fa8c16"><span style={{ color: '#fa8c16' }}>● 橙色</span></Select.Option>
+              <Select.Option value="#faad14"><span style={{ color: '#faad14' }}>● 黄色</span></Select.Option>
+              <Select.Option value="#52c41a"><span style={{ color: '#52c41a' }}>● 绿色</span></Select.Option>
+              <Select.Option value="#13c2c2"><span style={{ color: '#13c2c2' }}>● 青色</span></Select.Option>
+              <Select.Option value="#1890ff"><span style={{ color: '#1890ff' }}>● 蓝色</span></Select.Option>
+              <Select.Option value="#722ed1"><span style={{ color: '#722ed1' }}>● 紫色</span></Select.Option>
+              <Select.Option value="#eb2f96"><span style={{ color: '#eb2f96' }}>● 粉色</span></Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name="status" label="状态">
+            <Radio.Group>
+              <Radio value="active">启用</Radio>
+              <Radio value="disabled">禁用</Radio>
+            </Radio.Group>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* 新增/编辑分类弹窗 */}
+      <Modal
+        title={editingCategory ? '编辑分类' : '新建分类'}
+        open={categoryModal}
+        onCancel={() => { setCategoryModal(false); setEditingCategory(null); }}
+        onOk={() => {
+          const form = document.getElementById('category-form') as HTMLFormElement;
+          if (form) form.requestSubmit();
+        }}
+        okText="保存"
+        width={400}
+      >
+        <Form
+          id="category-form"
+          layout="vertical"
+          initialValues={editingCategory ? { name: editingCategory.name } : {}}
+          onFinish={handleSaveCategory}
+        >
+          <Form.Item
+            name="name"
+            label="分类名称"
+            rules={[{ required: true, message: '请输入分类名称' }]}
+          >
+            <Input placeholder="例如：消费能力、社交行为…" maxLength={10} />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </div>
+  );
+};
+
 // ─── 积分管理 ──────────────────────────────────────────────
 const PointsPage: React.FC = () => {
   const [tab, setTab] = useState('records');
@@ -5654,15 +6620,16 @@ const PermissionPage: React.FC = () => {
 const LEVEL1_MENU = [
   { key: 'dashboard', icon: <DashboardOutlined />, label: '数据管理' },
   { key: 'user', icon: <UserOutlined />, label: '用户管理' },
+  { key: 'org', icon: <BankOutlined />, label: '组织管理' },
   { key: 'content', icon: <FileTextOutlined />, label: '内容管理' },
   { key: 'circle', icon: <TeamOutlined />, label: '圈子管理' },
   { key: 'activity', icon: <CalendarOutlined />, label: '活动管理' },
   { key: 'service', icon: <ShoppingCartOutlined />, label: '服务管理' },
+  { key: 'tag', icon: <TagsOutlined />, label: '标签管理' },
   { key: 'points', icon: <StarOutlined />, label: '积分管理' },
   { key: 'push', icon: <BellOutlined />, label: '消息管理' },
-  { key: 'report', icon: <FlagOutlined />, label: '举报管理' },
   { key: 'permission', icon: <SafetyOutlined />, label: '权限管理' },
-  { key: 'org', icon: <BankOutlined />, label: '组织管理' },
+  { key: 'report', icon: <FlagOutlined />, label: '举报管理' },
 ];
 
 // 2级菜单（按1级模块分组）
@@ -5682,6 +6649,10 @@ const LEVEL2_MENU: Record<string, { key: string; label: string }[]> = {
     { key: 'service-order', label: '服务订单' },
     { key: 'service-provider', label: '服务商管理' },
   ],
+  tag: [
+    { key: 'tag-user', label: '用户标签' },
+    { key: 'tag-content', label: '内容标签' },
+  ],
   points: [
     { key: 'points-record', label: '积分记录' },
     { key: 'points-rule', label: '积分规则' },
@@ -5698,7 +6669,7 @@ const LEVEL2_MENU: Record<string, { key: string; label: string }[]> = {
 // 1级模块名称映射
 const LEVEL1_NAMES: Record<string, string> = {
   dashboard: '数据管理', user: '用户管理', content: '内容管理', circle: '圈子管理',
-  activity: '活动管理', service: '服务管理', points: '积分管理', push: '消息管理',
+  activity: '活动管理', service: '服务管理', tag: '标签管理', points: '积分管理', push: '消息管理',
   report: '举报管理', permission: '权限管理', org: '组织管理',
 };
 
@@ -5710,6 +6681,7 @@ const PAGE_TO_MODULE: Record<string, string> = {
   circle: 'circle',
   'activity-platform': 'activity', 'activity-circle': 'activity',
   'service-order': 'service', 'service-provider': 'service',
+  'tag-user': 'tag', 'tag-content': 'tag',
   'points-record': 'points', 'points-rule': 'points',
   push: 'push',
   report: 'report',
@@ -5723,6 +6695,7 @@ const BREADCRUMB: Record<string, string> = {
   circle: '圈子列表',
   'activity-platform': '平台活动', 'activity-circle': '圈子活动',
   'service-order': '服务订单', 'service-provider': '服务商管理',
+  'tag-user': '用户标签', 'tag-content': '内容标签',
   'points-record': '积分记录', 'points-rule': '积分规则',
   push: '推送管理', report: '举报处理',
   'permission-role': '角色管理', 'permission-account': '账号管理',
@@ -5760,6 +6733,8 @@ const MainLayout: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
         return <ActivityPage setActivePage={setPage} />;
       case 'service-order': return <ServiceOrderPage />;
       case 'service-provider': return <ServiceProviderPage />;
+      case 'tag-user': return <TagPage targetType="user" />;
+      case 'tag-content': return <TagPage targetType="content" />;
       case 'points-record':
       case 'points-rule':
         return <PointsPage />;

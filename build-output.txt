@@ -1,0 +1,4 @@
+Generated entries.json (schema v2) with 116 js entries and 116 html entries (using unified template)
+
+==== 构建入口: prototypes/management ====
+
